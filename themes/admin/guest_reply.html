@@ -1,0 +1,39 @@
+{include file='lib/top.lbi'}
+<div class="nav"><a href="admin.php?m=guest&">留言管理</a></div>
+<div class="nav_title">留言回复</div>
+<div class="rbox">
+<form action="admin.php?m=guest&a=reply_db" method="post">
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="1" class="tb1">
+  <tr>
+    <td width="128" height="25" align="right">留言主题：</td>
+    <td width="612">{$guest.title}
+      <input name="id" type="hidden" id="id" value="{$guest.id}" /></td>
+  </tr>
+  <tr>
+    <td height="25" align="right">qq：</td>
+    <td>{$guest.qq}</td>
+  </tr>
+  <tr>
+    <td height="25" align="right">email：</td>
+    <td>{$guest.email}</td>
+  </tr>
+  <tr>
+    <td height="25" align="right">phone：</td>
+    <td>{$guest.phone}</td>
+  </tr>
+  <tr>
+    <td height="25" align="right">留言内容：</td>
+    <td><textarea name="content" id="content" cols="80" rows="5">{$guest.content}</textarea></td>
+  </tr>
+  <tr>
+    <td height="25" align="right">回复内容：</td>
+    <td><textarea name="reply" id="reply" cols="80" rows="5">{$guest.reply}</textarea></td>
+  </tr>
+  <tr>
+    <td height="30" align="right">&nbsp;</td>
+    <td><input type="submit" name="button" id="button" value="回复" class="btn" /></td>
+  </tr>
+</table>
+
+</form>
+</div> {include file='lib/foot.lbi'}

@@ -1,0 +1,41 @@
+{include file='lib/header.html'}
+{include file='shopnav.html'}
+<div class="row">
+
+<div class="span8">
+
+{if $list}
+
+{foreach item=g from=$list}
+<table class="table table-bordered">
+<tr>
+<td>留言者：{if $g.username}{$g.username}{else}游客{/if}</td>
+<td>留言时间:{$g.dateline|date:Y-m-d}</td>
+</tr>
+<tr>
+<td colspan="2">内容：{$g.content}</td>
+</tr>
+
+{if $g.reply}
+<tr>
+<td colspan="2">
+回复：{$g.reply}
+</td>
+</tr>
+{/if}
+</table>
+
+{/foreach}
+
+{if $pagelist}{$pagelist}{/if}
+{else}
+<h2>暂无留言</h2>
+{/if}
+
+</div>
+<!--左边结束-->
+<div class="span4">
+{include file="shop_right.html"}
+ <!--右侧结束-->
+</div>
+{include file='lib/footer.html'}

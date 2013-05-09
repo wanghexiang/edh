@@ -1,0 +1,26 @@
+{include file='lib/header.html'}
+{include file='shopnav.html'}
+<div class="row">
+
+<div class="span8">
+
+{if $list}
+<table class="table table-bordered">
+{foreach item=g from=$list}
+<tr><td>@{$g.orderuser} 下了订单{$g.orderno} 时间：{$g.dateline|date:Y-m-d H@i} </td></tr>
+<tr><td>
+ 菜单：{foreach item=c from=$g.cais}{$c.title} &nbsp;  {/foreach}</td></tr>
+{/foreach}
+</table>
+{else}
+<h2>暂无订单</h2>
+{/if}
+
+</div>
+<!--左边结束-->
+<div class="span4">
+{include file="shop_right.html"}
+ </div>
+ <!--右侧结束-->
+</div>
+{include file='lib/footer.html'}

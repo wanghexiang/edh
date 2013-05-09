@@ -1,0 +1,30 @@
+{include file='lib/top.lbi'}
+<div class="nav"><a href="admin.php?m=admin&">管理员管理</a>  <a href="admin.php?m=admin&a=add">管理员添加</a>  <a href="admin.php?m=admin&a=zu">管理组</a> <a href="admin.php?m=admin&a=zu&op=add">管理组添加</a></div>
+<div class="nav_title">管理组</div>
+<div class="rbox">
+
+<table width="100%" border="0" cellpadding="0" cellspacing="1" class="tb1">
+  <tr>
+    <td width="92" height="30" align="center">ID</td>
+    <td width="231" align="center">组名</td>
+    <td width="204" align="center">操作</td>
+  </tr>
+  {foreach item=t from=$zulist}
+  <tr>
+    <td height="25" align="center">{$t.id}</td>
+    <td align="center">{$t.title}</td>
+    <td align="center"><a href="admin.php?m=admin&a=zu&op=add&id={$t.id}">编辑</a> <a href="admin.php?m=admin&a=zu&op=del&id={$t.id}" onclick="return confirm('删除后不可恢复，确认删除？')">删除</a></td>
+  </tr>
+  {/foreach}
+  {if $pagelist}
+  <tr>
+    <td height="25" colspan="7" align="center">{$pagelist}</td>
+    </tr>
+{/if}
+  
+</table>
+
+
+</div> 
+
+{include file='lib/foot.lbi'}

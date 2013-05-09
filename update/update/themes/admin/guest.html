@@ -1,0 +1,38 @@
+{include file='lib/top.lbi'}
+<div class="nav"><a href="admin.php?m=guest">ÁôÑÔ¹ÜÀí</a> <a href="index.php?m=guest&" target="_blank">²é¿´ÁôÑÔ°å</a></div>
+<div class="nav_title">ÁôÑÔ¹ÜÀí: 
+{if $smarty.get.status eq 0}Î´ÉóºË{else}<a href="admin.php?m=guest&status=0">Î´ÉóºË</a>{/if}  
+{if $smarty.get.status eq 1}ÒÑÉóºË{else}<a href="admin.php?m=guest&status=1">ÒÑÉóºË</a>{/if} 
+{if $smarty.get.status eq 2}Î´ÉóºË{else}<a href="admin.php?m=guest&status=2">ÒÑ½ûÖ¹</a>{/if} </div>
+<div class="rbox">
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="1" class="tb1">
+  <tr>
+    <td width="61" height="30" align="center">ID</td>
+    <td width="271" height="30" align="center">ÁôÑÔĞÅÏ¢</td>
+    <td width="156" height="30" align="center">ÁôÑÔÕß</td>
+    <td width="183" height="30" align="center">Ê±¼ä</td>
+    <td width="111" align="center">ÉóºË</td>
+    <td width="305" height="30" align="center">²Ù×÷</td>
+  </tr>
+  {foreach item=t from=$glist}
+  <tr>
+    <td height="25" align="center">{$t.id}</td>
+    <td>{$t.content}</td>
+    <td align="center">{$t.username}</td>
+    <td align="center">{$t.dateline|date:m-d H@i}</td>
+    <td align="center">{if $t.status eq 1}ÒÑÉóºË{elseif $t.status eq 2}½ûÖ¹{else}Î´ÉóºË{/if}</td>
+    <td align="center">
+    {if $t.status eq 1}<a href="javascript:;" url="admin.php?m=guest&a=status&id={$t.id}&status=2" class="ajax_forbid">½ûÖ¹</a>{/if}
+    {if $t.status eq 2}<a href="javascript:;" url="admin.php?m=guest&a=status&id={$t.id}&status=1" class="ajax_pass">ÉóºË</a>{/if}
+    {if $t.status eq 0}<a href="javascript:;"  url="admin.php?m=guest&a=status&status=2" class="ajax_forbid"> ½ûÖ¹</a> <a url="admin.php?m=guest&a=status&id={$t.id}&status=1" class="ajax_pass">ÉóºË</a>{/if}
+    <a href="admin.php?m=guest&a=reply&amp;id={$t.id}">»Ø¸´</a> <a href="admin.php?m=guest&a=del&amp;id={$t.id}">É¾³ı</a></td>
+  </tr>
+  {/foreach}
+  {if $pagelist}
+  <tr>
+    <td height="25" colspan="6" align="center">{$pagelist}</td>
+    </tr>
+    {/if}
+</table>
+
+</div> {include file='lib/foot.lbi'}

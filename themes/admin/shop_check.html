@@ -1,0 +1,29 @@
+{include file='lib/top.lbi'}
+<div class="nav"><a href="admin.php?m=shop&a=check">µêÆÌ¾À´í</a></div>
+<div class="nav_title">µêÆÌ¾À´í</div>
+<div class="rbox">
+<table width="685" border="0" cellpadding="0" cellspacing="0" class="tb1">
+  <tr>
+    <td width="98" align="left">µêÆÌÃû³Æ</td>
+    <td width="373" align="center">¾À´íÔ­Òò</td>
+    <td width="107" align="center">ÉóºË</td>
+    <td width="107" align="center">²Ù×÷</td>
+  </tr>
+  {foreach item=s from=$list}
+  <tr>
+    <td><a href="index.php?m=shop&shopid={$s.shopid}" target="_blank">{$s.shopname}</a></td>
+    <td>{$s.content}</td>
+    <td align="center">{if $s.status}<img src="images/yes.gif"  />{else}<img src="images/no.gif" class="ajax_yes"  url='admin.php?m=shop&a=check&op=status&id={$s.id}' rurl='admin.php?m=shop&a=check&op=status&id={$s.id}' />{/if}</td>
+    <td align="center">  <a href="javascript:;" onClick="$.get('admin.php?m=shop&a=check&op=del&id={$s.id}');$(this).parents('tr').remove()">É¾³ý</a></td>
+  </tr>
+  {/foreach}
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+
+</div>
+{include file='lib/foot.lbi'}

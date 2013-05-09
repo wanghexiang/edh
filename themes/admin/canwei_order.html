@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>后台框架</title>
+<script language="javascript" src="js/jquery.js"></script>
+<script language="javascript" src="{$skins}js/jquery.center.js"></script>
+<script language="javascript" src="{$skins}js/common.js"></script>
+<link href="{$skins}css.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div class="body">
+
+<div class="right">
+<div class="nav"><a href="admin.php?m=canwei&">餐位管理</a> <a href="admin.php?m=canwei&a=order">餐位预定</a></div>
+<div class="nav_title">餐位预定  <a href="admin.php?m=canwei&a=order&t=0">未审核</a> <a href="admin.php?m=canwei&a=order&t=1">已审核</a> <a href="admin.php?m=canwei&a=order&t=-1">未通过</a> </div>
+<div class="rbox">
+<table width="100%" border="0"  align="center" cellpadding="0" class="tb1" cellspacing="1">
+  <tr>
+    <td width="112" align="center">预定者</td>
+    <td width="99" height="30" align="center">联系电话</td>
+    <td width="245" align="center">预定信息</td>
+    <td width="93" align="center">预定时间</td>
+    <td width="93" align="center">餐位名称</td>
+    <td width="91" align="center">容纳人数</td>
+    <td width="168" align="center">状态</td>
+    <td width="283" align="center">操作</td>
+  </tr>
+  {foreach item=t from=$orderlist}
+  
+  <tr>
+    <td align="center">{$t.nickname}</td>
+    <td height="25" align="center">{$t.phone}</td>
+    <td align="center">{$t.info}</td>
+    <td align="center">{$t.dateline|date:m-d H@i}</td>
+    <td align="center">{$t.room}</td>
+    <td align="center">{$t.room_men}</td>
+    <td align="center">{if $t.status eq 0}未审  <a href="admin.php?m=canwei&a=orderstatus&status=1&id={$t.id}">通过</a> <a href="admin.php?m=canwei&a=orderstatus&status=-1&id={$t.id}">不通过</a>{elseif $t.status eq 1}通过 
+    <a  href="admin.php?m=canwei&a=orderstatus&status=-1&id={$t.id}">未通过</a>{else}<a href="admin.php?m=canwei&a=orderstatus&status=1&id={$t.id}">通过</a> 未通过{/if}</td>
+    <td align="center">
+    <a href="javascript:;" class="replybox_btn" replyid="{$t.id}" title='{$t.nickname}' replycontent="{$t.reply}" url='admin.php?m=canwei&a=orderreply'>回复</a>
+    <a href="admin.php?m=canwei&a=orderdel&amp;id={$t.id}">删除</a></td>
+  </tr>
+  
+  {/foreach}
+  {if $pagelist}
+  <tr>
+    <td height="25" colspan="11" align="center">{$pagelist}</td>
+    </tr>
+{/if}
+</table>
+
+</div> 
+
+</div>
+
+<div id="replybox" >
+
+<div id="replybox_nav">回复:<span id="replybox_title"></span><span class="floatright"><a href="javascript:;" id="replybox_close">关闭</a></span></div>
+<div>
+    <input type="hidden" id="replybox_id" value="" />
+    <input type="hidden" id="replybox_url" value="" />
+    <textarea name="replybox_content" id="replybox_content" cols="45" rows="5" style="width:380px;"></textarea>
+</div>
+<div style="height:30px; line-height:30px;">   
+   <input type="submit" name="button" id="replybox_submit" class="btn" value="回复" />
+</div>
+
+
+</div>
+</div>
+</body>
+</html>

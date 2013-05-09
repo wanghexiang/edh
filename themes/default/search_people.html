@@ -1,0 +1,73 @@
+{include file='lib/header.html'}
+ 
+{include file="searchnav.html"}
+ 
+<div class="row">
+<div class="span9">
+  <table class="table table-bordered  table-condensed  "  >
+ 
+ {foreach item=u from=$userlist}
+  <tr>
+    <td width="104" rowspan="2" align="center" bgcolor="#FFFFFF"><a href="index.php?m=member&userid={$u.userid}"><img src="{if $u.logo}{$u.logo}{else}images/nologo.gif{/if}" style="width:100px; height:100px;" /></a></td>
+    <td width="513" height="26" bgcolor="#FFFFFF">
+    <a href="index.php?m=member&userid={$u.userid}">{$u.nickname}</a> 
+    &nbsp;粉丝 {$u.followeds} &nbsp;关注 {$u.followers}  
+    <span style="float:right;">
+    {if $ssuser}{if $u.isfollowed} 
+      <a href="javascript:;" url='index.php?m=friend&a=follow_del&touserid={$u.userid}' class="ajax_follow_del btn btn-warning" shopid="{$shop.shopid}">取消关注</a>
+      {else}
+      <a href="javascript:;" url='index.php?m=friend&a=follow_add&touserid={$u.userid}' class="ajax_follow_add btn btn-success" shopid="{$shop.shopid}">加关注</a>{/if}
+      {/if}
+      </span>
+      </td>
+    </tr>
+    
+   
+  <tr>
+    <td height="25" valign="top" bgcolor="#FFFFFF">
+    
+    个人简介：{$u.info}
+     </td>
+    </tr>
+    {/foreach}
+    {if $pagelist}
+  <tr>
+    <td height="30" colspan="2" align="center" bgcolor="#FFFFFF">{$pagelist}</td>
+    </tr>
+    {/if}
+</table>
+
+</div>
+<div class="span3">
+<div>
+ <h3>还是不太敢在线订餐？</h3>
+ <p>别担心，你的订单会立刻得到处理，进度还会实时反馈给你。很多人已经用上瘾了，你也试一次吧。</p>
+ </div>
+ <form   action="index.php?m=guest&a=add_db" method="post">
+								 
+					<textarea id="ask_answer_content"  class="input-xlarge"  style="width:100%; height:100px;" name="content"></textarea>
+				 
+					<input   type="submit" value="好了，提交" class="btn">
+				 
+			</form>
+ 
+ 
+ {foreach item=guest from=$guestlist}
+ <table class="table table-bordered  table-condensed   ">
+ <tr>
+        <td><strong>{$guest.username}</strong> ： {$guest.content} </td>  </tr>
+ <tr>
+            
+             
+           <td> 口福答疑 {$guest.reply} </td>
+</tr>
+        
+ </table>      	
+          {/foreach}
+ 
+
+</div>
+</div>
+
+
+{include file='lib/footer.html'}

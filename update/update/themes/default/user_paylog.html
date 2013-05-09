@@ -1,0 +1,39 @@
+{include file='lib/header.html'}
+<div class="row">
+<div class="span2">{include file='usernavleft.html'}</div>
+<div class="span10">
+{include file='usernav.html'}
+<h2>余额 充值/消费记录</h2>
+<table class="table table-bordered">
+  <tr>
+    <td height="30" colspan="3">欢迎您，{$ssuser.username}!</td>
+    </tr>
+  <tr>
+    <td height="30" colspan="3">您目前余额为{$balance}元，已下是您的充值/消费记录。</td>
+    </tr>
+    
+ 
+  
+  <tr>
+    <td width="87" height="23" align="center">金额</td>
+    <td width="468" align="center">详情</td>
+    <td width="141" align="center">时间</td>
+    </tr>
+     {foreach item=t from=$list}
+  <tr>
+    <td width="87" height="30" align="center">{$t.money}</td>
+    <td>{$t.content}</td>
+    <td width="141" align="center">{$t.dateline|date:Y-m-d H@i@s}</td>
+  </tr> {/foreach}
+  <tr>
+    <td height="30" colspan="3" align="center">{$pagelist}</td>
+    </tr>
+</table>
+
+</div>
+
+ 
+
+</div>
+
+{include file='lib/footer.html'}

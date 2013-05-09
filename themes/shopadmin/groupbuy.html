@@ -1,0 +1,41 @@
+{include file="lib/top.lbi"}
+{include file="groupbuy_nav.html"}
+<div class="nav_title">团购管理</div>
+<div class="rbox">
+<table class="tb1" width="100%">
+<tr>
+<td width="22%" align="center">主题</td>
+<td width="7%" align="center">团购价格</td>
+<td width="11%" align="center">最低人数</td>
+<td width="13%" align="center">参与人数</td>
+<td width="17%" align="center">截止时间</td>
+<td width="13%" align="center">上线</td>
+<td width="13%" align="center">管理</td>
+</tr>
+{foreach item=g from=$list}
+<tr>
+  <td>{$g.title}</td>
+  <td align="center">{$g.groupprice}</td>
+  <td align="center">{$g.minjoins}</td>
+  <td align="center">{$g.joins}</td>
+  <td align="center">{$g.endtime|date:Y-m-d H@i}</td>
+  <td align="center">{if $g.status eq 1}
+  <img src="images/yes.gif" class="ajax_no" url="shopadmin.php?m=groupbuy&a=change&id={$g.id}&status=0" rurl="shopadmin.php?m=groupbuy&a=change&id={$g.id}&status=1">
+  {elseif $g.status eq 0}
+    <img src="images/no.gif" class="ajax_yes" url="shopadmin.php?m=groupbuy&a=change&id={$g.id}&status=1" rurl="admin.php?m=groupbuy&a=change&id={$g.id}&status=0">
+    {else}
+    被禁止
+  {/if}</td>
+  <td align="center"> <a href="index.php?m=groupbuy&a=show&id={$g.id}" target="_blank">查看</a> 
+      <a href="shopadmin.php?m=groupbuy&a=add&id={$g.id}">编辑</a> 
+      <a href="shopadmin.php?m=groupbuy&a=del&id={$g.id}" onclick="return confirm('删除后不可恢复，确认删除?')">删除</a>
+  </td>
+</tr>
+{/foreach}
+ 
+<tr>
+  <td colspan="7" align="center">{$pagelist}</td>
+  </tr>
+</table>
+</div>
+{include file="lib/foot.lbi"}

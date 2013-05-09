@@ -1,0 +1,46 @@
+{include file='lib/header.html'}
+<div class="row">
+<div class="span2">{include file="usernavleft.html"}</div>
+<div class="span7">
+<div class="breadcrumb">我的私信<small>(已有{$rscount}个联系人)</small></div>
+ <p>
+<a href="index.php?m=pm&a=send" class="btn btn-success">发私信</a>
+ </p>
+ 
+
+{if $msglist}   
+{foreach item=msg  from=$msglist}
+<table class="table table-bordered">
+    <tr>
+        <td width="60" rowspan="2">
+        <img src="{if $msg.logo}{$msg.logo}{else}images/nologo.gif{/if}" width="60" height="60" class="userShow" url='index.php?m=friend&a=userinfo&touserid={$msg.userid}' /><br />{$msg.nickname}
+        </td>
+        <td height="50">
+     
+    {$msg.content} 
+        </td>
+    </tr>
+    <tr>
+      <td height="20"> &nbsp;{$msg.dateline}  &nbsp;&nbsp;
+    <a href="index.php?m=pm&a=del&id={$msg.id}">删除</a> | <a href="index.php?m=pm&a=detail&touserid={if $msg.userid eq $ssuser.userid}{$msg.touserid}{else}{$msg.userid}{/if}">共{$msg.num}条私信</a> | <a href="javascript:;" url='index.php?m=pm&a=send' nickname='{$msg.nickname}' class='sendpm'>回复</a> </td>
+    </tr>
+</table>
+{/foreach}
+<p>{$pagelist}</p>
+{else}
+<h2>暂无私信</h2>
+{/if}
+ 
+ 
+{if $pagelist}
+{$pagelist}
+{/if}
+
+</div>
+<div class="span3">
+<div class="breadcrumb">私信</div>
+</div>
+</div>
+
+
+{include file='lib/footer.html'}

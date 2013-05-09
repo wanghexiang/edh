@@ -1,0 +1,76 @@
+{include file='lib/header.html'}
+<div class="row  ">
+<div class="span9">
+<ul class="breadcrumb">
+{$where}
+</ul>
+<div style="text-align:center;"><h3>{$art.title}</h3></div>
+<hr />
+<p style="text-align:center;">作者：{$web.webname}&nbsp; 所属分类：<a href="index.php?m=art_cat&catid={$art.catid}">{$art.cname}</a> &nbsp;点击：[{$art.click}] &nbsp;发表时间：{$art.dateline|date:Y-m-d}</p>
+<div style="padding:6px;">{$art.content}</div>
+<div>
+
+<p>上一篇：{$lastrs}</p>
+<p>下一篇：{$nextrs}</p>
+
+</div>
+<h3>文章评论::</h3>
+
+<form class="form-inline" action="index.php?m=art&a=addcomment" method="post">
+
+<input type="hidden" name="pid" value="{$art.id}" />
+<textarea name="content" style="width:400px; height:100px;"></textarea>
+<input type="submit" class="btn" value="我评一个" />
+
+</form>
+<hr />
+<h3>评论列表::</h3>
+{if $commentlist}
+{foreach   item=t from=$commentlist}
+
+<pre>{$t.content|nl2br} <br /> --评论时间：{$t.dateline|date:Y-m-d }</pre>
+{/foreach}
+
+{else}
+<p>暂无评论</p>
+{/if}
+{if $pagelist}
+<p>{$pagelist}</p>
+{/if}
+
+
+</div>
+<div class="span3">
+
+<table class="table table-bordered">
+<tr class="linearcolor">
+<td> 文章分类 </td>
+</tr>
+{foreach item=cat from=$artcat}
+<tr><td><a href="index.php?m=art_cat&catid={$cat.catid}"> {$cat.cname} </a></td></tr>
+{if $cat.child}
+{foreach item=c from=$cat.child}
+<tr><td>|__<a href="index.php?m=art_list&catid={$c.catid}"> {$c.cname} </a></td></tr>
+{/foreach}
+{/if}
+
+{/foreach}
+ </table>
+
+
+<table class="table table-bordered">
+<tr class="linearcolor">
+<td>热门推荐</td>
+</tr>
+
+{foreach item=t from=$artding}
+<tr><td><a href="index.php?m=art&id={$t.id}"> {$t.title|cutstr:30} </a></td></tr>
+
+{/foreach}
+</table>
+</div>
+<!--右边结束-->
+</div>
+
+
+{include file='lib/footer.html'}

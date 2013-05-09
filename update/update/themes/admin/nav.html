@@ -1,0 +1,51 @@
+{include file='lib/top.lbi'}
+<div class="nav"><a href="admin.php?m=web_nav&">导航管理</a> <a href="admin.php?m=web_nav&a=add">导航添加</a></div>
+<div class="nav_title">导航管理</div>
+<div class="rbox">
+<form action="admin.php?m=web_nav&a=order" method="post">
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#FFFFFF" class="tb1">
+  <tr>
+    <td width="21%" align="center">导航名</td>
+    <td width="31%" height="30" align="center">所属父类</td>
+    <td width="12%" align="center">打开方式</td>
+    
+    <td width="15%" height="30" align="center">排序</td>
+    <td width="21%" height="30" align="center">操作</td>
+  </tr>
+  {foreach item=t from=$navlist}
+  <tr>
+  <td align="left"><a href="{$t.navurl}" target="_blank">{$t.title}</a></td>
+    <td height="25" align="center">{$t.pname}</td>
+    <td align="center">{if $t.ctype eq 1}新窗口{else}默认{/if}</td>
+    <input type="hidden" name="id[]" value="{$t.id}" />
+    <td height="25" align="center"><input name="orderid[]" type="text" value="{$t.orderid}" size="6" /></td>
+    <td height="25" align="center"><a href="admin.php?m=web_nav&a=add&amp;id={$t.id}">编辑</a> <a href="admin.php?m=web_nav&a=del&amp;id={$t.id}" onclick="return confirm('删除后不可恢复，确定删除？');">删除</a></td>
+  </tr>
+  {if $t.child}
+  {foreach item=c from=$t.child}
+    <tr>
+  <td align="left">|__<a href="{$c.navurl}" target="_blank">{$c.title}</a> </td>
+    <td height="25" align="center">{$t.title}</td>
+    <td align="center">{if $c.ctype eq 1}新窗口{else}默认{/if}</td>
+    <input type="hidden" name="id[]" value="{$c.id}" />
+    
+    <td height="25" align="center"><input name="orderid[]" type="text" value="{$c.orderid}" size="6" /></td>
+    <td height="25" align="center"><a href="admin.php?m=web_nav&a=add&amp;id={$c.id}">编辑</a> <a href="admin.php?m=web_nav&a=del&amp;id={$c.id}" onclick="return confirm('删除后不可恢复，确定删除？');">删除</a></td>
+  </tr>
+  {/foreach}
+  {/if}
+	{/foreach}
+  <tr>
+    <td colspan="5" align="right"><input type="submit" name="button" id="button" value="更改排序" class="btn" /></td>
+    </tr>
+    {if $pagelist}
+    <tr>
+    <td colspan="5" align="right">{$pagelist}</td>
+    </tr>
+    {/if}
+</table>
+
+</form>
+</div>
+
+{include file='lib/foot.lbi'}

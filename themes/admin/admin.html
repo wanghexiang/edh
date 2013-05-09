@@ -1,0 +1,41 @@
+{include file='lib/top.lbi'}
+<div class="nav"><a href="admin.php?m=admin&">管理员管理</a> <a href="admin.php?m=admin&a=add">管理员添加</a> <a href="admin.php?m=admin&a=zu">管理组</a> </div>
+<div class="nav_title">管理员管理</div>
+<div class="rbox">
+<form method="get" action="admin.php">
+<input type="hidden" name="m" value="admin" />
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="tb1">
+  <tr>
+    <td width="246" height="30" align="right">用户名:&nbsp;</td>
+    <td width="179" align="left"><input type="text" name="adminname" id="adminname" value="{$smarty.get.adminname}" /></td>
+    <td width="315" align="left"><input type="submit" name="button" id="button" value="快速搜索" class="btn" /></td>
+    </tr>
+  </table>
+
+</form>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="1" class="tb1">
+  <tr>
+    <td width="92" height="30" align="center">adminId</td>
+    <td width="231" align="center">用户名</td>
+    <td width="213" align="center">所数组</td>
+    <td width="204" align="center">操作</td>
+  </tr>
+  {foreach item=t from=$adminlist}
+  <tr>
+    <td height="25" align="center">{$t.adminid}</td>
+    <td align="center">{$t.adminname}</td>
+    <td align="center">{$t.title}</td>
+    <td align="center"><a href="admin.php?m=admin&a=chpwd&adminid={$t.adminid}">编辑</a> {if !$t.isfounder}<a href="admin.php?m=admin&a=del&amp;adminid={$t.adminid}">删除</a>{/if}</td>
+  </tr>{/foreach}
+  {if $pagelist}
+  <tr>
+    <td height="25" colspan="8" align="center">{$pagelist}</td>
+    </tr>
+{/if}
+  
+</table>
+
+
+</div> 
+{include file='lib/foot.lbi'}

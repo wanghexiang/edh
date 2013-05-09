@@ -1,0 +1,18 @@
+{include file="lib/header.html"}
+<div class="breadcrumb">用户登陆</div>
+
+<form class="form" action="index.php?m=user&a=logindb" method="post">
+<label>用户名</label>
+<input name="username" type="text" id="username" class="h30" value="{$ssuser.nickname}" />
+<label>密码</label>
+<input type="password" name="password" id="password" class="h30" />
+
+<p class="form-actions"><input type="submit" name="button" id="button" value="登陆"  class="btn"/>
+      <input type="reset" name="button2" id="button2" value="重置" class="btn" /></p>
+
+</form>
+</div>
+
+
+
+{include file="lib/footer.html"}

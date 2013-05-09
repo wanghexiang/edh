@@ -1,0 +1,30 @@
+{include file='lib/top.lbi'}
+<div class="nav"><a href="shopadmin.php?m=admin&">管理员</a> <a href="shopadmin.php?m=admin&a=add">管理员添加</a></div>
+<div class="nav_title">管理员添加</div>
+<div class="rbox">
+<form action="shopadmin.php?m=admin&a=add_db" method="post" autocomplete="off">
+<table width="100%" border="0" cellpadding="0" cellspacing="1" class="tb1">
+  <tr>
+    <td width="154" height="25" align="right">管理员：</td>
+    <td width="586"><input name="adminname" type="text" id="adminname" size="40" /> <span id="adminname_res"></span></td>
+  </tr>
+  <tr>
+    <td height="25" align="right">邮箱：</td>
+    <td><input name="email" type="text" id="email" size="40" /> <span id="email_res"></span></td>
+  </tr>
+  <tr>
+    <td height="25" align="right">密码：</td>
+    <td><input name="pwd1" type="password" id="pwd1" size="40" /> <span id="pwd1_res"></span></td>
+  </tr>
+  <tr>
+    <td height="25" align="right">确认密码：</td>
+    <td><input name="pwd2" type="password" id="pwd2" size="40" /> <span id="pwd2_res"></span></td>
+  </tr>
+  <tr>
+    <td height="25" align="right">&nbsp;</td>
+    <td><input type="submit" name="button" id="button" value="提交" class="btn" /></td>
+  </tr>
+</table>
+
+</form>
+</div> {include file='lib/foot.lbi'}

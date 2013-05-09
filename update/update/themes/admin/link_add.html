@@ -1,0 +1,35 @@
+{include file='lib/top.lbi'}
+<div class="nav"><a href="admin.php?m=link&">链接管理</a> <a href="admin.php?m=link&a=add">添加链接</a></div>
+<div class="nav_title">添加链接</div>
+<div class="rbox">
+  <form action="admin.php?m=link&a=add_db" method="post">
+  <table width="100%" border="0" align="center" cellpadding="0" cellspacing="1" class="mid tb1">
+  <tr>
+    <td width="19%" height="25" align="right">链接名称：</td>
+    <td width="81%" height="25"><input name="title" type="text" id="title" value="{$rs.title}" size="50" />
+      <input name="id" type="hidden" id="id" value="{$rs.id}" /></td>
+  </tr>
+  <tr>
+    <td height="25" align="right">链接网址：</td>
+    <td height="25"><input name="linkurl" type="text" id="linkurl" value="{$rs.linkurl}" size="50" /></td>
+  </tr>
+  <tr>
+    <td height="25" align="right">链接图片：</td>
+    <td height="25"><input name="linkimg" type="text" id="linkimg" value="{$rs.linkimg}" size="50" /></td>
+  </tr>
+  <tr>
+    <td height="25" align="right">链接类型：</td>
+    <td height="25"><input type="radio" name="linktype" id="radio" value="0" {if $rs.linktype eq 0} checked="checked" {/if} />
+      普通 
+        <input type="radio" name="linktype" id="radio2" value="1" {if $rs.linktype eq 1 } checked="checked" {/if} />
+        首页</td>
+  </tr>
+  <tr>
+    <td height="25" align="right">&nbsp;</td>
+    <td height="25"><input type="submit" name="button" id="button" value="提交" class="btn" /> <input type="reset" name="button2" id="button2" value="重置" class="btn" /></td>
+  </tr>
+  </table>
+
+  </form>
+</div> 
+{include file='lib/foot.lbi'}

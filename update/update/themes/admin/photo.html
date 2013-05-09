@@ -1,0 +1,39 @@
+{include file='lib/top.lbi'}
+<div class="nav"><a href="admin.php?m=photo&">相册管理</a> 
+<a href="admin.php?m=photo&a=add">添加相册</a> 
+<a href="admin.php?m=photo&a=pic">相片管理</a></div>
+<div class="nav_title">相册管理</div>
+<div class="rbox">
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="1" class="tb1">
+  <tr>
+    <td width="75" height="30" align="center">PID</td>
+    <td width="134" align="center">封面</td>
+    <td width="199" align="center">名称</td>
+    <td width="77" align="center">推荐</td>
+    <td width="70" align="center">热门</td>
+    <td width="72" align="center">最新</td>
+    <td width="459" align="center">操作</td>
+  </tr>
+  {foreach item=t from=$photolist}
+  <tr>
+    <td height="25" align="center">{$t.pid}</td>
+    <td align="center"><img src="{$t.logo}" width="100" /></td>
+    <td>{$t.title}</td>
+    <td align="center">{if $t.isding}<img src='images/yes.gif' class="ajax_no" url='admin.php?m=photo&a=noisding&pid={$t.pid}' rurl='admin.php?m=photo&a=isding&pid={$t.pid}'>{else}<img src='images/no.gif' class="ajax_yes" url='admin.php?m=photo&a=isding&pid={$t.pid}' rurl='admin.php?m=photo&a=noisding&pid={$t.pid}'>{/if}</td>
+    <td align="center">{if $t.ishot}<img src='images/yes.gif' class="ajax_no" url='admin.php?m=photo&a=noishot&pid={$t.pid}' rurl='admin.php?m=photo&a=ishot&pid={$t.pid}'>{else}<img src='images/no.gif' class="ajax_yes" url='admin.php?m=photo&a=ishot&pid={$t.pid}' rurl='admin.php?m=photo&a=noishot&pid={$t.pid}'>{/if}</td>
+    <td align="center">{if $t.isnew}<img src='images/yes.gif' class="ajax_no" url='admin.php?m=photo&a=noisnew&pid={$t.pid}' rurl='admin.php?m=photo&a=isnew&pid={$t.pid}'>{else}<img src='images/no.gif' class="ajax_yes" url='admin.php?m=photo&a=isnew&pid={$t.pid}' rurl='admin.php?m=photo&a=noisnew&pid={$t.pid}'>{/if}</td>
+    <td align="center">
+    <a href="index.php?m=photo&a=pic&pid={$t.pid}" target="_blank" >查看</a> 
+    <a href="admin.php?m=photo&a=add&pid={$t.pid}">编辑</a> <a href="admin.php?m=photo&a=pic&pid={$t.pid}">相片管理</a> <a href="admin.php?m=photo&a=del&pid={$t.pid}" onclick="return confirm('删除后不可恢复，确认删除？');">删除</a></td>
+  </tr>
+  {/foreach}
+  {if $pagelist}
+  <tr>
+    <td height="25" colspan="7" align="center">{$pagelist}</td>
+    </tr>
+    {/if}
+</table>
+
+
+</div> 
+{include file='lib/foot.lbi'}

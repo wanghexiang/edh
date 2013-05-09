@@ -1,0 +1,33 @@
+{include file="lib/header.html"}
+{include file='lib/user.html'}        
+<h2>用户中心</h2>
+
+<table  class="table"  >
+  <tr>
+    <td width="619" height="30">欢迎您，{$ssuser.nickname}!</td>
+    </tr>
+  <tr>
+    <td height="30">您目前可用鱼额为{$bonus}元，余额消费记录详情请点击
+      <a href="index.php?m=bonus&a=log"><font color="red">查看</font></a>。</td>
+    </tr>
+  <tr>
+    <td height="30">您在本站累计消费{$ordermoney}元，获得{$user.grade}等级积分，可以获得{$discount}%优惠(优惠计入余额),
+      <a href="index.php?m=shopcar&a=history"><font color="red">查看消费记录</font></a></td>
+    </tr>
+    <tr>
+    <td height="30">您有{$user.usegrade}可用积分，查看<a href="index.php?m=grade_log"><font color="red">积分兑换记录</font></a></td>
+    </tr>
+  <tr>
+    <td height="30">您共引荐了{$spread}名好友,您的好友累计消费了{$friendmoney}元，给您带来{$friendbonus}元奖励,
+      <a href="index.php?m=user&a=spread"><font color="red">我要推广</font></a>。</td>
+    </tr>
+  <tr>
+    <td height="30">&nbsp;</td>
+    </tr>
+  <tr>
+    <td height="30">&nbsp;</td>
+    </tr>
+</table>
+
+
+{include file="lib/footer.html"}

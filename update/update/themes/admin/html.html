@@ -1,0 +1,45 @@
+{include file='lib/top.lbi'}
+<div class="nav"><a href="admin.php?m=html&a=cat">单页分类</a> <a href="admin.php?m=html&">单页管理</a> <a href="admin.php?m=html&a=add">单页添加</a></div>
+<div class="nav_title">单页管理</div>
+<div class="rbox">
+<form action="admin.php?m=html&a=order" method="post">
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="1" class="tb1">
+  <tr>
+    <td width="85" height="30" align="center">ID</td>
+    <td width="219" height="30" align="center">名称</td>
+    <td width="115" height="30" align="center">调用标签</td>
+    <td width="84" align="center">单页导航</td>
+    <td width="114" height="30" align="center">排序</td>
+    <td width="116" height="30" align="center">操作</td>
+  </tr>
+  {foreach item=t from=$htmllist}
+  <tr>
+    <td height="25" align="center">{$t.id}
+      <input name="id[]" type="hidden" id="id[]" value="{$t.id}" /></td>
+    <td height="30" align="center">{$t.title}</td>
+    <td height="30" align="center">{$t.tagname}</td>
+    <td align="center">
+    {if $t.isnav}
+    <img src='images/yes.gif' class="ajax_no" url='admin.php?m=html&a=noisnav&id={$t.id}' rurl='admin.php?m=html&a=isnav&id={$t.id}'>
+    {else}
+    <img src='images/no.gif' class="ajax_yes" url='admin.php?m=html&a=isnav&id={$t.id}' rurl='admin.php?m=html&a=noisnav&id={$t.id}'>
+    {/if}</td>
+    <td height="30" align="center"><input name="orderid[]" type="text" id="orderid[]" value="{$t.orderid}" size="6" /></td>
+    <td height="30" align="center"><a href="admin.php?m=html&a=add&amp;id={$t.id}">编辑</a> 
+    <a href="admin.php?m=html&a=del&amp;id={$t.id}" onclick="return confirm('删除后不可恢复，确认删除?')">删除</a></td>
+  </tr>
+  {/foreach}
+  <tr>
+    <td height="30" colspan="6" align="right"><input type="submit" name="button" id="button" value="更改排序" class="btn" /></td>
+  </tr>
+  {if $pagelist}
+  <tr>
+    <td height="30" colspan="6" align="center">{$pagelist}</td>
+    </tr>
+    {/if}
+</table>
+
+
+</form>
+</div> 
+{include file='lib/foot.lbi'}

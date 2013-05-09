@@ -1,0 +1,43 @@
+{include file='lib/top.lbi'}
+<div class="nav"><a href="admin.php?m=html&a=cat">单页分类</a> <a href="admin.php?m=html&">单页管理</a> <a href="admin.php?m=html&a=add">单页添加</a></div>
+<div class="nav_title">单页分类</div>
+<div class="rbox">
+<form action="admin.php?m=html&a=catadd_db" method="post">
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0"  class="tb1">
+  <tr>
+    <td width="248" height="30" align="right">分类名：</td>
+    <td width="230"><label for="cname"></label>
+      <input type="text" name="cname" id="cname" /></td>
+    <td width="621"><input type="submit" name="button" id="button" value="添加" class="btn"/></td>
+  </tr>
+  </table>  
+</form>
+
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="1" class="tb1">
+  <tr>
+    <td width="81" height="30" align="center">ID</td>
+    <td width="294" height="30" align="center">名称</td>
+    <td width="92" height="30" align="center">排序</td>
+    <td width="273" align="center">操作</td>
+  </tr>
+  {foreach item=t from=$catlist}
+  <form action="admin.php?m=html&a=catadd_db" method="post">
+  <tr>
+    <td height="25" align="center">{$t.catid}</td>
+    <td height="25" align="center"><label for="cname"></label>
+      <input name="cname" type="text" id="cname" value="{$t.cname}" />
+      <input name="catid" type="hidden" id="catid" value="{$t.catid}" /></td>
+    <td height="25" align="center"><label for="orderid"></label>
+      <input name="orderid" type="text" id="orderid" value="{$t.orderid}" size="6" /></td>
+    <td align="center">
+    <input type="button" class="btn" value="单页管理"  onclick="location.href='admin.php?m=html&catid={$t.catid}'"/> 
+    <input type="submit"  class="btn" value="编辑" />
+    <input type="button" class="btn" onclick="location.href='admin.php?m=html&a=catdel&catid={$t.catid}'" value="删除" />
+    </td>
+  </tr>
+  </form>
+  {/foreach}
+</table>
+
+</div>
+{include file='lib/foot.lbi'}

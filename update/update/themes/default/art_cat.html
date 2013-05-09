@@ -1,0 +1,55 @@
+{include file='lib/header.html'}
+<div class="row">
+<div class="span9">
+<ul class="breadcrumb">
+{$where}
+</ul>
+ <div class="row-fluid">
+    {foreach item=c from=$artlist}
+    <div class="span6">
+    <table class="table table-bordered  ">
+    <tr><td class="linearcolor">::<a href="index.php?m=art_cat&catid={$c.catid}">{$c.cname}</a> </td></tr>
+    {foreach item=art from=$c.arts}
+    
+        <tr>
+            <td>  <a href="index.php?m=art&id={$art.id}" target="_blank" title="{$art.title}"> {$art.title} </a> 
+            <span style="float:right;">{$art.dateline|date:Y-m-d}</span></td>
+        </tr>
+        {/foreach}
+        </table>
+        </div>
+        {/foreach}
+ </div>
+</div>
+<!--左边结束-->
+<div class="span3">
+<table class="table table-bordered">
+<tr class="linearcolor">
+<td> 文章分类 </td>
+</tr>
+{foreach item=cat from=$artcat}
+<tr><td><a href="index.php?m=art_cat&catid={$cat.catid}"> {$cat.cname} </a></td></tr>
+{if $cat.child}
+{foreach item=c from=$cat.child}
+<tr><td>|__<a href="index.php?m=art_list&catid={$c.catid}"> {$c.cname} </a></td></tr>
+{/foreach}
+{/if}
+
+{/foreach}
+ </table>
+
+<table class="table table-bordered">
+<tr class="linearcolor">
+<td>热门推荐</td>
+</tr>
+
+{foreach item=t from=$artding}
+<tr><td><a href="index.php?m=art&id={$t.id}"> {$t.title|cutstr:30} </a></td></tr>
+
+{/foreach}
+</table>
+</div>
+<!--右边结束-->
+</div>
+
+{include file='lib/footer.html'}

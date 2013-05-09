@@ -1,0 +1,37 @@
+{include file='lib/header.html'}
+<div class="row">
+	<div class="span2">{include file='usernavleft.html'}</div>
+	<div class="span7">												 
+	<p><h2>我的答疑</h2></p> 
+
+<form class="form-inline" action="index.php?m=guest&a=add_db" method="post">
+			 
+				<textarea class="text content" name="content" style="width:400px; height:100px;"></textarea>
+			 
+				<input type="submit" value="提交" class="btn btn-success">
+			 
+		</form>
+        <h2>答疑列表</h2>
+        	 
+									
+                {foreach item=guest from=$guestlist}                    
+                <div class="breadcrumb">{$guest.content}<br />
+								
+					{if $guest.reply}回复：{$guest.reply}{else}暂无回复{/if}<br />							
+					{$guest.dateline|date:Y-m-d H@i@s} <a href="index.php?m=guest&a=del&id={$guest.id}" >删除</a>
+				</div>
+					
+                {/foreach}
+
+	</div>
+			
+		<div class="span3 ">
+            <h2>我的答疑</h2>
+            
+            <p>
+                这是你专属的答疑页面，在这里可以看到你最新提出的十个问题和它们的回复。
+            </p>
+		</div>
+							
+		</div>
+{include file='lib/footer.html'}

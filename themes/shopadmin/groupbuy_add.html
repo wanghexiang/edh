@@ -1,0 +1,100 @@
+{include file="lib/top.lbi"}
+<script type="text/javascript" src="xheditor/xheditor.js" ></script>
+
+<script language="javascript">
+$(document).ready(function()
+{
+	$('#content').xheditor({forcePtag:false,upImgUrl:"shopadmin.php?m=upfile&xh=1",upImgExt:"jpg,jpeg,gif,png",html5Upload:false});
+	
+
+});
+</script>
+<style type="text/css">
+#selectgoods_box li{ cursor:pointer; height:25px; line-height:25px; padding-left:10px;}
+#selectgoods_box li:hover{background-color:#09C;}
+</style>
+{include file="groupbuy_nav.html"}
+<div class="nav_title">添加团购</div>
+<div class="rbox">
+<form method="post" action="{$appindex}?m=groupbuy&a=post" name="f1">
+<input type="hidden" name="id" value="{$groupbuy.id}" />
+<table class="tb1" width="100%">
+ <tr>
+ 	<td width="109" align="right">团购主题：</td>
+    <td width="975"><input name="title" type="text" value="{$groupbuy.title}" size="50" /></td>   
+ </tr>
+ 
+ <tr>
+   <td align="right">团购类别：</td>
+   <td style="position:relative;"><label for="select"></label>
+     <select name="catid" id="select">
+     <option value="0">选择类别</option>
+     {foreach item=c from=$catlist}
+     <option value="{$c.catid}" {if $c.catid eq $groupbuy.catid} selected="selected"{/if}>{$c.cname}</option>
+     {/foreach}
+     </select></td>
+ </tr>
+ <tr>
+   <td width="109" align="right">市场价格：</td>
+   <td style="position:relative;">
+  		<input type="text" name="goodsprice" value="{$groupbuy.goodsprice}" />
+     
+     </td>
+ </tr>
+ <tr>
+   <td width="109" align="right">团购价格：</td>
+   <td><label for="groupprice"></label>
+     <input type="text" name="groupprice" id="groupprice" value="{$groupbuy.groupprice}" /></td>
+ </tr>
+ 
+ <tr>
+ 	<td align="right">团购类型：</td>
+    <td><select name="grouptype">
+    	<option value="0" >团购</option>
+        <option value="1" {if $groupbuy.grouptype eq 1} selected="selected"{/if}>抢购</option>
+    </select></td>
+ </tr>
+ 
+ <tr>
+ 	<td align="right">商品库存：</td>
+    <td><input type="text" name="goods_num" value="{$groupbuy.goods_num}" /></td>
+ </tr>
+ 
+ <tr>
+   <td width="109" align="right">截止时间：</td>
+   <td><label for="endtime"></label>
+     <input type="text" name="endtime" id="endtime" value="{if $groupbuy}{$groupbuy.endtime|date:Y-m-d H@i@s}{/if}" /> 
+     (格式：2012-12-12 12:12:12)</td>
+ </tr>
+ <tr>
+   <td width="109" align="right">最少参团数：</td>
+   <td><label for="minjoins"></label>
+     <input type="text" name="minjoins" id="minjoins" value="{$groupbuy.minjoins}" /></td>
+ </tr>
+ <tr>
+   <td align="right">商品图片：</td>
+   <td><label for="img"></label>
+     <input name="img" type="text" id="img" value="{$groupbuy.img}" />
+     <input type="button" name="button3" id="button3" value="上传图片" class="btn"  onclick="window.open('shopadmin.php?m=upload&formname=f1&editname=img&f_type=1','文件上传','left=300px,height=400,width=500');" />
+     (图片大小：宽高比例2:1 如 800:400)
+     </td>
+ </tr>
+ <tr>
+   <td width="109" align="right">团购简介：</td>
+   <td><label for="info"></label>
+     <textarea name="info" id="info" style="width:400px; height:60px;">{$groupbuy.info}</textarea></td>
+ </tr>
+ <tr>
+   <td align="right">详情：</td>
+   <td><label for="content"></label>
+     <textarea name="content" id="content" cols="45" rows="5" style="width:100%; height:600px;">{$groupbuy.content}</textarea></td>
+ </tr>
+ <tr>
+   <td align="right">&nbsp;</td>
+   <td><input type="submit" name="button" id="button" value="保存" class="btn" />
+     <input type="reset" name="button2" id="button2" value="重置" class="btn" /></td>
+ </tr>
+ </table>
+</form>
+</div>
+{include file="lib/foot.lbi"}

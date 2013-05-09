@@ -1,0 +1,9 @@
+/*头部导航重写*/
+
+.navbar-inner{background:none; background-image:none;filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF6600', endColorstr='#FF6600', GradientType=0); background-color:#FF6600;}
+.navbar .nav > li > a{color:#fff;}
+.navbar .divider-vertical{background-color:#FF6600; border-right: 1px solid #DD6C6C;}
+.navbar .nav .active > a, .navbar .nav .active > a:hover{background-color: #677021}
+
+/*重写头部背景*/
+ 

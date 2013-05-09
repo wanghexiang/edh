@@ -1,0 +1,28 @@
+{include file='lib/header.html'}
+{include file='lib/user.html'}
+ 
+
+
+    {foreach item=address from=$addresslist}
+					
+				 
+					<form class="address_edit action" action="index.php?m=user&a=myaddress&op=post" method="post">
+						 
+							<input type="hidden" name="id" value="{$address.id}">
+							<textarea class="text address_text"  style="width:100%;"  name="address">{$address.address}</textarea>
+							<input type="submit" value="保存" class="btn btn-primary" id="edit_this_address"  >
+                            <input type="submit" onClick="location.href='index.php?m=user&a=myaddress&op=del&id={$address.id}'" class="btn btn-danger " value="删除">
+						 
+					</form>
+					
+						
+			
+            {/foreach}
+			
+			<form action="index.php?m=user&a=myaddress&op=post" method="post">
+				<label for="new_address_text">添加地址</label>
+                <textarea id="new_address_text" style="width:100%;" name="address"></textarea>
+				<input type="submit" value="保存" class="btn btn-primary">
+			</form>
+
+{include file='lib/footer.html'}

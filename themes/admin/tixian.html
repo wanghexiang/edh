@@ -1,0 +1,30 @@
+{include file='lib/top.lbi'}
+<div class="nav"><a href="admin.php?m=tixian">提现处理</a></div>
+<div class="nav_title">提现记录 <a href="admin.php?m=tixian&status=0">未处理</a> <a href="admin.php?m=tixian&status=1">已处理</a></div>
+<div class="rbox">
+<table width="100%"  class="tb1">
+  <tr>
+    <td width="7%" align="center">金额（元）</td>
+    <td width="11%" align="center">所属店铺</td>
+    <td width="41%" align="center">账户信息</td>
+    <td width="13%" align="center">时间</td>
+    <td width="14%" align="center">状态</td>
+    <td width="14%" align="center">操作</td>
+    </tr>
+   {foreach item=t from=$list}
+  <tr>
+    <td align="center">{$t.money}</td>
+    <td align="center"><a href="shopadmin.php?m=shopadmin&shopid={$t.shopid}" target="_blank">{$t.shopname}</a></td>
+    <td>{$t.info}</td>
+    <td align="center">{$t.dateline|date:Y-m-d H@i@s}</td>
+    <td align="center">{if $t.status}已处理{else}未处理{/if}</td>
+    <td align="center">{if $t.status eq 0}<a href="admin.php?m=tixian&a=do&id={$t.id}">处理</a>{/if}</td>
+    </tr>
+  {/foreach}
+  <tr>
+    <td colspan="5" align="center">{$pagelist}</td>
+    </tr>
+</table>
+
+</div>
+{include file='lib/foot.lbi'}

@@ -1,0 +1,59 @@
+{include file='lib/header.html'}
+<div class="row">
+<div class="span2">{include file="usernavleft.html"}</div>
+<div class="span7">
+{include file="pm_nav.html"}
+ 
+<p class="breadcrumb">我和 {$nickname} 的对话 <a href="index.php?m=pm">返回私信</a>   共{$rscount}条私信</p>
+<form method="post" action="index.php?m=pm&a=send&op=post">
+<input name="nicknames" type="hidden" id="nicknames"   value="{$nickname}">
+<table class="table table-bordered">
+  <tr>
+    <td align="right">&nbsp;</td>
+    <td>发送私信给：{$nickname}</td>
+  </tr>
+
+  <tr>
+    <td align="right">内容：</td>
+    <td><label for="content"></label>
+      <textarea name="content" id="content" cols="45" rows="5" style="width:400px; height:100px;"></textarea></td>
+    </tr>
+  <tr>
+    <td align="right">&nbsp;</td>
+    <td><input type="submit" name="button" id="button" value="发送" class="btn"></td>
+    </tr>
+</table>
+
+</form>
+
+{if $pmlist}  
+<table class="table table-bordered"> 
+{foreach item=msg  from=$pmlist}
+
+<tr>
+<td>{if $msg.userid eq $ssuser.userid}我：{else}{$nickname}{/if}</td>
+<td>{$msg.content}<br />{$msg.dateline|date:Y-m-d H@i@s}  &nbsp;&nbsp;&nbsp;
+<a href="index.php?m=pm&a=del&id={$msg.id}">删除</a>  </td>
+</tr>
+
+
+{/foreach}
+<p>{$pagelist}</p>
+</table>
+{else}<h2>暂无通知</h2>
+{/if}
+ 
+{if $pagelist}
+{$pagelist}
+{/if}
+
+</div>
+<div class="span3">
+<h2>私信</h2>
+
+</div>
+</div>
+
+
+
+{include file='lib/footer.html'}

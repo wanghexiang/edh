@@ -1,0 +1,30 @@
+{include file="lib/header.html"}
+<p>
+<div class="btn-group">
+<a href="index.php?m=guest" class="btn active" >留言列表</a>
+<a href="index.php?m=guest&a=add" class="btn">我要留言</a>
+</div>
+</p>
+
+{foreach item=t from=$guestlist}
+
+<table class="table table-bordered">
+  <tr>
+    <td width="100" height="25" align="right" bgcolor="#FFFFFF"> 留言标题：</td>
+    <td width="" bgcolor="#FFFFFF">{$t.title}</td>
+  </tr>
+  <tr>
+    <td height="25" align="right" bgcolor="#FFFFFF">内容：</td>
+    <td bgcolor="#FFFFFF">{$t.content}</td>
+  </tr>
+  <tr>
+    <td height="25" align="right" bgcolor="#FFFFFF">回复：</td>
+    <td bgcolor="#FFFFFF">{$t.reply}</td>
+  </tr>
+</table>
+{/foreach}
+{if $pagelist}<div class="pagelist">{$pagelist}</div>{/if}
+
+
+
+{include file="lib/footer.html"}

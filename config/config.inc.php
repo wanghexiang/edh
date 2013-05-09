@@ -1,0 +1,12 @@
+<?php 
+define("MYSQL_HOST","localhost");
+define("MYSQL_USER","root");
+define("MYSQL_PWD","root");
+define("MYSQL_DB","edh");
+define("MYSQL_CHARSET","GBK");
+define("TABLE_PRE","");
+define("DOMAIN","");
+define("WAPURL","");
+define("SKINS","default");
+define("BINDUC",0);
+?>

@@ -1,0 +1,22 @@
+{include file='lib/header.html'}
+{include file='lib/user.html'}
+ <table class="table">
+  <tr>
+    <td width="196" height="30">欢迎您，{$ssuser.nickname}!</td>
+  </tr>
+  <tr>
+    <td height="30">您共引荐了{$spread}名好友,您的好友累计消费了{$friendmoney}元，给您带来{$friendbonus}元奖励。</td>
+  </tr>
+  <tr>
+    <td height="30">推广方法：</td>
+    </tr>
+  <tr>
+    <td height="30"><p>1.复制以下链接，如果您的好友通过链接注册成功，那么他就是您引荐的。</p>
+      <p><a href="{$web.weburl}index.php?m=user&a=reg&amp;fuserid={$ssuser.userid}">{$web.weburl}index.php?m=user&a=reg&amp;fuserid={$ssuser.userid}</a></p></td>
+    </tr>
+  <tr>
+    <td height="30">2.在注册时在引荐人填写以下你的ID：{$ssuser.userid}。</td>
+  </tr>
+  </table>
+
+{include file='lib/footer.html'}

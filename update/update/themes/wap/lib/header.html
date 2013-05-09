@@ -1,0 +1,185 @@
+<!DOCTYPE>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{$title}</title>
+<meta name="keywords" content="{$keywords}" />
+<meta name="description" content="{$description}" />
+<script language="javascript" src="js/jquery.js"></script>
+<script language="javascript" src="plugin/bootstrap/js/bootstrap-dropdown.js"></script>
+ <script src="plugin/bootstrap/js/bootstrap-collapse.js"></script>
+ <script src="plugin/bootstrap/js/bootstrap-carousel.js"></script>
+<link href="plugin/bootstrap/css/bootstrap.css" rel="stylesheet">
+<link href="plugin/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+ 
+<style type="text/css">
+/* Subnav */
+.subnav {
+  width: 100%;
+  height: 36px;
+  background-color: #eeeeee; /* Old browsers */
+  background-repeat: repeat-x; /* Repeat the gradient */
+  background-image: -moz-linear-gradient(top, #f5f5f5 0%, #eeeeee 100%); /* FF3.6+ */
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f5f5f5), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
+  background-image: -webkit-linear-gradient(top, #f5f5f5 0%,#eeeeee 100%); /* Chrome 10+,Safari 5.1+ */
+  background-image: -ms-linear-gradient(top, #f5f5f5 0%,#eeeeee 100%); /* IE10+ */
+  background-image: -o-linear-gradient(top, #f5f5f5 0%,#eeeeee 100%); /* Opera 11.10+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f5f5', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */
+  background-image: linear-gradient(top, #f5f5f5 0%,#eeeeee 100%); /* W3C */
+  border: 1px solid #e5e5e5;
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+}
+.subnav .nav {
+  margin-bottom: 0;
+}
+.subnav .nav > li > a {
+  margin: 0;
+  padding-top:    11px;
+  padding-bottom: 11px;
+  border-left: 1px solid #f5f5f5;
+  border-right: 1px solid #e5e5e5;
+  -webkit-border-radius: 0;
+     -moz-border-radius: 0;
+          border-radius: 0;
+}
+.subnav .nav > .active > a,
+.subnav .nav > .active > a:hover {
+  padding-left: 13px;
+  color: #777;
+  background-color: #e9e9e9;
+  border-right-color: #ddd;
+  border-left: 0;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0,0,0,.05);
+     -moz-box-shadow: inset 0 3px 5px rgba(0,0,0,.05);
+          box-shadow: inset 0 3px 5px rgba(0,0,0,.05);
+}
+.subnav .nav > .active > a .caret,
+.subnav .nav > .active > a:hover .caret {
+  border-top-color: #777;
+}
+.subnav .nav > li:first-child > a,
+.subnav .nav > li:first-child > a:hover {
+  border-left: 0;
+  padding-left: 12px;
+  -webkit-border-radius: 4px 0 0 4px;
+     -moz-border-radius: 4px 0 0 4px;
+          border-radius: 4px 0 0 4px;
+}
+.subnav .nav > li:last-child > a {
+  border-right: 0;
+}
+.subnav .dropdown-menu {
+  -webkit-border-radius: 0 0 4px 4px;
+     -moz-border-radius: 0 0 4px 4px;
+          border-radius: 0 0 4px 4px;
+}
+
+.pointer{cursor:pointer;}
+
+.h30{height:30px;}
+
+.f12{font-size:12px;}
+
+.f14{font-size:14px;}
+
+.f16{font-size:16px;}
+
+table{font-size:12px;}
+
+.navbar-inner{
+
+background-color:#0C9;	
+
+	}
+
+.pages {
+
+margin: 5px auto;
+
+padding: 3px;
+
+text-align: center;
+
+}
+
+.pages strong {
+
+background: #4BC7E5;
+
+color: white;
+
+}
+
+.pages em, .pages strong {
+
+border-color: #DB60CC;
+
+}
+
+.pages * {
+
+padding: 3px 6px;
+
+color: #999;
+
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+<div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+<div class="navbar">
+<div class="navbar-inner">
+<div class="container">
+<a href="javascript:;" class="brand">挑食客</a>
+<div class="nav-collapse">
+<ul class="nav">
+<li class="dropdown">
+<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">{$site.sitename}<b class="caret"></b></a> 
+<ul class="dropdown-menu">
+{foreach item=p from=$sitelist}
+<li > <a href="index.php?m=index&setsite=yes&siteid={$p.siteid}&iswap=1" title="{$p.sitename}">{$p.sitename}</a> </li>
+{/foreach}
+</ul>          
+</li>
+<li><a href="index.php?m=search">搜索</a></li>
+{if !$ssuser.userid}
+<li><a href="index.php?m=user&a=login">登陆</a></li>
+<li><a href="index.php?m=user&a=reg">注册</a></li>
+
+{else}
+<li><a href="index.php?m=shopcar&a=history">购买记录</a></li>
+<li><a href="index.php?m=user&a=home">{$ssuser.nickname}</a></li>
+<li><a href="index.php?m=user&a=logout">退出</a></li>
+
+{/if}
+<li><a href="index.php?m=guest">留言</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<p>
+ <div class="subnav">
+<div class="nav nav-pills">
+<li><a href="index.php?m=index">首页</a></li>
+<li><a href="index.php?m=shoplist">店铺</a> </li>
+<li><a href="index.php?m=art_cat">文章</a></li>
+<li><a href="index.php?m=shopcar">购物车</a></li>
+<li><a href="index.php?m=near">身边</a></li>
+</div>
+</div>
+</p>

@@ -1,0 +1,38 @@
+{include file='lib/top.lbi'}
+<div class="nav">
+
+<a href="admin.php?m=config&a=phone">短信设置</a>
+<a href="admin.php?m=config&a=email">邮箱设置</a>
+<a href="admin.php?m=config&a=water">水印设置</a>
+</div>
+<div class="nav_title">支付设置</div>
+<div class="rbox">
+<form action="admin.php?m=config&a=pay&op=db" method="post">
+<table width="100%" border="0" cellspacing="1" cellpadding="0" class="tb1">
+  <tr>
+    <td height="30" align="right">支付宝：</td>
+    <td height="30"><input type="radio" name="alipay" id="radio" value="1" {if $rs.alipay eq 1} checked="checked"{/if} />
+      <label for="radio">开启</label>
+        <input name="alipay" type="radio" id="radio2" value="0"  {if $rs.alipay eq 0} checked="checked"{/if} />
+        <label for="radio2">关闭</label> 
+        (打开请在api/alipay/alipay.config.php配置相关参数)
+</td>
+  </tr>
+  <tr>
+    <td width="158" height="30" align="right">财付通：</td>
+    <td width="938" height="30"><input type="radio" name="tenpay" id="radio3" value="1" {if $rs.tenpay eq 1} checked="checked"{/if} />
+      <label for="radio3">开启</label>
+        <input name="tenpay" type="radio" id="radio4" value="0"   {if $rs.tenpay eq 0} checked="checked"{/if} />
+        <label for="radio4">关闭 (打开请在api/tenpay/tenpay_config.php配置相关参数)</label></td>
+  </tr>
+
+  <tr>
+    <td height="30" align="right">&nbsp;</td>
+    <td height="30"><input type="submit" name="button" id="button" value="提交" class="btn" /></td>
+  </tr>
+  </table>
+
+
+</form>
+
+</div>{include file='lib/foot.lbi'}

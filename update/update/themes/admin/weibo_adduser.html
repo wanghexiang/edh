@@ -1,0 +1,74 @@
+{include file='lib/top.lbi'}
+{include file='weibo_nav.html'}
+<div class="nav_title">添加微博用户</div>
+<div class="rbox">
+<form method="post" action="admin.php?m=weibo&a=saveuser">
+<table width="100%" border="0" class="tb1">
+  <tr>
+    <td width="14%" align="right">uid：</td>
+    <td width="86%"><input name="uid" type="text" id="uid" value="{$data.uid}"> <input type="button" id="getweibouser" value="获取信息" /></td>
+    </tr>
+  <tr>
+    <td align="right">昵称：</td>
+    <td><input name="screen_name" type="text" id="screen_name" value="{$data.screen_name}"></td>
+    </tr>
+  <tr>
+    <td align="right">城市：</td>
+    <td><input name="location" type="text" id="location" value="{$data.location}"></td>
+    </tr>
+  <tr>
+    <td align="right">描述：</td>
+    <td><input name="description" type="text" id="description" value="{$data.description}" size="80"></td>
+  </tr>
+  <tr>
+    <td align="right">头像：</td>
+    <td><input name="avatar_large" type="text" id="avatar_large" value="{$data.avatar_large}" size="40"></td>
+  </tr>
+  <tr>
+    <td align="right">关注数：</td>
+    <td><input name="friends_count" type="text" id="friends_count" value="{$data.friends_count}"></td>
+  </tr>
+  <tr>
+    <td align="right">域名：</td>
+    <td><input name="domain" type="text" id="domain" value="{$data.domain}"></td>
+  </tr>
+  <tr>
+    <td align="right">粉丝数：</td>
+    <td><input name="followers_count" type="text" id="followers_count" value="{$data.followers_count}" size="8"></td>
+  </tr>
+  <tr>
+    <td align="right">微博数：</td>
+    <td><input name="statuses_count" type="text" id="statuses_count" value="{$data.statuses_count}"></td>
+  </tr>
+  <tr>
+    <td align="right">&nbsp;</td>
+    <td><input type="submit" name="button" id="button" class="btn" value="提交"></td>
+  </tr>
+  </table>
+
+
+</form>
+
+</div>
+<script>
+$(document).ready(function(){
+	$("#getweibouser").click(function(){
+		uid=$("#uid").val();
+		$.get("index.php?m=weibo&a=getbyuid&uid="+uid,function(data){
+			
+			$("#screen_name").val(data.screen_name);
+			$("#location").val(data.location);
+			$("#description").val(data.description);
+			$("#domain").val(data.domain);
+			$("#followers_count").val(data.followers_count);
+			$("#friends_count").val(data.friends_count);
+			$("#statuses_count").val(data.statuses_count);
+			$("#avatar_large").val(data.avatar_large);
+			
+		},"json")
+		
+	});
+	
+});
+</script>
+{include file='lib/foot.lbi'}

@@ -1,0 +1,78 @@
+{include file='lib/header.html'}
+<div class="row">
+<div class="span9">
+<div class="breadcrumb">{$where}</div>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="table">
+<tr>
+<td width="51%" rowspan="6" class="span4"><img src="{$goods.middle_img}" style="width:320px; height:320px;"></td>
+<td width="49%"  class="span5"><h2><small>名称：</small>{$goods.title}</h2></td>
+</tr>
+<tr>
+  <td>分类：{$goods.cname}</td>
+</tr>
+<tr>
+  <td>兑换积分：{$goods.grade}  {if $goods.grade lte $usegrade}<a href="index.php?m=goods&a=order&id={$goods.id}" >兑换</a>{/if} </td>
+</tr>
+<tr>
+  <td>价格：{$goods.price}</td>
+</tr>
+<tr>
+  <td>关注：浏览({$goods.clicks})</td>
+</tr>
+<tr>
+  <td>简介：{$goods.info}</td>
+</tr>
+</table>
+<div class="well">
+{$goods.content}
+</div>
+<div class="breadcrumb">上一篇：{$lastrs} 下一篇：{$nextrs}</div>
+<h2>商品评论::</h2>
+<form action="index.php?m=goods&a=addcomment" class="form-inner" method="post">
+<input type="hidden" name="pid" value="{$goods.id}" />
+<textarea name="content" style="width:400px; height:100px;"></textarea>
+<input type="submit" class="btn btn-primary" value="我评一个" />
+</form>
+{if $commentlist}
+<div class="breadcrumb">评论列表::</div>
+
+{foreach item=c from=$commentlist}
+<pre>{$c.content}<br>
+--{$c.dateline|date:Y-m-d}</pre>
+{/foreach}
+{/if}
+</div>
+<div class="span3">
+<div class="accordion-group">
+<div class="accordion-heading">
+<a href="JavaScript:;" class="accordion-toggle f14">{if $catrs}{$catrs.cname}{else}商品分类{/if}</a>
+</div>
+<div class="accordion-inner">
+<ul class="unstyled">
+{foreach item=cat from=$goodscat}
+<li><a href="index.php?m=goods&a=cat&catid={$cat.catid}">{$cat.cname}</a></li>
+{/foreach}
+</ul>
+</div>
+</div>
+
+<div class="accordion-group">
+<div class="accordion-heading">
+<a href="javascript:;" class="accordion-toggle f14">商品推荐</a>
+</div>
+<div class="accordion-inner">
+<ol>
+{foreach item=g from=$recommendgoods}
+<li><a href="index.php?m=goods&a=detail&id={$g.id}">{$g.title}</a></li>
+{/foreach}
+
+</ol>
+</div>
+
+</div>
+
+</div>
+
+
+</div>
+{include file='lib/footer.html'}

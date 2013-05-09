@@ -1,0 +1,89 @@
+{include file='lib/top.lbi'}
+<script type="text/javascript" src="xheditor/xheditor.js" ></script>
+<script language="javascript">
+$(document).ready(function()
+{
+$('#content').xheditor({forcePtag:false,upImgUrl:"admin.php?m=upfile&xh=1",upImgExt:"jpg,jpeg,gif,png",html5Upload:false});
+});
+</script>
+<div class="nav"><a href="admin.php?m=goods&">商品管理</a> <a href="admin.php?m=goods&a=add">添加商品</a></div>
+<div class="nav_title">添加商品</div>
+<div class="rbox">
+<form action="admin.php?m=goods&a=add&op=post" method="post" name="f1" id="f1">
+<table width="100%" border="0"   cellpadisrecommend="0" cellspacing="0" class="tb1">
+  <tr>
+    <td width="134" height="25" align="right">名称：</td>
+    <td width="944" height="25">
+      <input name="title" type="text" id="title" value="{$rs.title}" size="40" />
+      <input name="id" type="hidden" id="id" value="{$rs.id}" /></td>
+  </tr>
+  <tr>
+    <td height="25" align="right">所属分类：</td>
+    <td height="25">
+      <select name="catid" id="catid">
+      {if $rs.catid}<option value="{$rs.catid}">{$rs.cname}</option>{/if}
+      <option>请选择分类</option>
+      {foreach item=t from=$catlist}
+      <option value="{$t.catid}">{$t.cname}</option>
+      {/foreach}
+      </select></td>
+  </tr>
+  
+ 
+  <tr>
+    <td height="25" align="right">缩略图：</td>
+    <td height="25"><input name="thumb_img" type="text" id="thumb_img" value="{$rs.thumb_img}" size="50" />
+      <input type="button" name="button3" id="button3" value="上传图片" onclick="window.open('admin.php?m=upload&formname=f1&editname=thumb_img&f_type=1','文件上传','left=300px,height=400,width=500');" class="btn" />
+      (可不填 图片宽高 200*200)</td>
+  </tr>
+  <tr>
+    <td height="25" align="right">美食图片：</td>
+    <td height="25">
+      <input name="img" type="text" id="img" value="{$rs.img}" size="50" />
+      <input type="button" name="button2" id="button2" value="上传图片" onclick="window.open('admin.php?m=upload&formname=f1&editname=img&f_type=1','文件上传','left=300px,height=400,width=500');" class="btn" /></td>
+  </tr>
+  <tr>
+    <td height="25" align="right">关键字：</td>
+    <td height="25">
+      <input name="keyword" type="text" id="keyword" value="{$rs.keyword}" size="60" /></td>
+  </tr>
+  <tr>
+    <td height="20" align="right">描述：</td>
+    <td height="20">
+      <textarea name="info" id="info" cols="60" rows="5">{$rs.info}</textarea></td>
+  </tr>
+  <tr>
+    <td height="25" align="right">价格：</td>
+    <td height="20"><input name="price" type="text" id="price" value="{$rs.price}" size="8" />
+      元</td>
+  </tr>
+ 
+  <tr>
+    <td height="25" align="right">兑换积分：</td>
+    <td height="20"><input name="grade" type="text" id="grade" value="{$rs.grade}" size="8" />
+      分</td>
+  </tr>
+  <tr>
+    <td height="25" align="right">推荐属性：</td>
+    <td height="20">
+    <input name="isrecommend" type="checkbox" id="isrecommend" value="1" {if $rs.isrecommend eq 1 } checked="checked"{/if} />推荐 
+       <input name="ishot" type="checkbox" id="ishot" value="1" {if $rs.ishot eq 1} checked="checked" {/if} />热门
+               
+          <input name="isnew" type="checkbox" id="isnew" value="1" {if $rs.isnew eq 1} checked="checked" {/if} /> 
+          最新 
+          </td>
+  </tr>
+  
+  <tr>
+    <td height="20" align="right">详情：</td>
+    <td height="20"><textarea name="content" id="content"  style="width:100%; height:600px;">
+    {$rs.content}</textarea></td>
+  </tr>
+  <tr>
+    <td height="30" align="right">&nbsp;</td>
+    <td height="20"><input type="submit" name="button" id="button" class="btn" value="确定" /></td>
+  </tr>
+</table>
+
+</form>
+</div>{include file='lib/foot.lbi'}

@@ -1,0 +1,44 @@
+{include file='lib/top.lbi'}
+{include file='caipu_nav.html'}
+<div class="nav_title">分类管理</div>
+<div class="rbox">
+<table width="100%" class="tb1">
+  <tr>
+    <td width="13%" align="center">分类ID</td>
+    <td width="22%" align="center">分类名称</td>
+     
+    <td width="34%" align="center">排序</td>
+    <td align="center">操作</td>
+  </tr>
+  {foreach item=c from=$catlist}
+  <tr>
+    <td align="center">{$c.catid}</td>
+    <td><a href="admin.php?m=caipu&a=cat_add&catid={$c.catid}">{$c.cname}</a></td>
+     
+    <td align="center">{$c.orderindex}</td>
+    <td align="center"> <a href="admin.php?m=caipu&a=cat_del&catid={$c.catid}" onClick="return confirm('删除后不可恢复，确认删除?')">删除</a> </td>
+  </tr>
+  
+  {foreach item=cc from=$c.child}
+  	<tr>
+    <td align="center">{$cc.catid}</td>
+    <td>|__<a href="admin.php?m=caipu&a=cat_add&catid={$cc.catid}">{$cc.cname}</a></td>
+     
+    <td align="center">{$cc.orderindex}</td>
+    <td align="center"><a href="admin.php?m=caipu&a=cat_del&catid={$cc.catid}" onClick="return confirm('删除后不可恢复，确认删除?')">删除</a></td>
+  </tr>
+  {/foreach}
+  
+  {/foreach}
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+
+
+</div>
+
+{include file='lib/foot.lbi'}

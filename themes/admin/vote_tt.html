@@ -1,0 +1,92 @@
+{include file='lib/top.lbi'}
+<script language="javascript">
+$(document).ready(function()
+{
+	$("#seleall").click(function()
+	{
+		
+		if($("#seleall").attr("checked")=="checked")
+		{
+		$(".cktid").attr("checked",true);
+		}else
+		{
+			$(".cktid").attr("checked",false);
+		}
+	});
+});
+</script>
+<div class="nav">
+<a href="admin.php?m=vote&">投票管理</a> 
+<a href="admin.php?m=vote&a=add">投票添加</a>
+<a href="admin.php?m=vote&a=ttcat">选项分类</a>  
+<a href="admin.php?m=vote&a=tt">选项管理</a> 
+<a href="admin.php?m=vote&a=ttadd">选项添加</a>
+ </div>
+<div class="nav_title">投票管理</div>
+<div class="rbox">
+<form action="admin.php?m=vote&" method="get" id="qwq">
+<input name="vid" type="hidden" id="vid" value="{$vote.vid}" />
+<table width="100%" border="0" align="center" cellspacing="1" class="tb1">
+  <tr>
+    <td width="529" align="right">关键字：
+     <input type="hidden" name="act" value="tt" />
+      <input type="text" name="title" id="title" value="{$title}" />
+      分类：
+      <select name="catid" id="catid">
+       {if $cat.catid}<option value="{$cat.catid}">{$cat.cname}</option>{/if}
+      <option>请选择分类</option>
+     
+      {foreach item=c from=$catlist}
+      <option value="{$c.catid}">{$c.cname}</option>
+      {/foreach}
+      </select></td>
+    <td width="224"><input type="submit" name="button2" id="button2" value="筛选" class="btn" /></td>
+  </tr>
+  </table>
+
+</form>
+
+<form action="admin.php?m=vote&a=tt" name="ttform" id="ttform" method="post">
+<table width="100%" border="0" align="center" cellspacing="1" class="tb1">
+  <tr>
+    <td width="56" align="center">ID</td>
+    <td width="303" align="center">选项名称</td>
+    <td width="235" align="center">选项网址</td>
+    <td width="153" align="center">操作</td>
+  </tr>
+  {foreach item=vt from=$votelist}
+  <tr>
+    <td align="center">{if $vote}
+    <input name="tid[{$vt.tid}]" type="checkbox"  class="cktid" value="{$vt.tid}" />
+    {else}
+    {$vt.tid}
+    {/if}
+      </td>
+    <td align="center">
+     
+      <input name="title[{$vt.tid}]" type="text" id="title" value="{$vt.title}" /></td>
+    <td align="center">
+      <input name="url[{$vt.tid}]" type="text" id="url" value="{$vt.url}" /></td>
+    <td align="center"><a href="admin.php?m=vote&a=ttadd&amp;tid={$vt.tid}">编辑</a> <a href="admin.php?m=vote&a=ttdel&amp;tid={$vt.tid}">删除</a></td>
+  </tr>
+  {/foreach}
+  <tr>
+    <td colspan="3" align="center">
+    {if $vote}
+    <input type="checkbox" value="1" id="seleall" />全选
+    <input type="submit" name="button3" id="button3" value="添加" class="btn" onclick="document.ttform.action='admin.php?m=vote&a=tt2vote'" />
+      到投票<a href="admin.php?m=vote&a=selett&amp;vid={$vote.vid}">{$vote.title}</a>
+      <input name="vid" type="hidden" id="vid" value="{$vote.vid}" />
+        {/if}
+        </td>
+    <td align="center"><input type="submit" name="button" id="button" value="更新" class="btn" /></td>
+  </tr>
+  <tr>
+    <td colspan="3" align="center">{$pagelist}</td>
+    <td align="center">&nbsp;</td>
+  </tr>
+</table>
+</form>
+
+</div>
+{include file='lib/foot.lbi'}

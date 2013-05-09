@@ -1,0 +1,37 @@
+{include file='lib/header.html'}
+<div class="row">
+<div class="span2">
+{include file='usernavleft.html'}
+</div>
+<div class="span10">
+<h2>我的包间预订</h2>
+<table width="100%" class="table table-bordered">
+<tr>
+	<td width="15%" align="center">预定时间</td>
+    <td width="12%" align="center">房间</td>
+    <td width="9%" align="center">容量</td>
+    <td width="13%" align="center">店铺名称</td>
+    <td width="7%" align="center">状态</td>
+    <td width="44%" align="center">店主回复</td>
+</tr>
+{foreach item=c from=$list}
+<tr>
+  <td>{$c.order_time|date:Y-m-d H@i}</td>
+  <td>{$c.room_name}</td>
+  <td>{$c.room_men}</td>
+  <td><a href="index.php?m=shop&shopid={$c.shopid}" target="_blank">{$c.shopname}</a></td>
+  <td>{if $c.status eq 1}已审核{elseif $c.status eq 2}已取消{else}未审核{/if}</td>
+  <td>{if $c.reply}{$c.reply}{else}暂无回复{/if}</td>
+</tr>
+{/foreach}
+{if $pagelist}
+<tr>
+  <td colspan="6">{$pagelist}</td>
+   
+</tr>
+{/if}
+</table>
+</div>
+
+</div>
+{include file='lib/footer.html'}

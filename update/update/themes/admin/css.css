@@ -1,0 +1,88 @@
+/* CSS Document */
+*{ margin:0; padding:0; font-size:14px; font-size:12px;}
+.body{width:95%;  }
+.btn{ width:60px; height:24px; line-height:24px; background:url(images/btn.gif); border:none; color:#fff; cursor:pointer}
+.btn:hover{ text-decoration:underline}
+.clear{clear:both;}
+.floatleft{float:left;}
+.floatright{float:right;}
+img{border:0;}
+.mid{margin:0 auto;}
+a{text-decoration:none; color:#000;}
+a:hover{text-decoration:underline; color:#F00;}
+/*分页*/
+.pages {
+margin: 5px auto;
+padding: 3px;
+text-align: center;
+}
+.pages strong {
+background: #4BC7E5;
+color: white;
+}
+.pages em, .pages strong {
+border-color: #DB60CC;
+}
+.pages * {
+padding: 3px 6px;
+color: #999;
+}
+/*分页样式结束*/
+/*弹出框*/
+#replybox{position:absolute; width:400px; background-color:#95F176; padding:5px 20px; display:none;}
+#replybox_nav{ height:30px; line-height:30px; display:block; }
+/**/
+
+/*表格背景控制*/
+.tb1{ width:100%; }
+.tb1 td{  border-bottom:1px solid #e5e5e5; border-collapse:collapse; height:30px; color:#666}
+.tb1 td a{color:#666}
+td{padding:2px 3px; border-right:1px solid #e5e5e5;}
+td img{ cursor:pointer}
+.odd { background-color:#ffffff; } 
+.even { background-color:#fbfcff;}
+.first{ background-color: #f5f5f5; font-size:14px; }
+.first td{ font-size:14px;color:#000}
+
+/*背景结束*/
+.top{width:100%; height:70px; background:#2d2d2d;  border-bottom:1px solid #333EFF;}
+.top .logo{ float:left; margin:13px 0 0 30px;}
+.top .topnav{height:35px; line-height:35px; float:left; margin:35px 0 0 32px;}
+.top .topnav a{ text-decoration:none; color:#FFF; padding:0 15px; font-size:14px; float:left; color:#c2c2c2; height:35px;}
+.top .topnav a:hover,
+.top .topnav a.on{padding:0 9px;border-top-left-radius:5px; border-top-right-radius:5px; background-color:#d54e21;font-weight:600; font-size:16px; color:#fff;}
+.top .msg{height:30px; line-height:30px; position:absolute; width:600px;  top:10px; left:200px; display:block;}
+.top .header{ height:40px; line-height:40px; color:#fff; position:absolute; right:0; width:600px; display:block; float:right; text-align:right;padding-right:10px;}
+.top .header a{ text-decoration:none; color:#fff; }
+.top .header a:hover{ text-decoration:underline}
+.top .header span{ margin:0 5px; color:#656565}
+
+.left{width:200px; margin-left:4px; float:left; overflow:hidden;}
+.mtitle,.ztitle{ height:30px; font-size:14px; font-weight:bold; color:#000; line-height:30px;cursor:pointer; padding-left:30px;  }
+.zbox{padding:6px; line-height:25px; padding-left:30px; padding-right:10px; display:block;}
+
+#menu-body{ background:url(images/menu-bg.gif) repeat-y; padding-top:15px;}
+.menu{ display:none; padding:0 0 10px 0; border-bottom:1px #cfe6f4 solid}
+.menu ul{ list-style-type:none;}
+.menu ul li{ font-size:12px;  margin-bottom:1px;}
+.menu ul li a{padding-left:30px;text-decoration:none; display:block; height:29px; line-height:29px; color:#676767;}
+.menu ul li a:hover,
+.menu ul li a.on{color:#000; background:#e5f3fe; border-left:4px #d54e21 solid; padding-left:26px;}
+
+
+
+.right{ height:auto; width:100%;float:left; overflow:hidden; margin-left:10px;}
+.rbox{ border:1px solid #CCC; border-right:none; display:table; width:100%;}
+.rbox .skinsbox{ width:200px; height:260px; float:left; margin-left:10px; margin-right:10px; margin-bottom:10px;}
+.skinsbox img{border:0px;}
+
+.nav{ padding-left:30px; height:30px;line-height:30px; padding-left:30px; background-image:url(images/left_menu.gif);}
+.nav a{ text-decoration:none;  color:#000; padding:5px; background-color:#F5EB8D;}
+.nav a:hover{  color:#2213AC; padding:5px; background-color:#F9C;}
+
+.nav_title{ height:25px; line-height:25px; padding-left:30px; background-color:#DCFAF7;}
+
+
+.address{ padding-left:40px; font-size:13px;}
+
+.foot{width:100%; height:50px; background-color:#993; margin-top:10px; clear:both;}

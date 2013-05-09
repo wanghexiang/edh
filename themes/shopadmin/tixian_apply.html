@@ -1,0 +1,25 @@
+{include file='lib/top.lbi'}
+{include file='tixian_nav.html'}
+<div class="nav_title">提现申请</div>
+<div class="rbox">
+<form method="post" action="shopadmin.php?m=tixian&a=apply&op=post">
+<table width="100%"  class="tb1">
+  <tr>
+    <td width="13%" align="right">提现金额：</td>
+    <td width="87%"><label for="money"></label>
+      <input name="money" type="text" id="money" value="100" size="10"> (提现金额不得少于100元，您目前可提现金额为{$balance}元)</td>
+    </tr>
+  <tr>
+    <td align="right">账户信息：</td>
+    <td><label for="info"></label>
+      <textarea name="info" id="info" cols="60" rows="5"></textarea></td>
+    </tr>
+  <tr>
+    <td align="right">&nbsp;</td>
+    <td><input type="submit" name="button" id="button" class="btn" value="确定"></td>
+    </tr>
+</table>
+</form>
+
+</div>
+{include file='lib/foot.lbi'}

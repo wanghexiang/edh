@@ -1,0 +1,30 @@
+<!--购物车列表-->
+{foreach item=s from=$shopcart }
+<div class="restaurant " id="cart_restaurant{$s.shopid}">
+<div style="height:30px; line-height:30px;" ><a href="index.php?m=shop&shopid={$s.shopid}" target="_blank">{$s.shopname}</a> <small>{if $s.phone}(电话：{$s.phone} ){/if}</small></div>
+
+<table class="table table-bordered">
+{foreach item=cai from=$s.cailist}   
+<tr>
+<td class="span4">{$cai.title}</td>
+<td class="span3">{$cai.price}</td>
+
+<td class="span3"><a href="javascript:;" class=" cart_l" caiid='{$cai.caiid}'>-</a>
+<span class="cart_count" id="cart_count{$cai.caiid}">{$cai.cainum}</span>
+<a href="javascript:;" class="  cart_r" caiid='{$cai.caiid}'>+</a>
+</td>
+
+<td class="span2  cart_delete   "  caiid='{$cai.caiid}'><span class="pointer icon-remove"> </span></td>
+</tr>
+{/foreach}
+</table>
+</div>
+{/foreach}
+<p>总价：<span id="totalmoney">{$totalmoney}</span>元</p>
+<!--购物车结束-->
+<script language="javascript">
+
+	 
+	$('tr').addClass('odd'); 
+	$('tr:even').addClass('even'); //奇偶变色，添加样式 
+</script>

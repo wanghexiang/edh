@@ -1,0 +1,32 @@
+{include file='lib/top.lbi'}
+{include file='groupbuy_nav.html'}
+<div class="nav_title">团购分类</div>
+<form method="post" action="admin.php?m=groupbuy&a=category&op=post">
+<table class="tb1">
+<tr>
+<td align="center">ID</td>
+<td>名称</td>
+<td>排序</td>
+<td>操作</td>
+</tr>
+{foreach item=c from=$catlist}
+<tr>
+  <td>{$c.catid}</td>
+  <td><input type="text" name="cname[{$c.catid}]" value="{$c.cname}"></td>
+  <td><input type="text" name="orderindex[{$c.catid}]" value="{$c.orderindex}"></td>
+  <td><a href="admin.php?m=groupbuy&a=delcat&catid={$c.catid}" onClick="return confirm('删除后不可恢复，确认删除？')">删除</a></td>
+</tr>
+{/foreach}
+<tr>
+  <td>&nbsp;</td>
+  <td><input type="text" name="newcname" value=""></td>
+  <td><input type="text" name="neworderindex" value=""></td>
+  <td>新增</td>
+</tr>
+<tr>
+  <td colspan="4" align="center"><input type="submit" name="" value="保存" class="btn"></td>
+  </tr>
+</table>
+
+</form>
+{include file='lib/foot.lbi'}

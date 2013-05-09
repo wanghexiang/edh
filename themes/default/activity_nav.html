@@ -1,0 +1,7 @@
+<ul class="nav nav-pills">
+<li  {if $smarty.get.a eq '' && $smarty.get.d eq 0}class="active" {/if} ><a href="index.php?m=activity">正在进行</a></li>
+<li {if  $smarty.get.a eq '' && $smarty.get.d eq 1}class="active" {/if} ><a href="index.php?m=activity&d=1">未开始</a></li>
+<li {if  $smarty.get.a eq '' && $smarty.get.d eq 2}class="active" {/if} ><a href="index.php?m=activity&d=2">已结束</a></li>
+<li {if  $smarty.get.a eq 'mycreate' }class="active" {/if}><a href="index.php?m=activity&a=mycreate">我发起的</a></li>
+<li {if  $smarty.get.a eq 'myjoin' }class="active" {/if}><a href="index.php?m=activity&a=myjoin">我参与的</a></li>
+</ul>

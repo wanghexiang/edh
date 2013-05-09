@@ -1,0 +1,41 @@
+{include file='lib/top.lbi'}
+<div class="nav">
+<a href="admin.php?m=vote&">投票管理</a> 
+<a href="admin.php?m=vote&a=add">投票添加</a>
+<a href="admin.php?m=vote&a=ttcat">选项分类</a>  
+<a href="admin.php?m=vote&a=tt">选项管理</a> 
+<a href="admin.php?m=vote&a=ttadd">选项添加</a>
+ </div>
+<div class="nav_title">投票管理</div>
+<div class="rbox">
+
+<table width="100%" border="0" align="center" cellspacing="1" class="tb1">
+  <tr>
+    <td width="403" align="center">分类名称</td>
+    <td width="223" align="center">&nbsp;</td>
+    </tr>
+<form action="admin.php?m=vote&a=ttcat_add" method="post">
+  <tr>
+    <td align="center">
+      <input type="text" name="cname" id="cname" /></td>
+    <td align="center"><input type="submit" name="button" id="button" value="添加" class="btn" /></td>
+    </tr></form>
+    <form name="f" method="post" action="admin.php?m=vote&a=ttcat">
+    {if $catlist}
+  {foreach item=cat from=$catlist}
+  <tr>
+    <td align="center"><input name="cname[{$cat.catid}]" type="text" id="title" value="{$cat.cname}" /></td>
+    <td align="center"><a href="admin.php?m=vote&a=ttcat_del&amp;catid={$cat.catid}">删除</a></td>
+    </tr>
+    {/foreach}
+  <tr>  
+    <td align="center">{$pagelist}      </td>
+    <td align="center"><input type="submit" name="button2" id="button2" value="更新" class="btn" /></td>
+    </tr>
+    {/if}
+    </form>
+</table>
+
+
+</div>
+{include file='lib/foot.lbi'}

@@ -1,0 +1,104 @@
+{include file='lib/top.lbi'}
+<link rel="stylesheet" href="plugin/zebra/zebra_datepicker.css" type="text/css">
+<script type="text/javascript" src="plugin/zebra/zebra_datepicker.js"></script>
+<script language="javascript">
+$(document).ready(function()
+{
+	$("#chkall").click(function()
+	{
+		$(".orderid").attr("checked","checked");
+	});
+	$("#chknone").click(function()
+	{
+		$(".orderid").attr("checked",false);
+	});
+	$('#starttime').Zebra_DatePicker();
+
+	$('#endtime').Zebra_DatePicker();
+});
+
+</script>
+{include file='groupbuy_nav.html'}
+<div class="rbox">
+
+<form action="admin.php " method="get">
+<input type="hidden" name="m" value="groupbuy" />
+<input type="hidden" name="a" value="order" />
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="1" class="tb1">
+  <tr>
+    <td height="30" align="center">客户：
+      <input name="nickname" type="text" id="username" value="{$smarty.get.nickname}" size="16" />
+
+      配送状态
+      <label for="status"></label>
+      <select name="status" id="status">
+      <option value="-1" {if $smarty.get.status eq -1} selected="selected"{/if}>全部</option>
+      <option value="0" {if $smarty.get.status eq 0} selected="selected"{/if}>未确认</option>
+      <option value="1" {if $smarty.get.status eq 1} selected="selected"{/if}>已确认</option>
+      <option value="2" {if $smarty.get.status eq 2} selected="selected"{/if}>正在配送</option>
+      <option value="3" {if $smarty.get.status eq 3} selected="selected"{/if}>已完成</option>
+     
+      </select>  
+       开始时间 <span style="position:relative;"><input name="starttime" type="text" id="starttime" value="{$smarty.get.starttime}" size="12" /></span>
+       结束时间 <span style="position:relative;"><input name="endtime" type="text" id="endtime" value="{$smarty.get.endtime}" size="12" /></span>   
+       <input type="submit" name="button" id="button" value="查询" class="btn"/></td>
+    </tr>
+  </table>
+
+</form>
+
+<form method="post" action="index.php?m=groupbuy">
+<table class="tb1" width="100%">
+	<tr>
+    	<td width="3%" align="center">选择</td>
+    	<td width="8%" align="center">团购主题</td>
+        <td width="11%" align="center">客户</td>
+        <td width="8%" align="center">电话</td>
+        <td width="10%" align="center">地址</td>
+        <td width="9%" align="center">数量</td>
+        <td width="14%" align="center">总价</td>
+        <td width="10%" align="center">支付</td>
+        <td width="18%" align="center">下单时间</td>
+        <td width="9%" align="center">状态</td>
+         
+    </tr>
+    {foreach item=g from=$list}
+    	<tr>
+        <td><input type="checkbox" name="orderid[]" class="orderid" value="{$g.orderid}"></td>
+    	<td>{$g.title}</td>
+        <td align="center">{$g.nickname}</td>
+        <td align="center">{$g.phone}</td>
+        <td align="center">{$g.address}</td>
+        <td align="center">{$g.goodsnum}</td>
+        <td align="center">{$g.totalprice}</td>
+         <td align="center">{if $g.ispay}已在线支付{else}货到付款{/if}</td>
+        <td align="center">{$g.dateline|date:Y-m-d H@i}</td>
+        <td align="center">{if $g.status eq 0}未确认{elseif $g.status eq 1}已确认{elseif $g.status eq 2}配送中{elseif $g.status eq 3}已完成{/if}</td>
+         
+      </tr>
+    {/foreach}
+    
+    <tr>
+    	<td colspan="9"> 
+        	<a href="javascript::" id="chkall"  >全选</a>
+      &nbsp;<a href="javascript::" id="chknone"  >全不选</a>
+       
+        <input type="submit" name="button3" id="button3" value="已确认" class="btn"  onclick="this.form.action='admin.php?m=groupbuy&a=orderstatus&status=1'"  />
+
+        <input type="submit" name="button5" id="button5" value="配送中"  class="btn" 
+         onclick="this.form.action='admin.php?m=groupbuy&a=orderstatus&status=2'"  />
+        <input type="submit" name="button6" id="button6" value="已完成" class="btn"  onclick="this.form.action='admin.php?m=groupbuy&a=orderstatus&status=3';return confirm('订单完成后将不可再更改订单状态');"   />
+        </td>
+    </tr>
+    
+    {if $pagelist}
+    <tr>
+    	<td colspan="9">{$pagelist}</td>
+    </tr>
+    {/if}
+
+</table>
+</form>
+</div>
+
+{include file='lib/foot.lbi'}

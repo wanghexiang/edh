@@ -1,0 +1,85 @@
+	<div  >
+    {php mod_userinfo("u")}
+    <table class="table table-bordered">
+    <thead>
+    <tr>
+    <td colspan="3"><a href="index.php?m=blog&userid={$u.userid}"><img src="{if $u.logo}{$u.logo}{else}images/nologo.gif{/if}" style="width:100px; height:100px;" /></a></td>
+    
+    </tr>
+    <tr><td colspan="3" align="center"> <a href="index.php?m=blog&userid={$u.userid}">{$u.nickname}</a>  </td></tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>{$u.followers}<br /><a href="index.php?m=friend&a=follow&userid={$u.userid}">关注</a></td>
+    <td>{$u.followeds}<br /><a href="index.php?m=friend&a=followed&userid={$u.userid}">粉丝</a></td>
+    <td>{$u.blogs}<br /><a href="index.php?m=blog&a=my&userid={$u.userid}">说说</a></td>
+    </tr>
+    {if $smarty.session.ssuser.userid neq $smarty.get.userid}
+    <tr>
+    <td align="center" colspan="3">
+    {if $ssuser}{if $u.followed} 
+      <a href="javascript:;" url='index.php?m=friend&a=follow_del&touserid={$u.userid}' class="ajax_follow_del btn btn-warning" shopid="{$shop.shopid}">取消关注</a>
+      {else}
+      <a href="javascript:;" url='index.php?m=friend&a=follow_add&touserid={$u.userid}' class="ajax_follow_add btn btn-success" shopid="{$shop.shopid}">加关注</a>{/if}
+      {/if}
+    </td>
+    </tr>
+    {/if}
+    </tbody>
+    </table>
+    </div>
+    
+    
+    <ul class="nav nav-tabs nav-stacked">
+    	 
+		<li {if $smarty.get.m eq 'blog'}class="active"{/if}>
+        	<a href="index.php?m=blog&a=my&userid={$smarty.get.userid}">我的说说</a>
+        </li>
+        <li {if $smarty.get.m eq 'ordershare'}class="active"{/if}>
+        	<a href="index.php?m=ordershare&a=my&userid={$smarty.get.userid}">我的吃吃</a>
+        </li>
+         <li {if $smarty.get.m eq 'friend'}class="active"{/if}>
+         	<a href="index.php?m=friend">我的好友</a>
+         </li>
+        
+        <li {if $smarty.get.a eq 'history'}class="active"{/if}>
+			<a href="index.php?m=shopcar&a=history">订单历史</a>
+		</li>
+        
+        <li {if $smarty.get.m eq 'groupbuy' && $smarty.get.a eq 'my'} class="active"{/if}>
+        	<a href="index.php?m=groupbuy&a=my">我的团购</a>
+        </li>
+        
+        <li {if $smarty.get.m eq 'grade_log'}class="active"{/if}>
+        	<a href="index.php?m=grade_log">兑换记录</a>
+        </li>
+        
+        <li {if $smarty.get.m eq 'room' & $smarty.get.a eq 'my'}class="active"{/if}>
+        	<a href="index.php?m=room&a=my">包间预订</a>
+        </li>
+	
+        <li {if $smarty.get.m eq 'fav'}class="active"{/if}><a href="index.php?m=fav">我的收藏</a></li>
+        <li {if $smarty.get.m eq 'message'}class="active"{/if}>
+        	<a href="index.php?m=message">消息</a>
+        </li>
+        <li {if $smarty.get.a eq 'mycomment'}class="active"{/if}>
+        	<a href="index.php?m=shop&a=mycomment">评论管理</a>
+        </li>
+        
+        <li {if $smarty.get.m eq 'pm'}class="active"{/if}>
+        	<a href="index.php?m=pm">私信</a>
+        </li>
+
+		<li {if $smarty.get.a eq 'my' && $smarty.get.m eq'guest'}class="active"{/if}>
+			<a href="index.php?m=guest&a=my">我的答疑</a>
+		</li>
+		<li {if $smarty.get.a eq 'edi'}class="active"{/if}>
+			<a href="index.php?m=user&a=edi">账户信息</a>
+		</li>
+  
+        <li {if $smarty.get.m eq 'recharge'} class="active"{/if} >
+        	<a href="index.php?m=recharge">在线充值</a>
+        </li>
+        
+	 
+	</ul>

@@ -1,0 +1,51 @@
+{include file='lib/top.lbi'}
+<div class="nav">
+
+<a href="admin.php?m=config&a=phone">短信设置</a>
+<a href="admin.php?m=config&a=email">邮箱设置</a>
+<a href="admin.php?m=config&a=water">水印设置</a>
+</div>
+<div class="nav_title">营业信息设置</div>
+<div class="rbox">
+<form action="admin.php?m=config&a=opentime&op=db" method="post">
+<table width="100%" border="0" cellspacing="1" cellpadding="0" class="tb1">
+  <tr>
+    <td height="30" align="right">按星期显示：</td>
+    <td height="30"><input type="radio" name="showweek" id="radio3" value="1" {if $rs.showweek eq 1} checked="checked"{/if} />开启 
+        <input type="radio" name="showweek" id="radio4" value="0" {if $rs.showweek eq 0} checked="checked"{/if} />关闭</td>
+  </tr>
+  <tr>
+    <td height="30" align="right">开启开业时间：</td>
+    <td height="30"><input type="radio" name="opentime" id="radio" value="1" {if $rs.opentime eq 1} checked="checked"{/if} />开启 
+        <input name="opentime" type="radio" id="radio2" value="0"{if $rs.opentime neq 1} checked="checked"{/if} />
+        不开启 (开启后在可以自动关闭 非营业时间的购物功能)</td>
+  </tr>
+  <tr>
+    <td width="186" height="30" align="right">开始时间：</td>
+    <td width="910" height="30"><input name="starthour" type="text" id="starthour" value="{$rs.starthour}" size="6" />
+      时
+        <input name="startminute" type="text" id="startminute" value="{$rs.startminute}" size="6" />
+        分 （时间为24小时制如：开始 9时 10分 结束 20时0分）</td>
+  </tr>
+  <tr>
+    <td height="30" align="right">结束时间：</td>
+    <td height="30"><input name="endhour" type="text" id="endhour" value="{$rs.endhour}" size="6" />
+      时
+        <input name="endminute" type="text" id="endminute" value="{$rs.endminute}" size="6" />
+        分</td>
+  </tr>
+  <tr>
+    <td height="30" align="right">最低送餐金额：</td>
+    <td height="30"><input name="minprice" type="text" id="minprice" size="8" value="{$rs.minprice}" />
+      元</td>
+  </tr>
+  <tr>
+    <td height="30" align="right">&nbsp;</td>
+    <td height="30"><input type="submit" name="button" id="button" value="提交" class="btn" /></td>
+  </tr>
+  </table>
+
+
+</form>
+
+</div>{include file='lib/foot.lbi'}

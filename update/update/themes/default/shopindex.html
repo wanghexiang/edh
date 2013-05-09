@@ -1,0 +1,73 @@
+{include file='lib/header.html'}
+
+{include file='shopnav.html'}
+<!--左侧浮动开始-->
+<div style="position:fixed; left:10px; top:50px; z-index:1000; background-color:#FFFFFF;">
+<div style="position:absolute; right:-40px; vertical-align:middle; padding:4px; border:1px solid #ccc; width:20px; height:100px;  top:30px;">
+	<i class="icon-pencil"></i>
+    <a href="index.php?m=shop&a=check&shopid={$shop.shopid}">店铺纠错</a>
+</div>
+<ul class="nav nav-tabs nav-stacked">
+<li><a href="javascript:;"><i class="icon-home"></i>美食分类</a></li>
+
+{foreach item=c from=$shop.caicat}
+<li>	 
+<a href="#section{$c.catid}" >{$c.cname|cutstr:16}</a> 
+</li>    
+{/foreach}
+</ul> 
+</div>
+<!--左侧浮动结束-->
+<div class="row">
+
+<div class="span8">
+
+
+<p><h2>
+ <a href="index.php?m=shop&shopid={$shop.shopid}" target="_blank">{$shop.shopname}</a>
+ <small>点击率{$shop.clicks}次 {if $shop.opentype eq 'doing'}营业中{elseif $shop.opentype eq 'will'}即将营业{else}已打烊{/if} {if $shopconfig.ordertype}本店只支持电话订餐{/if}  {$shop.phone}
+ 
+ {if $shop.isfav}
+                        <a rel="nofollow" href="javascript:;" shopid="{$shop.shopid}"  class="btn btn-warning delshopfav">移出首页</a>
+                        {elseif $ssuser.userid}
+						<a rel="nofollow" href="javascript:;" shopid="{$shop.shopid}"  class="btn btn_success fav-add addshopfav">加到首页</a>
+                        {else}
+                        <a rel="nofollow" href="index.php?m=user&a=login"  class="btn" >登录收藏</a>
+                        {/if}</small></h2>
+ </p>
+ <p>该餐厅订餐成功率颇高/最低消费
+	{if $shop.qq}<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={$shop.qq}&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:{$shop.qq}:41 &r=0.0803054568823427" alt="点击联系我{$shop.qq}" title="点击联系我{$shop.qq}"></a>
+    {/if}
+    </p>
+  <p class="caicatbtn">{foreach item=c from=$shop.caicat}
+	 <a href="#section{$c.catid}" class="btn">{$c.cname}</a> 
+    {/foreach}</p>                              
+ {foreach item=cat from=$shop.caicat}
+ <a name="section{$cat.catid}" id="section{$cat.catid}"></a>
+ <div style="height:40px; width:100%;"></div>
+ <table class="table table-bordered  table-condensed">
+ <thead><th  class="span11"  colspan="2"><h3  >{$cat.cname}</h3> </th>
+ <th class="span1" ><a class="btn pull-right" href="#top">TOP</a></th>
+ </thead>
+ <tbody>
+ {foreach item=cai from=$cat.cailist}
+ <tr id="dish{$cai.id}" class=" dish ">
+ 
+ <td class="span1"><span class="cart_count">{if $shopconfig.ordertype eq 0}<a href="javascript:;" class="addCart btn " caiid="{$cai.id}"  shopid='{$cai.shopid}' name="{$cai.title}" price="{$cai.price}" cart_count='0' >买</a>{else}<a href="javascript:;" title="电话预定" class="btn btn-warning">+</a>{/if}</span></td>
+ <td class="span9"><span class="title"><a href="index.php?m=cai&id={$cai.id}">{$cai.title}</a> </span></td>
+ <td class="span2"><span class="price">{$cai.price}</span></td>
+ </tr>
+ {/foreach}
+ </tbody>
+ 
+ </table>
+ {/foreach}
+</div>
+<!--左边结束-->
+<div class="span4">
+ {include file='lib/shopcar.html'}
+{include file="shop_right.html"}
+ </div>
+ <!--右侧结束-->
+</div>
+{include file='lib/footer.html'}

@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>内页</title>
+<link rel="stylesheet" type="text/css" href="image/gong.css"/>
+<link rel="stylesheet" type="text/css" href="image/nei.css"/>
+</head>
+<body>
+{include file="lib/header.html"}
+<script language="javascript">
+function movenew()
+{
+	document.location='{$url}';
+}
+setTimeout(movenew,2000);
+
+</script>
+<br/>
+<br/>
+<br/><br/>
+<br/>
+<br/><br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<center>
+<div class="well" style="color:green">
+{$message}，如果没有自动跳转请点击 <a href="{$url}">跳转</a>
+
+</div>
+</center>
+<br/>
+<br/>
+<br/><br/>
+<br/>
+<br/><br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+{include file='lib/footer.html'}
+</body>
+</html>

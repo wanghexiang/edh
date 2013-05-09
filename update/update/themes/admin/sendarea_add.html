@@ -1,0 +1,35 @@
+{include file='lib/top.lbi'}
+<div class="nav"><a href="admin.php?m=sendarea&">区域管理</a> <a href="admin.php?m=sendarea&a=add">区域添加</a></div>
+<div class="nav_title">区域添加</div>
+<div class="rbox">
+<form action="admin.php?m=sendarea&a=add_db" method="post">
+<table width="100%" border="0" cellspacing="1" cellpadding="0" class="tb1">
+  <tr>
+    <td width="16%" height="30" align="right">所属区域：</td>
+    <td width="84%">
+      <select name="pid" id="pid">
+      {if $cat.pid}<option value="{$cat.pid}">{$cat.pname}</option>{/if}      
+        <option>作为顶级区域</option>
+        {foreach from=$plist item=t}
+        <option value="{$t.catid}">{$t.cname}</option>
+        {/foreach}
+      </select></td>
+  </tr>
+  <tr>
+    <td height="30" align="right">区域名称：</td>
+    <td><input name="cname" type="text" value="{$cat.cname}" /> 
+    <input name="catid" type="hidden" id="catid" value="{$cat.catid}" /></td>
+  </tr>
+  <tr>
+    <td height="30" align="right">说明：</td>
+    <td><textarea name="info" id="info" cols="60" rows="5">{$cat.info}</textarea></td>
+  </tr>
+  <tr>
+    <td height="30" align="right">&nbsp;</td>
+    <td><input type="submit" name="button" id="button" value="确定" class="btn" /></td>
+  </tr>
+</table>
+
+</form>
+</div>
+{include file='lib/foot.lbi'}

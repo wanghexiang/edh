@@ -1,0 +1,49 @@
+{include file='lib/header.html'}
+<span class="breadcrumb span12" style="text-align:center; position:relative; font-size:18px; font-weight:16px;"><sd style="float:left; font-size:14px;"><a href="index.php?m=weibo&a=userlist"><<返回</a></sd> {$screen_name}的挑食客专栏</span>
+<div style="clear:both;">
+<div class="row" id="row">
+
+{foreach item=c key=k from=$list}
+<div class="span3">
+<span style="line-height:25px;">
+<font style="color:red">{$k|+:1}.</font>{$c.content}
+
+</span>
+{if $c.picture}<span class="showbig" style="position:relative; display:block;"><img src="{$c.picture}" big="0" style="max-width:100%;"  /></span>{/if}
+</div>
+{/foreach}
+
+</div>
+<script language="javascript" src="js/jquery.masonry.min.js"></script>
+<script language="javascript">
+$(document).ready(function(){
+	
+	var $container=$("#row");
+    $container.imagesLoaded(function(){
+		  $container.masonry({
+			itemSelector: '.span3',
+			
+		  });
+		  
+	  });
+	$('.showbig img').click(
+			function(){
+				if($(this).attr("big")=='1'){
+					$(this).attr("big","0").css({position:"absolute","border":0}).stop().animate({				
+						zIndex:1,
+						left:0,
+						maxWidth:"100%"
+					});
+				}else{
+					$(this).attr("big","1").css({position:"absolute",zIndex:1000,"border":"6px solid #ccc"}).stop().animate({				
+					
+					left:('-'+$(this).width()/2+'px'),
+					maxWidth:1000
+					});
+				}
+		  })
+	 
+
+});
+</script>
+{include file='lib/footer.html'}

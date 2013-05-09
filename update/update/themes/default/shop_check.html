@@ -1,0 +1,35 @@
+{include file='lib/header.html'}
+{include file='shopnav.html'}
+<div class="row">
+
+<div class="span9">
+
+<form method="post" action="index.php?m=shop&a=check&op=post" class="form  form-horizontal">
+<input type="hidden" name="shopid" value="{$shop.shopid}">
+<table class="table table-bordered">
+	<tr>
+    	<td>µÍ∆Ã√˚≥∆</td>
+        <td>{$shop.shopname}</td>
+    </tr>
+    
+    <tr>
+    	<td>æ¿¥Ì‘≠“Ú</td>
+        <td><textarea name="content" style="width:400px; height:200px;"></textarea></td>
+    </tr>
+    
+    <tr>
+    	<td></td>
+        <td><input type="submit" value="±£¥Ê" class="btn btn-large"></td>
+    </tr>
+    
+</table>
+
+</form>
+</div>
+<div class="span3">
+<h3>µÍ∆Ãæ¿¥Ì</h3>
+</div>
+
+</div>
+
+{include file='lib/footer.html'}

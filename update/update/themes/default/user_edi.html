@@ -1,0 +1,54 @@
+{include file='lib/header.html'}
+<div class="row">
+	
+    <div class="span2">{include file='usernavleft.html'}</div>
+    
+	<div class="span10">												 
+	{include file='usernav.html'}
+
+ <form class="form " action="index.php?m=user&a=edi_db" method="post">
+ <table class="table table-bordered">
+ 	<tr>
+    	<td colspan="2"><h2>联系信息</h2></td>
+    </tr>
+    
+ 	<tr>
+    	<td>昵称</td>
+        <td><input type="text" name="nickname" class="h30" value="{$user.nickname}" /></td>
+    </tr>
+    
+     <tr>
+    	<td>手机号码</td>
+        <td><input type="text" class="h30" name="phone" id="mobile_number" value="{$user.phone}"></td>
+    </tr>
+    
+     <tr>
+    	<td>QQ</td>
+        <td><input type="text" class="h30" name="qq" id="qq" value="{$user.qq}" /></td>
+    </tr>
+    
+    <tr>
+    	<td>信息</td>
+        <td><textarea name="info" style="height:100px; width:400px;">{$user.info}</textarea></td>
+    </tr>
+    
+    <tr>
+    	<td colspan="2"><input class="btn btn-large btn-success" type="submit" value="保存"></td>
+    </tr>
+ 
+ </table>
+
+					 
+	</form>
+    
+	</div>
+			
+		 			
+		</div>
+{include file='lib/footer.html'}
+
+
+
+
+
+

@@ -1,0 +1,68 @@
+{include file='lib/header.html'}
+<div class="row">
+<div class="span2">{include file="usernavleft.html"}</div>
+<div class="span7">
+<ul class="nav nav-tabs">
+<li {if $smarty.get.a eq 'follow' } class="active"{/if}><a href="index.php?m=friend&a=follow" >我的关注</a></li>
+<li {if $smarty.get.a eq 'followed' } class="active"{/if}><a href="index.php?m=friend&a=followed"  >我的粉丝</a></li>
+<li><a href="index.php?m=search&type=people">找人</a></li>
+</ul>
+{if $user}
+<table class="table table-bordered">
+<tr>
+	<td><a href="index.php?m=photos&userid={$user.userid}" target="_blank" title="{$user.nickname}"><img src="{$user.logo}" class="usercard" wb_screen_name="hardbye" alt="{$user.nickname}"></a></td>
+    <td><a href="index.php?m=photos&userid={$user.userid}" target="_blank" class="usercard" wb_screen_name="hardbye">{$user.nickname}</a> <a href='index.php?m=friend&a=follow&userid={$user.userid}'>粉丝[{$user.followeds}]</a> <a href="index.php?m=friend&a=followed&userid={$user.userid}">关注[{$user.follows}]</a></td>
+</tr>
+<tr>
+	<td colspan="2">{if $user.follow }<a href="javascript:void(0);" class="btn_followed"><img src="http://img.app.wcdn.cn/ops/photo/style/images_v4/transparent.gif" class="mt_icon icon_follow">{if $user.followed}好友{else}已关注{/if}</a>&nbsp;&nbsp;<a href="index.php?m=friend&a=follow_del&touserid={$user.userid}">取消</a>{else}<a href="index.php?m=friend&a=follow_add&touserid={$user.userid}">加关注</a>{/if}</td>
+</tr>
+
+</table>
+{/if}
+
+{foreach item=user from=$users}		
+<table class="table table-bordered">
+<tr>
+<td width="100" rowspan="2"><a href="index.php?m=blog&userid={$user.userid}"  ><img src="{if $user.logo}{$user.logo}{else}images/nologo.gif{/if}" style=" width:100px; background:url() center center no-repeat"></a></td>
+<td width="896">
+	<a href="index.php?m=blog&userid={$user.userid}">{$user.nickname}</a>  {$user.followers} 关注 {$user.followeds} 粉丝 &nbsp;<a class="btn btn-succcess btn-mini sendpm" href="javascript:;" nickname={$user.nickname}><i class="icon-envelope"></i>私信</a>
+    {if $smarty.get.a eq 'follow'}
+      
+    {if $user.status eq 1}已关注{elseif $user.status eq 2}好友{/if}<em>｜</em>
+    <a href="javascript:;" url="index.php?m=friend&a=follow_del&touserid={$user.userid}" class="ajax_follow_del"  >取消关注</a>
+     
+    {else}
+     
+    {if  $user.status eq 2}好友<em>｜</em>
+    <a href="javascript:;" url="index.php?m=friend&a=follow_del&touserid={$user.userid}" class="ajax_follow_del"  >取消关注</a>
+    {else}
+    <a href="javascript:;" class="ajax_follow_add" url="index.php?m=friend&a=follow_add&ajax=1&touserid={$user.userid}">加关注</a>
+    {/if}
+      
+    
+    {/if}
+
+</td>
+</tr>
+<tr>
+  <td>{$user.info}</td>
+</tr>
+
+</table>													
+				
+{/foreach}				
+			
+			 
+<div>{$pagelist}</div>
+
+
+</div>
+<div class="span3">
+<h2>我的好友</h2>
+<p>关注你的好友，关注他的美食，他的分享</p>
+</div>
+</div>
+
+
+
+{include file='lib/footer.html'}

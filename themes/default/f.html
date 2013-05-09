@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>内页</title>
+<link rel="stylesheet" type="text/css" href="image/gong.css"/>
+<link rel="stylesheet" type="text/css" href="image/nei.css"/>
+<link rel="stylesheet" type="text/css" href="image/pager.css"/>
+<script type="text/javascript" src="js/JQ.js"></script>
+</head>
+
+<body>
+{include file='lib/header.html'}
+<div class="kuan clear col">1. 选择美食 →2. 填写核对订单信息 →3. 成功提交订单</div>
+<div class="kuan bg_whitle mt15 pb15">
+	<div class="ge_top fz f14"><span>牛逼的个人中心</span></div>
+    <div class="ge_lt mt20"></div>
+    <div class="ge_bj">
+    <div class="left ren_xinx">
+    <dl class="ds_div pl20 pt10 pb25">
+      <dt><a href="#"><img src="image/ren_img.jpg" /></a></dt>
+      <span class="search fz f14"><a href="#">个人中心</a></span>
+      <dd class="fz f14">牛逼，欢迎您！
+      <h1><img src="image/jb1.jpg" /><img src="image/jb2.jpg" />
+      <img src="image/jb3.jpg" /></h1>
+      <h2><span>0</span>积分</h2>
+      <h3><span>5</span>消息</h3>
+      </dd>
+      </dl>
+        <script>
+ 	$(function(){
+	$(".ds_div").hover(function(){
+		$(this).addClass('hover');
+		$(this).find(".search").stop().animate({top:'80px'},100).show();
+		},function(){
+		$(this).removeClass('hover');
+	    $(this).find(".search").stop().animate({top:'0px'},100,function(){
+			$(this).css('display','none')
+		})
+		})
+ 	})
+ 	</script>
+    <div class="mt15 qian_an ml30">
+    <a href="#">
+    	<h1 class="fz fb f14 text_z left">周四 12-27</h1>
+        <p class="left fz f14 text_z pt10">已签到3天<br />
+		下次升级还有5天</p>
+    </a>
+    </div>
+    <div class="mt15 ml30">
+    <p class="f14 fz fc">订单中心</p>
+    <ul class="ding_lie mt10 pb10 mb10">
+    	<li class="ding_xbj1"><a href="index.php?m=shopcar&a=history">订单历史</a></li>
+        <!--<li class="ding_xbj2">最近一个月前</li>  -->
+    </ul>
+    <p class="f14 fz fc">我的收藏</p>
+    <ul class="ding_lie mt10 pb10 mb10">
+    	<li class="ding_xbj3"><a href="index.php?m=fav">我收藏的餐厅</a></li>
+    </ul>
+    <p class="f14 fz fc">相关地址</p>
+    <ul class="ding_lie mt10 pb10 mb10">
+    	<li class="ding_xbj4">我的地址</li>
+    </ul>
+    <p class="f14 fz fc">安全中心</p>
+    <ul class="ding_lie mt10 pb10 mb10">
+    	<li class="ding_xbj5">修改密码</li>
+        <li class="ding_xbj6">安全设置</li>
+    </ul>
+    </div>
+    </div>
+    <div class="left ren_wujie">
+    	<div class="ren_ping fz f14 pl20">
+        	您的订单历史
+        </div>
+        <table width="606" border="1" bordercolor="#DDDDDD" class="ml40 mr40 mt15 table">
+  <tr class="altrow">
+     <th  scope="col">餐厅名字</th>
+     <th scope="col">金额</th>
+     <th  scope="col">订单时间</th>
+     <th  scope="col">状态</td>
+     <th  scope="col">收货</td>
+  </tr>
+  {foreach item=order from=$orderlist}
+  <tr>
+    <td><a href="index.php?m=shop&shopid={$order.shopid}" target="_blank">{$order.shopname}</a></td>
+    <td>{$order.money}</td>
+    <td class="how_num">
+    {$order.dateline|date:m-d H@i}
+    </td>
+    <td>{if $order.sendtype eq 0}未审核{elseif $order.sendtype eq 1}已确认{elseif $order.sendtype eq 2}正在配送{elseif $order.sendtype eq 3}完成{/if} {if !$order.isvalid}未生效{/if}</td>
+	<td>
+	 {if $order.received}已收货{elseif $order.sendtype>0}<a href="javascript:;" onclick="$.get('index.php?m=shopcar&a=received&id={$order.id}');$(this).text('已收货')">确认收货</a>{/if}
+            {if $order.sendtype eq 3}
+            {if !$order.iscomment}<a href="index.php?m=shopcar&a=orderphone&ids={$order.id}" target="_blank">评价</a>{else}已评价{/if}
+            {/if}
+	</td>
+  </tr>
+  {/foreach}
+ 
+	</table> 
+	<br/>
+	<center><div>{$pagelist}</div></center>
+    </div>
+        <div class="clear cai_foot"></div>	
+    </div>
+
+</div>
+ 
+{include file='lib/footer.html'}
+</body>
+</html>

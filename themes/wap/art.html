@@ -1,0 +1,31 @@
+{include file="lib/header.html"}
+<p>
+<div  class="breadcrumb">文章详情</div>
+<div class="btn-group">
+  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+    文章分类
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu">
+{foreach item=t from=$artcat}
+<li><a href="index.php?m=art_cat&catid={$t.catid}">{$t.cname}</a></li>
+{/foreach}
+  </ul>
+</div>
+</p>
+
+
+<h2>{$art.title}</h2>
+
+<div style="display:block; width:99%;" >{$art.content}</div>
+
+
+<h2>相关文章</h2>
+
+<p>上一篇：{$lastrs}</p>
+
+<p>下一篇：{$nextrs}</p>
+
+
+
+{include file="lib/footer.html"}

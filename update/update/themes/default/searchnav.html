@@ -1,0 +1,15 @@
+ 
+<ul class="nav nav-tabs">
+<li {if $smarty.get.a eq "index" or $smarty.get.a eq "shop"} class="active"{/if}><a href="index.php?m=search&a=shop&keyword={$smarty.get.keyword}" >µÍ∆Ã</a></li>
+<li {if $smarty.get.a eq "cai" }class="active"{/if} ><a href="index.php?m=search&a=cai&keyword={$smarty.get.keyword}">√¿ ≥</a></li>
+<li {if $smarty.get.a eq "people" }class="active"{/if}><a href="index.php?m=search&a=people&keyword={$smarty.get.keyword}">∫√”—</a></li>
+<li {if $smarty.get.a eq "caipu" }class="active"{/if}><a href="index.php?m=search&a=caipu&keyword={$smarty.get.keyword}">≤À∆◊</a></li>
+</ul>                                
+<form action="index.php" name="searchform" id="form_search_new" method="get" >
+		<input type="hidden" name="m" value="search">
+        <input type="hidden" name="a" value="{$smarty.get.a}" />
+        <input type="text" value=" {$smarty.get.keyword|escape:html}" name="keyword"  style="padding:0px; width:600px; " autocomplete="off" class="searchinput">
+        <input type="submit" class="searchbtn" value=" " style="width:90px; height:33px;" name="submit">
+         
+</form>
+<div style="clear:both"></div> 

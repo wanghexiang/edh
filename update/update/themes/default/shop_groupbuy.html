@@ -1,0 +1,50 @@
+{include file='lib/header.html'}
+{include file='shopnav.html'}
+<div class="row">
+<div class="span9">
+
+{if $list}
+<ul class="thumbnails">
+{foreach item=g from=$list}
+<li class="span3" style="height:340px;">
+<div class="thumbnail"><a href="index.php?m=groupbuy&a=show&id={$g.id}"><img src="{if $g.img}{$g.img}.thumb.jpg{else}images/nologo.gif{/if}" onerror='images/nologo.gif' style="width:200px; height:140px;"   /></a>
+<div class="caption">
+<p>{$g.title}</p>
+<p>{$g.groupprice}元  <span style="text-decoration:line-through">￥{$g.goodsprice}({php echo round($smarty['g']['groupprice']/$smarty['g']['goodsprice'],1)}折)</span></p>
+
+<p><span class="lefttime" endtime={$g.endtime}>离团购结束....</span></p>
+</div>
+</div>
+</li>
+{/foreach}
+<script language="javascript">
+setInterval("changelefttime()",1000);
+</script>
+</ul>
+{else}
+<h2>暂无团购</h2>
+{/if}
+
+</div>
+<div class="span3">
+{php mod_base('hotlist',"SELECT * FROM ".table('groupbuy')." ")} 
+{if $hostlist}
+<div class="accordion-group">
+	<div class="accordion-heading"><div class="accordion-toggle f14 btn-success ">热门团购</div></div>
+    <div class="accordion-inner">
+    <ul class="unstyled">
+    
+    {foreach item=t from=$hotlist}
+    <li>{$t.title}</li>
+    {/foreach}
+    
+    </ul>
+    </div>
+</div>
+{/if}
+{include file="shop_right.html"}
+</div>
+<!--右边结束->
+
+</div>
+{include file='lib/footer.html'}

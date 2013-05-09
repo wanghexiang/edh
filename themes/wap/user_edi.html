@@ -1,0 +1,18 @@
+{include file="lib/header.html"}<div >
+{include file='lib/user.html'}
+<h2>信息更改</h2>
+
+<form class="form" action="index.php?m=user&a=edi_db" method="post">
+<label>昵称</label>
+<input name="nickname" type="text" id="nickname" value="{$user.nickname}" class="h30"  />
+
+
+<label>手机</label>
+<input name="phone" type="text" value="{$user.phone}" class="h30" />
+<div class="form-actions">
+<input type="submit" name="button" id="button" value="更改"  class="btn"/>
+      <input type="reset" name="button2" id="button2" value="重置" class="btn" /></div>
+
+</form>
+
+{include file="lib/footer.html"}

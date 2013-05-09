@@ -1,0 +1,72 @@
+<div id="ajaxshopinfo" style="width:440px; height:350px; font-size:12px;">
+
+<div class="row-fluid">
+<div class="span6" >
+
+			<table class="table table-bordered"  style="background:none; " >
+            
+            	<tr >
+                
+                <td  colspan="2" style="line-height:30px;"><span style=" padding-left:6px; cursor:pointer; font-weight:900; font-size:16px; "><a href="index.php?m=shop&shopid={$shop.shopid}" target="_blank">{$shop.shopname}</a>
+                 
+                </span>
+                <span style=" padding-left:6px; cursor:pointer; font-weight:900; font-size:16px; ">{if $smarty.session.ssuser.userid} {if $shop.isfav}<a href="javascript:;" class='delshopfav btn btn-warning' shopid="{$shop.shopid}" onclick="$.get('index.php?m=fav&a=shopdel&shopid={$shop.shopid}');$(this).text('已移除')">移除首页</a>{else}<a href="javascript:;" class='addshopfav btn btn-success' onclick="$.get('index.php?m=fav&a=shopadd&shopid={$shop.shopid}');$(this).text('已收藏')" shopid="{$shop.shopid}">加入首页</a>{/if}{/if} </span></td>
+                </tr>
+				<tr >
+					<th style="width:60px;">外卖时间</th>
+					<td>{$shopconfig.starthour}:{$shopconfig.startminute}-{$shopconfig.endhour}:{$shopconfig.endminute}</td>
+				</tr>
+				<tr class="restaurant_info_item unknown">
+					<th>送餐费用</th>
+					<td>-</td>
+				</tr>
+				<tr class="restaurant_info_item">
+					<th>起送金额</th>
+					<td>{$shopconfig.minprice}元</td>
+				</tr>
+				<tr class="restaurant_info_item">
+					<th>送餐范围</th>
+					<td>{$shop.sendarea}</td>
+				</tr>
+				<tr>
+                <td>店铺地址</td>
+                <td>{$shop.address}</td>
+                </tr>
+                {if $shop.distance}
+                <tr>
+                <td>距离</td>
+                <td>{$shop.distance}米</td>
+                </tr>
+                {/if}
+                <tr class="restaurant_info_item">
+					<th style="height:auto;">还有……</th>
+					<td>
+						{$shop.info}
+					</td>
+				</tr>
+								
+								
+			</table>
+</div>
+
+<div class="span6" >
+<div style="height:350px; overflow-y:scroll;">
+<table class="table table-bordered">
+
+<!--美食分类及列表开始-->
+{foreach item=cat from=$shop.caicat}
+<tr><td class="breadcrumb">{$cat.cname}</td></tr>
+
+<!--美食列表-->
+{foreach item=cai from=$cat.cailist}
+<tr><td>{$cai.title} -{$cai.price}元/份</td></tr>
+{/foreach}
+<!--美食列表结束-->
+{/foreach}
+
+<!--店铺美食结束-->	
+</table>
+</div>
+</div>
+
+</div>

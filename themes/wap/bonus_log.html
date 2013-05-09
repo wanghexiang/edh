@@ -1,0 +1,30 @@
+{include file='lib/header.html'}
+{include file='lib/user.html'}
+<h2>优惠余额记录</h2>
+<table class="table">
+  <tr>
+    <td height="30" colspan="3">欢迎您，{$ssuser.nickname}!</td>
+    </tr>
+  <tr>
+    <td height="30" colspan="3">您目前可用优惠额为{$bonus}元，您可以用这些优惠额进行全额消费，已下是您的优惠额记录。</td>
+    </tr>
+   
+ 
+  
+  <tr>
+    <td width="87" height="23" align="center">优惠额</td>
+    <td width="468" align="center">详情</td>
+    <td width="141" align="center">时间</td>
+    </tr>
+     {foreach item=t from=$loglist}
+  <tr>
+    <td width="87" height="30" align="center">{$t.bonus}</td>
+    <td>{$t.content}</td>
+    <td width="141" align="center">{$t.dateline}</td>
+  </tr> {/foreach}
+  <tr>
+    <td height="30" colspan="3" align="center">{$pagelist}</td>
+    </tr>
+</table>
+
+{include file='lib/footer.html'}

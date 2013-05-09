@@ -1,0 +1,30 @@
+{include file='lib/header.html'}
+<div class="row">
+<div class="span9">
+{include file='activity_nav.html'}
+<table class="table table-bordered">
+<tr>
+<td style="width:400px">主题</td>
+<td>发起人</td>
+<td>开始时间</td>
+</tr>
+{foreach item=c from=$list}
+<tr>
+<td><a href="index.php?m=activity&a=show&id={$c.id}"  >{$c.title}</a></td>
+<td>{if $c.nickname} {$c.nickname}{else}活动天使{/if}</td>
+<td>{$c.dateline|date:Y-m-d H@i@s}</td>
+</tr>
+{/foreach}
+</table>
+{if $pagelist}
+<p>{$pagelist}</p>
+{/if}
+
+</div>
+<div class="span3">
+{include file='activity_right.html'}
+</div>
+
+</div>
+
+{include file='lib/footer.html'}

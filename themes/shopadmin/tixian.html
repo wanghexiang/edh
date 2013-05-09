@@ -1,0 +1,28 @@
+{include file='lib/top.lbi'}
+{include file='tixian_nav.html'}
+<div class="nav_title">提现记录</div>
+<div class="rbox">
+<table width="100%"  class="tb1">
+  <tr>
+    <td width="7%" align="center">金额（元）</td>
+    <td width="35%" align="center">账户信息</td>
+    <td width="35%" align="center">处理信息</td>
+    <td width="14%" align="center">时间</td>
+    <td width="9%" align="center">状态</td>
+    </tr>
+   {foreach item=t from=$list}
+  <tr>
+    <td align="center">{$t.money}</td>
+    <td>{$t.info}</td>
+    <td>{if $t.reply}{$t.reply} 处理时间：{$t.redateline|date:Y-m-d H@i@s}{else}暂未处理{/if}</td>
+    <td align="center">{$t.dateline|date:Y-m-d H@i@s}</td>
+    <td align="center">{if $t.status}已处理{else}未处理{/if}</td>
+    </tr>
+  {/foreach}
+  <tr>
+    <td colspan="5" align="center">{$pagelist}</td>
+    </tr>
+</table>
+
+</div>
+{include file='lib/foot.lbi'}

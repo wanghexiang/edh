@@ -1,0 +1,72 @@
+{include file='lib/top.lbi'}
+<div class="nav">
+<a href="admin.php?m=vote&">投票管理</a> 
+<a href="admin.php?m=vote&a=add">投票添加</a>
+<a href="admin.php?m=vote&a=ttcat">选项分类</a>  
+<a href="admin.php?m=vote&a=tt">选项管理</a> 
+<a href="admin.php?m=vote&a=ttadd">选项添加</a>
+ </div>
+<div class="nav_title">投票添加</div>
+<div class="rbox">
+<form action="admin.php?m=vote&a=add" name="f1" method="post">
+<input type="hidden" name="vid" value="{$vote.vid}" />
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="tb1">
+  <tr>
+    <td width="189" height="25" align="right">投票主题：</td>
+    <td width="910"><input name="title" type="text" id="title" value="{$vote.title}" size="50" /></td>
+  </tr>
+  <tr>
+    <td height="25" align="right">投票描述：</td>
+    <td><textarea name="detail" id="detail" cols="60" rows="5">{$vote.detail}</textarea></td>
+  </tr>
+   <tr>
+    <td height="25" align="right">投票封面：</td>
+    <td><label for="logo"></label>
+      <input name="logo" type="text" id="logo" value="{$vote.logo}" readonly="readonly" />
+      <input type="button" name="button2" id="button2" value="上传封面" onclick="window.open('admin.php?m=upload&formname=f1&editname=logo&f_type=1','文件上传','left=300px,height=400,width=500');" class="btn" /></td>
+  </tr>
+  <tr>
+    <td height="25" align="right">投票类型：</td>
+    <td><input name="vtype" type="radio" id="radio" value="0" {if $vote.vtype neq 1} checked="checked" {/if} />
+      单选
+      <input type="radio" name="vtype" id="radio2" value="1" {if $vote.vtype eq 1} checked="checked"{/if} />
+      多选</td>
+  </tr>
+ 
+  <tr>
+    <td height="25" align="right">推荐：</td>
+    <td><input type="radio" name="isding" id="radio7" value="1" {if $vote.isding eq 1} checked="checked" {/if} />
+      是
+      <label for="isding">
+        <input type="radio" name="isding" id="radio8" value="0" {if $vote.isding eq 0} checked="checked" {/if}/>
+        否
+      </label></td>
+  </tr>
+  <tr>
+    <td height="25" align="right">投票展示：</td>
+    <td><input name="showtype" type="radio" id="radio3" value="0" {if $vote.showtype eq 0} checked="checked" {/if} />
+      文字 
+        <input type="radio" name="showtype" id="radio4" value="1"  {if $vote.showtype eq 1} checked="checked" {/if}/>
+        图文
+        <label for="showtype"></label>
+<label for="showtype"></label></td>
+  </tr>
+  <tr>
+    <td height="25" align="right">用户登录：</td>
+    <td><input type="radio" name="mustlogin" id="radio5" value="0" {if $vote.mustlogin eq 0} checked="checked"{/if} />
+      否
+        <input type="radio" name="mustlogin" id="radio6" value="1"  {if $vote.mustlogin eq 1} checked="checked"{/if}/>
+        是
+        <label for="mustlogin"></label>
+<label for="mustlogin"></label></td>
+  </tr>
+  <tr>
+    <td height="25" align="right">&nbsp;</td>
+    <td><input type="submit" name="button" id="button" value="提交" class="btn" /></td>
+  </tr>
+  </table>
+
+
+</form>
+</div>
+{include file='lib/foot.lbi'}

@@ -1,0 +1,36 @@
+{include file='lib/top.lbi'}
+{include file='weibo_nav.html'}
+<div class="nav_title">微博用户管理 <a href="admin.php?m=weibo&a=userlist&visible=0">隐藏</a> <a href="admin.php?m=weibo&a=userlist&visible=1">显示</a></div>
+<table width="100%" border="0" class="tb1">
+  <tr>
+    <td width="11%" align="center">昵称</td>
+    <td width="9%" align="center">城市</td>
+    <td width="9%" align="center">头像</td>
+    <td width="16%" align="center">描述</td>
+    <td width="13%" align="center"><a href="{$baseurl}&order=2">粉丝{if $smarty.get.order eq 2}↓{/if}</a></td>
+    <td width="12%" align="center"><a href="{$baseurl}&order=1">微博{if $smarty.get.order eq 1}↓{/if}</a></td>
+    <td width="5%" align="center">显示</td>
+    <td width="25%" align="center">操作</td>
+  </tr>
+  {foreach item=c from=$list}
+  <tr>
+    <td align="center">{$c.screen_name}</td>
+    <td align="center">{$c.location}</td>
+    <td align="center"><img src="{$c.avatar_large}" width="100" /></td>
+    <td align="center">{$c.description}</td>
+    <td align="center">{$c.followers_count}</td>
+    <td align="center">{$c.statuses_count}</td>
+    <td align="center">{if $c.visible eq 1}
+    <img src='images/yes.gif' class="ajax_no" url='admin.php?m=weibo&a=visible&visible=0&id={$c.id}' rurl='admin.php?m=weibo&a=visible&visible=1&id={$c.id}'>
+    {else}<img src='images/no.gif' class="ajax_yes" url='admin.php?m=weibo&a=visible&visible=1&id={$c.id}' rurl='admin.php?m=weibo&a=visible&visible=0&id={$c.id}'>{/if}</td>
+    
+    <td align="center"><a href="index.php?m=weibo&a=userindex&uid={$c.uid}" target="_blank">查看</a> 
+    <a href="admin.php?m=weibo&a=adduser&uid={$c.uid}">编辑</a> 
+    <a href="http://www.weibo.com/{$c.uid}" target="_blank">查看微博</a> 
+    <a href="javascript::" class="ajax_del" url="admin.php?m=weibo&a=del&uid={$c.uid}">删除</a></td>
+  </tr>
+  {/foreach}
+
+</table>
+{$pagelist}
+{include file='lib/foot.lbi'}

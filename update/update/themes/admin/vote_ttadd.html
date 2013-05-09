@@ -1,0 +1,51 @@
+{include file='lib/top.lbi'}
+<div class="nav">
+<a href="admin.php?m=vote&">投票管理</a> 
+<a href="admin.php?m=vote&a=add">投票添加</a>
+<a href="admin.php?m=vote&a=ttcat">选项分类</a>  
+<a href="admin.php?m=vote&a=tt">选项管理</a> 
+<a href="admin.php?m=vote&a=ttadd">选项添加</a>
+ </div>
+<div class="nav_title">投票选项管理</div>
+<div class="rbox">
+<form name="f1" method="post" action="admin.php?m=vote&a=ttadd">
+<input type="hidden" name="tid" value="{$vt.tid}" />
+<table width="100%" border="0" align="center" cellspacing="1" class="tb1">
+  <tr>
+    <td width="128" align="right">选项标题：</td>
+    <td width="625"><label for="title"></label>
+      <input name="title" type="text" id="title" value="{$vt.title}" size="40" /></td>
+    </tr>
+  <tr>
+    <td align="right">选项分类：</td>
+    <td><label for="catid"></label>
+      <select name="catid" id="catid">
+      {if $vt.catid}<option value="{$vt.catid}">{$vt.cname}</option>{/if}
+      <option value="">请选择</option>
+      {foreach item=c from=$catlist}
+      <option value="{$c.catid}">{$c.cname}</option>
+      {/foreach}
+      
+      </select></td>
+  </tr>
+  <tr>
+    <td align="right">选项图片：</td>
+    <td><label for=""></label>
+      <input name="img" type="text" id="img" value="{$vt.img}" size="40" readonly="readonly" />
+      <input type="button" name="button" id="button" value="上传图片" class="btn" onclick="window.open('admin.php?m=upload&formname=f1&editname=img&f_type=1','文件上传','left=300px,height=400,width=500');" /></td>
+    </tr>
+  <tr>
+    <td align="right">选项网址：</td>
+    <td><label for="url"></label>
+      <input name="url" type="text" id="url" value="{$vt.url}" size="40" /></td>
+    </tr>
+  <tr>
+    <td align="right">&nbsp;</td>
+    <td><input type="submit" name="button2" id="button2" value="提交" class="btn" /></td>
+  </tr>
+  </table>
+
+
+</form>
+</div>
+{include file='lib/foot.lbi'}

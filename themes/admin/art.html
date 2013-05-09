@@ -1,0 +1,99 @@
+{include file='lib/top.lbi'}
+<script language="javascript" src="{$skins}js/art.js"></script>
+<div class="nav"><a href="admin.php?m=art&">文章管理</a> <a href="admin.php?m=art&a=add">文章添加</a></div>
+<div class="nav_title">文章管理</div>
+<div class="rbox">
+<form action="admin.php" method="get">
+<input type="hidden" name="m" value="art" />
+<table width="100%" border="0" cellpadding="0" cellspacing="1" class="tb1"  >
+  <tr>
+    <td width="74" height="30" align="right">分类：</td>
+    <td width="666">
+    <select name="cat1" id="cat1">
+    {if $cat1}<option value="{$cat1.catid}">{$cat1.cname}</option>{/if}
+    <option>请选择分类</option>
+    {foreach item=t from=$catlist}
+    <option value="{$t.catid}">{$t.cname}</option>
+    {/foreach}
+    </select>
+    
+      <select name="cat2" id="cat2">
+      {if $cat2}<option value="{$cat2.catid}">{$cat2.cname}</option>{/if}
+      <option>请选择分类</option>
+      </select>
+      <input name="isnew" type="checkbox" value="1" {if $isnew eq 1} checked="checked" {/if} />最新
+      <input name="ishot" type="checkbox" value="1"   {if $ishot eq 1}checked="checked"{/if}/>热门
+      <input name="isding" type="checkbox" value="1"  {if $isding eq 1}checked="checked"{/if} />推荐
+      </td>
+  </tr>
+  <tr>
+    <td height="30" align="right">标题：</td>
+    <td><input name="title" type="text" id="title" value="{$art_title}" />
+      <input type="submit" name="button" id="button" value="筛选"  class="btn"/></td>
+  </tr>
+</table>
+</form>
+<form action="admin.php?m=art&a=del" method="post">
+<table width="100%"   cellpadding="0" cellspacing="1" class="tb1">
+  <tr>
+    <td width="62" height="30" align="center">ID</td>
+    <td width="233" align="center">标题</td>
+    <td width="102" align="center">所属分类</td>
+    <td width="40" align="center">置顶</td>
+    <td width="40" align="center">热门</td>
+    <td width="39" align="center">最新</td>
+    <td width="45" align="center">推荐</td>
+    <td width="71" align="center">点击数</td>
+    <td width="139" align="center">操作</td>
+  </tr>
+  {foreach item=t from=$artlist}
+  <tr>
+    <td height="25" align="center">{$t.id}</td>
+    <td align="center"><a href="index.php?m=art&id={$t.id}" target="_blank">{$t.title}</a></td>
+    <td align="center">{$t.cname}</td>
+    <td align="center">
+    {if $t.istop}
+    <img src='images/yes.gif' class="ajax_no" url='admin.php?m=art&a=istop&t=0&id={$t.id}' rurl='admin.php?m=art&a=istop&t=1&id={$t.id}'>
+    {else}
+    <img src='images/no.gif' class="ajax_yes" url='admin.php?m=art&a=istop&t=1&id={$t.id}' rurl='admin.php?m=art&a=istop&t=0&id={$t.id}'>
+    {/if}
+    </td>
+    <td align="center">
+     {if $t.ishot}
+    <img src='images/yes.gif' class="ajax_no" url='admin.php?m=art&a=ishot&t=0&id={$t.id}' rurl='admin.php?m=art&a=ishot&t=1&id={$t.id}'>
+    {else}
+    <img src='images/no.gif' class="ajax_yes" url='admin.php?m=art&a=ishot&t=1&id={$t.id}' rurl='admin.php?m=art&a=ishot&t=0&id={$t.id}'>
+    {/if}
+    </td>
+    <td align="center">
+     {if $t.isnew}
+    <img src='images/yes.gif' class="ajax_no" url='admin.php?m=art&a=isnew&t=0&id={$t.id}' rurl='admin.php?m=art&a=isnew&t=1&id={$t.id}'>
+    {else}
+    <img src='images/no.gif' class="ajax_yes" url='admin.php?m=art&a=isnew&t=1&id={$t.id}' rurl='admin.php?m=art&a=isnew&t=0&id={$t.id}'>
+    {/if}
+    </td>
+    <td align="center">
+     {if $t.isding}
+    <img src='images/yes.gif' class="ajax_no" url='admin.php?m=art&a=isding&t=0&id={$t.id}' rurl='admin.php?m=art&a=isding&t=1&id={$t.id}'>
+    {else}
+    <img src='images/no.gif' class="ajax_yes" url='admin.php?m=art&a=isding&t=1&id={$t.id}' rurl='admin.php?m=art&a=isding&t=0&id={$t.id}'>
+    {/if}
+    </td>
+    <td align="center">{$t.click}</td>
+    <td align="center">
+      <input name="id[]" type="checkbox" id="id[]" value="{$t.id}" />&nbsp;<a href="admin.php?m=art&a=add&amp;id={$t.id}">编辑</a></td>
+  </tr>
+  {/foreach}
+  <tr>
+    <td height="25" colspan="9" align="right" class="pagelist"><input type="submit" name="button2" id="button2" value="删除所选" class="btn" onclick="return confirm('删除后不可恢复，确定删除？')" />&nbsp;&nbsp;</td>
+  </tr>
+ {if $pagelist}
+  <tr>
+    <td height="25" colspan="9" align="center">{$pagelist}</td>
+    </tr>
+{/if}
+</table>
+</form>
+
+</div> 
+{include file='lib/foot.lbi'}

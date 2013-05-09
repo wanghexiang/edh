@@ -1,0 +1,40 @@
+{include file='lib/top.lbi'}
+<div class="nav"><a href="javascript::">口味分类</a></div>
+<div class="nav_title">口味美食分类</div>
+<div class="rbox">
+<form action="admin.php?m=cai_wei&a=add_db" method="post">
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0"  class="tb1">
+  <tr>
+    <td width="248" height="30" align="right">分类名：</td>
+    <td width="204"><label for="wname"></label>
+      <input type="text" name="wname" id="wname" /></td>
+    <td width="647"><input type="submit" name="button" id="button" value="添加" class="btn" /></td>
+  </tr>
+  </table>  
+</form>
+
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="1" class="tb1">
+  <tr>
+    <td width="81" height="30" align="center">ID</td>
+    <td width="294" height="30" align="center">名称</td>
+    <td width="92" height="30" align="center">排序</td>
+    <td width="273" align="center">操作</td>
+  </tr>
+  {foreach item=t from=$catlist}
+  <form action="admin.php?m=cai_wei&a=add_db" method="post">
+  <tr>
+    <td height="25" align="center">{$t.id}</td>
+    <td height="25" align="center"><label for="wname"></label>
+      <input name="wname" type="text" id="wname" value="{$t.wname}" />
+      <input name="id" type="hidden" id="id" value="{$t.id}" /></td>
+    <td height="25" align="center"><label for="orderid"></label>
+      <input name="orderid" type="text" id="orderid" value="{$t.orderid}" size="6" /></td>
+    <td align="center"><input type="submit" name="button2" id="button2" class="btn" value="编辑" />
+    <input type="button" class="btn" value="删除" onclick="location.href='admin.php?m=cai_wei&a=del&amp;id={$t.id}'" />
+      </td>
+  </tr>
+  </form>
+  {/foreach}
+</table>
+
+</div>{include file='lib/foot.lbi'}

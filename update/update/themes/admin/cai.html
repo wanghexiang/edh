@@ -1,0 +1,136 @@
+{include file='lib/top.lbi'}
+<div class="nav"><a href="admin.php?m=cai&">美食管理</a></div>
+<div class="nav_title">美食管理</div>
+<div class="rbox">
+<form action="admin.php" method="get">
+<input type="hidden" name="m" value="cai" />
+<table  class="tb1">
+
+
+  <tr>
+    <td width="63%" height="30"  align="center">菜名：
+      <input name="title" type="text" id="title" size="40" value="{$smarty.get.title}" /> 
+      <select name="isding" id="isding">
+        <option value="-1" selected="selected">推荐</option>
+        <option value="1"{if $smarty.get.isding eq 1} selected="selected"{/if}>是</option>
+        <option value="0" {if $smarty.get.isding eq 0} selected="selected"{/if}>否</option>
+      </select>
+      <select name="ishot" id="ishot">
+        <option value="-1" selected="selected">热门</option>
+        <option value="1" {if $smarty.get.ishot eq 1} selected="selected"{/if}>是</option>
+        <option value="0" {if $smarty.get.ishot eq 0} selected="selected"{/if}>否</option>
+      </select>
+      <select name="isnew" id="isnew">
+        <option value="-1" selected="selected">最新</option>
+        <option value="1" {if $smarty.get.isnew eq 1} selected="selected"{/if}>是</option>
+        <option value="0" {if $smarty.get.isnew eq 0} selected="selected"{/if}>否</option>
+      </select>
+      <select name="visible" id="visible">
+        <option value="-1" selected="selected">上架</option>
+        <option value="1" {if $smarty.get.visible eq 1} selected="selected"{/if}>是</option>
+        <option value="0" {if $smarty.get.visible eq 0} selected="selected"{/if}>否</option>
+      </select>
+      <select name="oos" id="oos">
+        <option value="-1" selected="selected">缺货</option>
+        <option value="1" {if $smarty.get.oos eq 1} selected="selected"{/if}>是</option>
+        <option value="0" {if $smarty.get.oos eq 0} selected="selected"{/if}>否</option>
+      </select>
+      <select name="promote" id="promote">
+        <option value="-1" selected="selected">促销</option>
+        <option value="1" {if $smarty.get.promote eq 1} selected="selected"{/if}>是</option>
+        <option value="0" {if $smarty.get.promote eq 0} selected="selected"{/if}>否</option>
+      </select></td>
+    <td width="37%">&nbsp; <input type="submit" name="button" id="button" value="搜索"  class="btn" /></td>
+  </tr>
+ 
+  </table>
+   </form>
+<table width="100%" border="0" cellpadding="1" cellspacing="0" class="tb1">
+  <tr>
+    <td align="center" height="30">
+    <a href="admin.php?m=cai&">全部</a>
+    <a href="admin.php?m=cai&week1=1">周一</a> 
+    <a href="admin.php?m=cai&week2=1">周二</a> 
+    <a href="admin.php?m=cai&week3=1">周三</a> 
+    <a href="admin.php?m=cai&week4=1">周四</a> 
+    <a href="admin.php?m=cai&week5=1">周五</a> 
+    <a href="admin.php?m=cai&week6=1">周六</a> 
+    <a href="admin.php?m=cai&week7=1">周七</a>
+    </td>
+  </tr>
+  </table>
+
+<table width="100%"   cellpadisding="0" cellspacing="0" class="tb1">
+  <tr>
+    <td width="49" height="25" align="center">ID</td>
+    <td width="142" height="25" align="center">菜名</td>
+    <td width="72" align="center">价格</td>
+    <td width="77" height="25" align="center">推荐</td>
+    <td width="70" align="center">热门</td>
+    <td width="70" align="center">最新</td>
+    <td width="84" align="center">上架</td>
+    <td width="41" align="center">促销</td>
+    <td width="41" align="center">缺货</td>
+    <td width="384" align="center">操作</td>
+  </tr>
+  {foreach item=t from=$cailist}
+  <tr>
+    <td height="20" align="center">{$t.id}</td>
+    <td>{$t.title}</td>
+    <td align="center">￥{$t.price}</td>
+    <td width="77" align="center">
+      {if $t.isding}
+      <img src='images/yes.gif' class="ajax_no" url="admin.php?m=cai&a=isding&t=0&id={$t.id}" rurl="admin.php?m=cai&a=isding&t=1&id={$t.id}">
+      {else}
+      <img src='images/no.gif' class="ajax_yes" rurl="admin.php?m=cai&a=isding&t=0&id={$t.id}" url="admin.php?m=cai&a=isding&t=1&id={$t.id}">
+      {/if}
+    </td>
+    <td width="70" align="center">
+    {if $t.ishot}
+    <img src='images/yes.gif' class="ajax_no" url="admin.php?m=cai&a=ishot&t=0&id={$t.id}" rurl="admin.php?m=cai&a=ishot&t=1&id={$t.id}">
+    {else}
+    <img src='images/no.gif' class="ajax_yes" rurl="admin.php?m=cai&a=ishot&t=0&id={$t.id}" url="admin.php?m=cai&a=ishot&t=1&id={$t.id}">
+    {/if}
+    </td>
+    <td width="70" align="center">
+    {if $t.isnew}
+    <img src='images/yes.gif' class="ajax_no" url="admin.php?m=cai&a=isnew&t=0&id={$t.id}" rurl="admin.php?m=cai&a=isnew&t=1&id={$t.id}">
+    {else}
+    <img src='images/no.gif' class="ajax_yes" rurl="admin.php?m=cai&a=isnew&t=0&id={$t.id}" url="admin.php?m=cai&a=isnew&t=1&id={$t.id}">
+    {/if}
+    </td>
+    <td align="center">
+    {if $t.visible}
+    <img src='images/yes.gif' class="ajax_no" url="admin.php?m=cai&a=visible&visible=0&id={$t.id}" rurl="admin.php?m=cai&a=visible&visible=1&t=1&id={$t.id}">
+    {else}
+    <img src='images/no.gif' class="ajax_yes" rurl="admin.php?m=cai&a=visible&visible=0&id={$t.id}" url="admin.php?m=cai&a=visible&visible=1&id={$t.id}">
+    {/if}
+    </td>
+    <td align="center">
+      {if $t.promote}
+    <img src='images/yes.gif' class="ajax_no" url="admin.php?m=cai&a=promote&t=0&id={$t.id}" rurl="admin.php?m=cai&a=promote&t=1&id={$t.id}">
+    {else}
+    <img src='images/no.gif' class="ajax_yes" rurl="admin.php?m=cai&a=promote&t=0&id={$t.id}" url="admin.php?m=cai&a=promote&t=1&id={$t.id}">
+    {/if}
+    </td>
+    <td align="center">
+      {if $t.oos}
+    <img src='images/yes.gif' class="ajax_no" url="admin.php?m=cai&a=oos&t=0&id={$t.id}" rurl="admin.php?m=cai&a=oos&t=1&id={$t.id}">
+    {else}
+    <img src='images/no.gif' class="ajax_yes" rurl="admin.php?m=cai&a=oos&t=0&id={$t.id}" url="admin.php?m=cai&a=oos&t=1&id={$t.id}">
+    {/if}
+    </td>
+    <td align="center"><a href="index.php?m=cai&shopid={$t.shopid}&id={$t.id}" target="_blank">查看</a> 
+      <a href="admin.php?m=cai_comment&pid={$t.id}">评论</a>
+      <a href="admin.php?m=cai&a=add&amp;id={$t.id}">编辑</a> 
+      <a href="admin.php?m=cai&a=del&amp;id={$t.id}">删除</a></td>
+  </tr>
+  {/foreach}
+{if $pagelist}
+  <tr>
+    <td height="25" colspan="10" align="center">{$pagelist}</td>
+    </tr>
+{/if}
+</table>
+
+</div> {include file='lib/foot.lbi'}

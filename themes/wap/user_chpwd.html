@@ -1,0 +1,24 @@
+{include file="lib/header.html"}
+{include file='lib/user.html'}
+<h2>更改密码</h2>
+
+<form action="index.php?m=user&a=chpwd_db" method="post">
+<label>用户名</label>
+<input name="username" type="text" id="username" value="{$ssuser.nickname}" class="h30" readonly="readonly" />
+<label>密码</label>
+<input type="password" name="pwd1" id="pwd1" class="h30" />
+<label>重复密码</label>
+<input type="password" name="pwd2" id="pwd2" class="h30" />
+<label>验证码</label>
+ <input name="yzm" type="text" id="yzm" size="6" class="input-mini h30" /> 
+ <img src="includes/lib_yzm.php" id="img" onclick="img.src='includes/lib_yzm.php?'+Math.random()" /><
+<div class="form-actions">
+<input type="submit" name="button" id="button" value="更改"  class="btn"/>
+      <input type="reset" name="button2" id="button2" value="重置" class="btn" />
+</form>
+
+
+</form>
+
+{include file="lib/footer.html"}
+

@@ -1,0 +1,74 @@
+{include file='lib/top.lbi'}
+{include file='ad_nav.html'}
+<div class="nav_title">广告管理</div>
+<div class="rbox">
+<div style="height:30px;line-height:30px;">
+<form method="get" action="admin.php">
+<input type="hidden" name="m" value="ad" />
+广告位置：
+<select name="cname">
+<option value="">请选择</option>
+ {foreach item=c from=$catlist}
+ <option value="{$c}" {if $smarty.get.cname eq $c} selected="selected"{/if}>{$c}</option>
+ {/foreach}
+ </select>
+ <select name="status">
+ <option value="0" >显示</option>
+ <option value="1"{if $smarty.get.status eq 1}selected{/if}>隐藏</option>
+ </select>
+ <input type="submit" value="筛选" class="btn" />
+ </form>
+</div>
+<table width="100%" class="tb1">
+    <tr>
+      <td width="5%" align="center">ID</td>
+    	<td width="10%" align="center">标题</td>
+    	<td width="7%" align="center">位置</td>
+    	<td width="7%" align="center">价格</td>
+    	<td width="24%" align="center">描述</td>
+    	<td width="10%" align="center">开始时间</td>
+    	<td width="10%" align="center">截止时间</td>
+        <td width="8%" align="center">状态</td>
+        <td width="4%" align="center">排序</td>
+    	<td width="7%" align="center">操作</td>
+    </tr>
+    {foreach item=a from=$list}
+    <tr>
+      <td align="center">{$a.id}</td>
+      <td><a href="{$a.url}" target="_blank">{$a.title}</a></td>
+      <td align="center">{$a.cname}</td>
+      <td align="center">{$a.price}</td>
+      <td align="center">{$a.info}</td>
+      <td align="center">{$a.starttime|date:Y-m-d}</td>
+      <td align="center">{$a.endtime|date:Y-m-d}</td>
+      <td align="center"><a href="javascript:;" class="changestatus" status={$a.status} aid={$a.id}>{if $a.status}隐藏{else}显示{/if}</a></td>
+      <td align="center">{$a.orderindex}</td>
+      <td align="center"><a href="admin.php?m=ad&amp;a=add&amp;id={$a.id}">编辑</a> <a href="admin.php?m=ad&amp;a=del&amp;id={$a.id}">删除</a></td>
+    </tr>
+    {/foreach}
+    {if $pagelist}
+    <tr>
+      <td colspan="8">{$pagelist}</td>
+      </tr>
+	{/if}
+</table>
+</div>
+
+<script language="javascript" >
+$(document).ready(function(){
+	$(".changestatus").click(function(){
+		aid=$(this).attr("aid");
+		status=parseInt($(this).attr("status"));
+		
+		$.get("admin.php?m=ad&a=changestatus&id="+aid+"&status="+(status==1?0:1));
+		if(status==1){
+			$(this).attr("status",0).text("显示");
+		}else{
+			$(this).attr("status",1).text("隐藏");
+		}
+	});
+	
+});
+</script>
+
+{include file='lib/foot.lbi'}

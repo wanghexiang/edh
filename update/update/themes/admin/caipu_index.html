@@ -1,0 +1,126 @@
+{include file='lib/top.lbi'}
+{include file='caipu_nav.html'}
+<div class="nav_title">菜谱管理</div>
+<div class="rbox">
+<div style="height:40px; line-height:40px; padding-left:20px;">
+<form method="get" action="admin.php">
+<input type="hidden" name="m" value="caipu" />
+<input type="hidden" name="a" value="index" />
+ 
+ID:<input type="text" name="id" size="6" value="{$smarty.get.id}" />
+名称：<input type="text" name="title" value="{$smarty.get.title}" />
+<select name="cat_id" id="scatid">
+	<option value="0">一级分类</option>
+    {foreach item=c key=k from=$catlist}
+    <option value="{$k}" {if $smarty.get.cat_id eq $k} selected="selected"{/if}>{$c}</option>
+    {/foreach}
+</select>
+<select name="cat_id_two" id="scatid_two">
+<option value="0">二级分类</option>
+
+{foreach item=c key=k from=$catlist_two}
+    <option value="{$k}" {if $smarty.get.cat_id_two eq $k} selected="selected"{/if}>{$c}</option>
+{/foreach}
+
+</select>
+推荐：<input type="checkbox" value="1" name="isrecommend" {if $smarty.get.isrecommend} checked="checked"{/if} />
+<input type="submit" class="btn" value="搜索" />
+</form>
+</div>
+
+<table class="tb1">
+<tr>
+<td align="center"><input type="checkbox" class="checkall" value="1" /></td>
+<td>名称</td>
+<td>所属分类</td>
+<td>主食</td>
+
+<td>推荐</td>
+<td>时间</td>
+<td>管理</td>
+</tr>
+{foreach item=c from=$list}
+<tr>
+<td align="center"><input type="checkbox" class="ids" value="{$c.id}" /></td>
+<td><a href="index.php?m=caipu&a=show&id={$c.id}" target="_blank">{$c.title}</a></td>
+<td>{if $c.cat_id}{$all_cat[$c.cat_id]}{/if}
+{if $c.cat_id_two}--{$all_cat[$c.cat_id_two]}{/if}
+</td>
+<td>{$c.maincai|cutstr:20}</td>
+
+<td>{if $c.isrecommend}
+    <img src='images/yes.gif' class="ajax_no" url='admin.php?m=caipu&a=recommend&t=0&id={$c.id}' rurl='admin.php?m=caipu&a=recommend&t=1&id={$c.id}'>
+    {else}
+    <img src='images/no.gif' class="ajax_yes" url='admin.php?m=caipu&a=recommend&t=1&id={$c.id}' rurl='admin.php?m=caipu&a=recommend&t=0&id={$c.id}'>
+    {/if}</td>
+<td>{$c.dateline|date:y-m-d}</td>
+<td><a href="admin.php?m=caipu&a=add&id={$c.id}">编辑</a> <a href="javascript:;" onclick="if(confirm('删除后不可恢复，确认删除？')){$.get('admin.php?m=caipu&a=del&id={$c.id}');$(this).parents('tr').remove();}" >删除</a></td>
+</tr>
+{/foreach}
+<tr>
+<td align="center"><input type="checkbox" class="checkall" /></td>
+<td colspan="4">
+<form method="post" id="change_category_form" action="admin.php?m=caipu&a=change_category">
+
+<input type="hidden" name="ids" id="ids" />
+<select name="cat_id" id="catid">
+	<option value="0">一级分类</option>
+    {foreach item=c key=k from=$catlist}
+    <option value="{$k}">{$c}</option>
+    {/foreach}
+</select>
+<select name="cat_id_two" id="catid_two">
+<option value="0">二级分类</option>
+</select>
+<input type="button" value="更改分类" id="change_category" class="btn" />
+</form>
+</td>
+</tr>
+<tr >
+<td colspan="5">{$pagelist}</td>
+</tr>
+</table>
+</div>
+<script>
+$(document).ready(function(){
+	$(".checkall").click(function(){
+		 
+		if($(this).attr("checked")=="checked"){
+			$(".ids").attr("checked",true);
+			
+		}else{
+			$(".ids").attr("checked",false);
+		}
+		
+	})
+	
+	$("#catid").change(function(){
+		
+		$.get("admin.php?m=caipu&a=getcatchild&pid="+$(this).val(),function(data){
+			$("#catid_two").empty().append(data).show();
+		})
+	});
+	
+	$("#scatid").change(function(){
+		
+		$.get("admin.php?m=caipu&a=getcatchild&pid="+$(this).val(),function(data){
+			$("#scatid_two").empty().append(data).show();
+		})
+	});
+	
+	$("#change_category").click(function(){
+		objs=$(".ids:checked");
+		ids="";
+		for(i=0;i<objs.length;i++){
+			ids=ids+" "+objs.eq(i).val();
+		}
+		$("#ids").val(ids);
+		if($("#ids").val().length==0){
+			alert('请选择菜谱')
+		}else{
+			$("#change_category_form").submit();
+		}
+	});
+});
+</script>
+{include file='lib/foot.lbi'}

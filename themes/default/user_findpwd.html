@@ -1,0 +1,29 @@
+{include file='lib/header.html'}
+<h2>找回密码</h2>
+<!--内容开始-->
+<form action="index.php?m=user&a=findpwd_db" method="post">
+<table width="680" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="149" height="25" align="right">用户名：</td>
+    <td width="451"><input name="username" type="text" id="username" class="h30" /></td>
+  </tr>
+  <tr>
+    <td height="25" align="right">邮箱：</td>
+    <td><input name="email" type="text" id="ajax_ckemail" class="h30" /> <span id="ajax_ckemail_res" class="ajax_res"></span></td>
+  </tr>
+  <tr>
+    <td height="25" align="right">验证码：</td>
+    <td><input name="yzm" type="text" id="ajax_ckyzm" size="6" class="h30" /> <img src="includes/lib_yzm.php" id="img" onclick="img.src='includes/lib_yzm.php?'+Math.random()" />  <span id="ajax_ckyzm_res" class="ajax_res"></span> </td>
+  </tr>
+  <tr>
+    <td height="40" align="right">&nbsp;</td>
+    <td><input type="submit" name="button" id="button" value="下一步"  class="btn"/>
+      <input type="reset" name="button2" id="button2" value="重置" class="btn" /></td>
+  </tr>
+</table>
+
+
+</form>
+
+<!--内容结束-->
+{include file='lib/footer.html'}

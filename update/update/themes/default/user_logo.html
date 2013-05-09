@@ -1,0 +1,123 @@
+{include file='lib/header.html'}
+<script type="text/javascript" src="js/ajaxfileupload.js"></script>
+<script type="text/javascript" src="js/jquery.Jcrop.min.js"></script>
+<link href="js/jquery.Jcrop.css" rel="stylesheet" type="text/css" />
+<script language="javascript">
+$(document).ready(function()
+{
+	
+	$("#userlogo").live("change",function()
+	{
+		$("#postfile_loading").css("display","block");
+			$.ajaxFileUpload
+			(
+				{
+					url:'index.php?m=user&a=logo&op=post&ajax=1&'+Math.random(),
+					secureuri:false,
+					fileElementId: 'userlogo',
+					dataType: 'json',
+					success: function (data, status)
+					{
+								
+						$("#postfile_view")
+						.css({display:""})
+						.attr("src",data.img);
+						$("#postfile_div").show();
+						
+						
+					$("#postfile_loading").css("display","none");
+					$("#view_note").css("display","none");
+					$("#pic").val(data.img);
+					
+					$("#postfile_view").Jcrop({
+						//aspectRatio: 1,
+						onSelect: updateCoords
+					}); 
+						
+												
+					},
+					error: function (data, status, e)
+					{
+						alert(e);
+					}
+				}
+			)
+		
+	});
+	
+
+});
+
+function updateCoords(c)
+{
+	$('#x').val(c.x);
+	$('#y').val(c.y);
+	$('#w').val(c.w);
+	$('#h').val(c.h);
+};
+function checkCoords()
+{
+	if (parseInt($('#w').val())) return true;
+	alert('Please select a crop region then press submit.');
+	return false;
+};
+
+</script>
+<div class="row">
+<div class="span2">{include file="usernavleft.html"}</div>
+<div class="span10">
+{include file='usernav.html'}
+<div class="breadcrumb"><i class=" icon-asterisk"></i>头像管理</div>
+<style type="text/css">
+/*表单上传空间*/
+.inputfile{ vertical-align:middle; margin:0; padding:0}
+.inputfile_box{ position:relative;width:100px}
+.inputfile_txt{ height:25px; border:1px solid #cdcdcd; width:180px;}
+.inputfile_btn{ background-color:#FFF; border:1px solid #CDCDCD;height:30px; width:70px;}
+.inputfile_file{ position:absolute; top:0px; left:0px; height:25px; filter:alpha(opacity:0);opacity: 0;width:70px }
+</style>
+<div style="height:40px; margin-top:10px;"><div style="float:left; width:200px;">上传头像(200*200):</div><div class="inputfile_box " style="float:left;">
+    
+    <input type='button' class='inputfile_btn' value='浏览上传...'  data-role="none"/>
+    <input type="file" id="userlogo" name="userlogo" style="width:50px;" class="inputfile_file"  />
+   
+    </div>
+      
+      <div style="float:left; width:400px;">
+      <span id="postfile_loading" style="display:none; float:left;" >正在上传中....</span>
+<form method="post" action="index.php?m=user&a=logo&op=post">
+<input type="hidden" id="x" name="x" value="0" />
+<input type="hidden" id="y" name="y" value="0" />
+<input type="hidden" id="w" name="w" value="400" />
+<input type="hidden" id="h" name="h"  value="400"/> 
+<input type="hidden" name="pic" id="pic" value="" /> 
+
+<input type="submit" name="button2" id="button2" value="保存" class="btn" />
+若上传无反应，请点击<a href="javascript:;">上传</a>  
+</form>
+
+</div>
+</div>
+  
+   
+<div id="postfile_div" style="width:400px; float:left; margin-right:10px; height:400px; display:none; background-color:#CCC;">
+ <img id="postfile_view" style="float:left; display:none; width:auto;"  />
+</div>
+<div style="float:left;">{if $userlogo}
+<img src="{$userlogo}?{$time}" width="180"  align="middle">
+    <img src="{$userlogo}.middle.jpg?{$time}" width="50"  align="middle">
+    <img src="{$userlogo}.min.jpg?{$time}" width="30"  align="middle">{/if}
+</div>
+
+ 
+</div>
+ 
+</div>
+
+
+
+
+ 
+
+
+{include file='lib/footer.html'}

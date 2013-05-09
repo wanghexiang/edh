@@ -1,0 +1,57 @@
+{include file='lib/top.lbi'}
+<div class="nav">
+<a href="admin.php?m=vote&">投票管理</a> 
+<a href="admin.php?m=vote&a=add">投票添加</a>
+<a href="admin.php?m=vote&a=ttcat">选项分类</a>  
+<a href="admin.php?m=vote&a=tt">选项管理</a> 
+<a href="admin.php?m=vote&a=ttadd">选项添加</a>
+ </div>
+<div class="nav_title">投票管理</div>
+<div class="rbox">
+<table width="100%" border="0" align="center" cellspacing="1" class="tb1">
+ <form action="admin.php" method="get">
+ <input type="hidden" name="m" value="vote" />
+ <input type="hidden" name="a" value="index" />
+  <tr>
+    <td width="490" align="right">
+      <input name="title" type="text" id="title" value="{$title}" size="40" /></td>
+    <td width="602"><input type="submit" name="button" id="button" value="搜索" class="btn" /></td>
+  </tr>
+  </form>
+  </table>
+
+
+<form action="" method="post">
+
+<table width="100%" border="0" align="center" cellspacing="1" class="tb1">
+  <tr>
+    <td width="56" align="center">ID</td>
+    <td width="166" align="center">投票名称</td>
+    <td width="165" align="center">类型</td>
+    <td width="126" align="center">创建时间</td>
+    <td width="126" align="center">推荐</td>
+    <td width="231" align="center">操作</td>
+  </tr>
+  {foreach item=v from=$votelist}
+  <tr>
+    <td align="center">{$v.vid}</td>
+    <td align="center">{$v.title}</td>
+    <td align="center">{if $v.vtype eq 0}单选{else}多选{/if}</td>
+    <td align="center">{$v.dateline}</td>
+    <td align="center">{if $v.isding}是{else}否{/if}</td>
+    <td align="center"> <a href="admin.php?m=vote&vid={$v.vid}" target="_blank">查看</a> <a href="admin.php?m=vote&a=add&amp;vid={$v.vid}">编辑</a> <a href="admin.php?m=vote&a=selett&amp;vid={$v.vid}">投票选项</a> <a href="admin.php?m=vote&a=del&amp;vid={$v.vid}">删除</a></td>
+  </tr>
+  {/foreach}
+  <tr>
+    <td align="center">&nbsp;</td>
+    <td align="center">&nbsp;</td>
+    <td align="center">&nbsp;</td>
+    <td align="center">&nbsp;</td>
+    <td align="center">&nbsp;</td>
+    <td align="center">&nbsp;</td>
+  </tr>
+</table>
+
+</form>
+</div>
+{include file='lib/foot.lbi'}

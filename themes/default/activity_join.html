@@ -1,0 +1,45 @@
+{include file='lib/header.html'}
+<div class="row">
+<div class="span9">
+{include file='activity_navcp.html'}
+<div class="breadcrumb">::申请参与活动</div>
+<form method="post" action="index.php?m=activity&a=saveuser">
+<input type="hidden" name="act_id" value="{$data.id}">
+ <table width="100%" class="table table-bordered" border="0">
+ <tr>
+ <td>活动名称：</td>
+ <td><a href="index.php?m=activity&a=show&id={$data.id}">{$data.title}</a></td>
+ </tr>
+  <tr>
+    <td width="14%" align="right">名字：</td>
+    <td width="86%"><input type="text" class="h30" name="nickname" id="nickname"></td>
+    </tr>
+  <tr>
+    <td align="right">联系电话：</td>
+    <td><input type="text" class="h30" name="telephone" id="telephone"></td>
+    </tr>
+  <tr>
+    <td align="right">其他信息：</td>
+    <td><textarea name="info" id="info" cols="45" style="width:80% " rows="5"></textarea></td>
+    </tr>
+  <tr>
+    <td align="right">&nbsp;</td>
+    <td><input type="submit" name="button" class="btn btn-success btn-large" id="button" value="提交"></td>
+  </tr>
+  </table>
+</form>
+</div>
+<div class="span3">
+<table class="table table-bordered">
+<tr>
+<td>活动说明</td>
+</tr>
+
+<tr>
+<td>活动。。。</td>
+</tr>
+
+</table>
+</div>
+</div>
+{include file='lib/footer.html'}

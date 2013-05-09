@@ -1,0 +1,46 @@
+{include file="lib/header.html"}
+<h3>购物车</h3>
+{if $shopcarlist}
+<form action="index.php?m=shopcar&a=edinum" method="post">
+
+
+
+
+<table  class="table">
+  <tr>
+    <td width="50%" height="30" align="center">菜名</td>
+    <td width="15%" height="30" align="center">价格</td>
+    <td width="15%" height="30" align="center">数量</td>
+    <td width="20%" height="30" align="center">操作</td>
+  </tr>
+  {foreach item=shop from=$shopcarlist}
+  <tr><td colspan="4"><a href="" class="btn">{$shop.shopname}</a></td></tr>
+  {foreach item=t from=$shop.cailist}
+  <tr>
+    <td height="25">{$t.title} </td>
+    <td align="center">{$t.price}</td>
+    <td align="center"><input type="hidden" name="ids[{$t.id}]" value="{$t.id}" />
+    <input name="cainum[{$t.id}]" type="text" id="cainum[]" class="input-mini" value="{$t.cainum}" size="6" /></td>
+    <td align="center">
+     
+     <a href="index.php?m=shopcar&a=del&caiid={$t.caiid}" > 删除</a></td>
+  </tr>
+  {/foreach}
+  {/foreach}
+  <tr>
+    <td height="30" colspan="4" style="text-align:right">总价格：{$totalmoney}元</td>
+    </tr>
+  <tr>
+    <td height="30" colspan="4" align="right"><input type="submit" name="button" id="button" value="更改数量" class="btn btn-primary" />
+      <input type="button" name="button2" id="button2" value="确认购买" onclick="location.href='index.php?m=shopcar&a=buy'" class="btn btn-success" /> &nbsp;</td>
+    </tr>
+ 
+</table>
+
+
+</form>
+{else}<div style="width:400px; height:30px; line-height:30px; margin:10px;" >暂无产品</div>{/if}
+<div class="line"></div>
+
+
+{include file="lib/footer.html"}

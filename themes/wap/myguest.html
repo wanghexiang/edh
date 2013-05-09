@@ -1,0 +1,14 @@
+{include file='lib/header.html'}
+{include file='lib/user.html'}
+
+{foreach item=guest from=$guestlist}                    
+                <div class="breadcrumb">{$guest.content}<br />
+								
+					{if $guest.reply}»Ø¸´£º{$guest.reply}{else}ÔÝÎÞ»Ø¸´{/if}<br />							
+					{$guest.dateline|date:Y-m-d H@i@s} <a href="index.php?m=guest&a=del&id={$guest.id}" >É¾³ý</a>
+				</div>
+					
+                {/foreach}
+
+
+{include file='lib/footer.html'}

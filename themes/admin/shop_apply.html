@@ -1,0 +1,33 @@
+{include file='lib/top.lbi'}
+<div class="nav"><a href="admin.php?m=shop&a=apply">申请管理</a></div>
+<div class="nav_title">店铺申请管理 </div>
+
+<table class="tb1" width="100%">
+	<tr>
+    	<td width="17%">店铺名字</td>
+        <td width="14%" >联系电话</td>
+        <td width="11%">QQ</td>
+        <td width="42%">禁止</td>
+        <td width="16%">操作</td>
+    </tr>
+    {foreach item=s from=$list}
+    <tr>
+    	<td>{$s.shopname}</td>
+        <td>{$s.phone}</td>
+        <td>{$s.qq}</td>
+        <td>{if $s.visible}<img src="images/yes.gif" class="ajax_no" url='admin.php?m=shop&a=visible&shopid={$s.shopid}&visible=0' rurl='admin.php?m=shop&a=visible&shopid={$s.shopid}&visible=1' />{else}<img src="images/no.gif" class="ajax_yes"  url='admin.php?m=shop&a=visible&shopid={$s.shopid}&visible=1' rurl='admin.php?m=shop&a=visible&shopid={$s.shopid}&visible=0' />{/if}</td>
+        <td> 
+        <a href="javascript:;" onclick="$.get('admin.php?m=shop&a=apply&shopid={$s.shopid}&op=status');$(this).text('已审核')">审核</a>   
+        <a href="admin.php?m=shop&a=add&shopid={$s.shopid}">编辑</a> 
+        </td>
+    </tr>
+    {/foreach}
+    
+</table>
+ 
+{if $pagelist}
+<div>
+{$pagelist}
+</div>
+{/if}
+{include file='lib/foot.lbi'}

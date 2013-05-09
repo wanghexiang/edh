@@ -1,0 +1,17 @@
+{include file='lib/header.html'}
+<div class="row">
+<div class="span9">
+{$html.content}
+</div>
+<div class="span3">
+<h2>{$cat.cname}</h2>
+<div class="well">
+<ol >
+{foreach item=c from=$htmllist}
+<li><a href="index.php?m=html&id={$c.id}">{$c.title}</a></li>
+{/foreach}
+</ol>
+</div>
+</div>
+</div>
+{include file='lib/footer.html'}

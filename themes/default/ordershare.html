@@ -1,0 +1,25 @@
+{include file='lib/header.html'}
+<div class="row">
+<div class="span2">{include file='usernavleft.html'}</div>
+<div class="span7">
+{include file='membernav.html'}
+{if $list}
+<table class="table table-bordered">
+{foreach item=s from=$list}
+<tr>
+<td>{$s.content}</td>
+</tr>
+{/foreach}
+</table>
+{else}
+<h2>还没有点餐分享</h2>
+{/if}
+</div>
+<div class="span3">
+<h2>吃吃</h2>
+<p>分享你订过的东西</p>
+</div>
+
+</div>
+
+{include file='lib/footer.html'}

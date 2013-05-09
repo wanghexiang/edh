@@ -1,0 +1,53 @@
+{include file='lib/top.lbi'}
+<div class="nav"><a href="admin.php?m=art_cat">分类管理</a> <a href="admin.php?m=art_cat&a=add">分类添加</a></div>
+<div class="nav_title">分类管理</div>
+<div class="rbox">
+<form action="admin.php?m=art_cat&a=order" method="post">
+<table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#FFFFFF" class="tb1">
+  <tr>
+    <td width="7%" height="30" align="center">ID</td>
+
+    <td width="33%" height="30" align="center">分类名</td>
+    <td width="31%" align="center">所属分类</td>
+    <td width="11%" align="center">类型</td>
+    <td width="11%" height="30" align="center">排序</td>
+    <td width="18%" height="30" align="center">操作</td>
+  </tr>
+  {foreach item=t from=$catlist}
+  <tr>
+    <td height="25" align="center">{$t.catid}<input name="catid[]" type="hidden" value="{$t.catid}" /></td>
+    <td height="25"  ><a href="index.php?m=art_cat&catid={$t.catid}" target="_blank">{$t.cname}</a></td>
+    <td align="center">{if $t.pname}{$t.pname}{/if}</td>
+    <td align="center">{if $t.t}栏目{else}列表{/if}</td>
+    <td height="25" align="center"><input name="orderid[]" type="text" value="{$t.orderid}" size="6" /></td>
+    <td height="25" align="center"><a href="admin.php?m=art_cat&a=add&catid={$t.catid}">编辑</a> <a href="admin.php?m=art_cat&a=del&catid={$t.catid}" onclick="return confirm('删除后不可恢复，确定删除？');">删除</a></td>
+  </tr>
+  {if $t.child}
+  {foreach item=c from=$t.child}
+  
+  <tr>
+    <td height="25" align="center">{$c.catid}<input name="catid[]" type="hidden" value="{$c.catid}" /></td>
+    <td height="25"  >  &nbsp;&nbsp;|__ <a href="index.php?m=art_cat&catid={$c.catid}" target="_blank">{$c.cname}</a></td>
+    <td align="center">{$t.cname}</td>
+    <td align="center">&nbsp;</td>
+    <td height="25" align="center"><input name="orderid[]" type="text" value="{$c.orderid}" size="6" /></td>
+    <td height="25" align="center"><a href="admin.php?m=art_cat&a=add&catid={$c.catid}">编辑</a> <a href="admin.php?m=art_cat&a=del&catid={$c.catid}" onclick="return confirm('删除后不可恢复，确定删除？');">删除</a></td>
+  </tr>
+  {/foreach}
+  {/if}
+  
+	{/foreach}
+  <tr>
+    <td colspan="6" align="right"><input type="submit" name="button" id="button" value="更改排序" class="btn" /></td>
+    </tr>
+</table>
+{if $pagelist}
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="30" align="center" class="pagelist">{$pagelist}</td>
+    </tr>
+  </table>
+{/if}
+</form>
+</div>
+{include file='lib/foot.lbi'}

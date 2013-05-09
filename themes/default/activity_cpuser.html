@@ -1,0 +1,38 @@
+{include file='lib/header.html'}
+<div class="row">
+<div class="span9">
+{include file='activity_navcp.html'}
+
+{if $list}
+<table class="table table-bordered">
+<tr>
+<td   align="center">用户</td>
+<td>电话</td>
+<td>时间</td>
+<td>允许</td>
+</tr>
+{foreach item=c key=k from=$list}
+<tr>
+<td align="center"><a href="index.php?m=blog&userid={$c.userid}" target="_blank">{$c.nickname}</a></td>
+<td>{$c.telephone}</td>
+<td>{$c.dateline|date:Y-m-d H@i@s}</td>
+<td> {if $c.status }<img src="images/yes.gif" url="index.php?m=activity&a=cpuser&op=changestatus&act_id={$c.act_id}&id={$c.id}&status=0" rurl="index.php?m=activity&a=cpuser&op=changestatus&act_id={$c.act_id}&id={$c.id}&status=1" class="ajax_no">{else}<img src="images/no.gif" class="ajax_yes" url="index.php?m=activity&a=cpuser&op=changestatus&act_id={$c.act_id}&id={$c.id}&status=1" rurl="index.php?m=activity&a=cpuser&op=changestatus&act_id={$c.act_id}&id={$c.id}&status=0">{/if} </td>
+</tr>
+ 
+{/foreach}
+</table>
+{if $pagelist}
+<p>{$pagelist}</p>
+{/if}
+{else}
+<p>暂无评论</p>
+{/if}
+
+</div>
+<div class="span3">
+{include file='activity_right.html'}
+</div>
+
+</div>
+
+{include file='lib/footer.html'}

@@ -1,0 +1,43 @@
+{include file='lib/top.lbi'}
+<div class="nav">
+
+<a href="admin.php?m=config&a=phone">短信设置</a>
+<a href="admin.php?m=config&a=email">邮箱设置</a>
+<a href="admin.php?m=config&a=water">水印设置</a>
+</div>
+<div class="nav_title">邮箱设置</div>
+<div class="rbox">
+<form action="admin.php?m=config&a=email_db" method="post">
+<table width="100%" border="0" cellspacing="1" cellpadding="0" class="tb1">
+  <tr>
+    <td height="30" align="right">邮箱服务器：</td>
+    <td height="30"><input name="smtphost" type="text" id="smtphost" value="{$rs.smtphost}" /></td>
+  </tr>
+  <tr>
+    <td width="158" height="30" align="right">端口：</td>
+    <td width="938" height="30"><input name="smtpport" type="text" id="smtpport" value="{$rs.smtpport}" size="8" /></td>
+  </tr>
+  <tr>
+    <td height="30" align="right">邮箱：</td>
+    <td height="30"><input name="smtpemail" type="text" id="smtpemail" value="{$rs.smtpemail}" /></td>
+  </tr>
+  <tr>
+    <td height="30" align="right">用户名：</td>
+    <td height="30"><input name="smtpuser" type="text" id="smtpuser" value="{$rs.smtpuser}" /></td>
+  </tr>
+  <tr>
+    <td height="30" align="right">密码：</td>
+    <td height="30"><input name="smtppwd" type="password" id="smtppwd" value="{$rs.smtppwd}" /> <a href="JavaScript:;" onclick="$.get('admin.php?m=config&a=testemail',function(data){ 
+    $('#testres').html(data); 
+    });">保存后测试</a><div id="testres"></div></td>
+  </tr>
+  <tr>
+    <td height="30" align="right">&nbsp;</td>
+    <td height="30"><input type="submit" name="button" id="button" value="提交" class="btn" /></td>
+  </tr>
+  </table>
+
+
+</form>
+
+</div>{include file='lib/foot.lbi'}

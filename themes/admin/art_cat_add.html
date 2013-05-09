@@ -1,0 +1,61 @@
+{include file='lib/top.lbi'}
+<div class="nav"><a href="admin.php?m=art_cat">分类管理</a> <a href="admin.php?m=art_cat&a=add">分类添加</a></div>
+<div class="nav_title">分类添加</div>
+<div class="rbox">
+<form action="admin.php?m=art_cat&a=add_db" method="post">
+<table width="100%" border="0" cellspacing="1" cellpadding="0" class="tb1">
+  <tr>
+    <td width="16%" height="30" align="right">父类：</td>
+    <td width="84%">
+      <select name="pid" id="pid">
+      {if $cat.pid }<option value="{$cat.pid}">{$cat.pname}</option>{/if}      
+        <option>作为顶级分类</option>
+        {foreach from=$plist item=t}
+        <option value="{$t.catid}">{$t.cname}</option>
+        {/foreach}
+      </select></td>
+  </tr>
+  <tr>
+    <td height="30" align="right">名称：</td>
+    <td><input name="cname" type="text" value="{$cat.cname}" /> 
+    <input name="catid" type="hidden" id="catid" value="{$cat.catid}" /></td>
+  </tr>
+  <tr>
+    <td height="30" align="right">关键字：</td>
+    <td><input name="keyword" type="text" id="keyword" value="{$cat.keyword}" size="60" /></td>
+  </tr>
+  <tr>
+    <td height="30" align="right">描述：</td>
+    <td><textarea name="info" id="des" cols="60" rows="5">{$cat.info}</textarea></td>
+  </tr>
+  <tr>
+    <td height="30" align="right">类型：</td>
+    <td><input type="radio" name="t" id="radio" value="1" {if $cat.t eq 1} checked="checked"{/if} />
+      栏目
+        <input type="radio" name="t" id="radio2" value="0" {if $cat.t eq 0} checked="checked" {/if} />
+        列表</td>
+  </tr>
+  <tr>
+    <td height="30" align="right">栏目模板：</td>
+    <td><input name="cattpl" type="text" id="cattpl" value="{if $cat.cattpl}{$cat.cattpl}{/if}" />
+      (可不填，栏目模板默认art_cat.html)</td>
+  </tr>
+  <tr>
+    <td height="30" align="right">列表模板：</td>
+    <td><input name="listtpl" type="text" id="listtpl" value="{if $cat.listtpl}{$cat.listtpl}{/if}" />
+      （可不填，列表模板默认为父类设定的列表模板然后是art_list.html）</td>
+  </tr>
+  <tr>
+    <td height="30" align="right">详情模板：</td>
+    <td><input name="contpl" type="text" id="contpl" value="{if $cat.contpl}{$cat.contpl}{/if}" />
+      （可不填，详情模板默认为父类设定的详情模板然后是art.html） </td>
+  </tr>
+  <tr>
+    <td height="30" align="right">&nbsp;</td>
+    <td><input type="submit" name="button" id="button" value="确定" class="btn" /></td>
+  </tr>
+</table>
+
+</form>
+</div>
+{include file='lib/foot.lbi'}

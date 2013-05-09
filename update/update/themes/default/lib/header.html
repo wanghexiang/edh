@@ -1,0 +1,241 @@
+<!DOCTYPE>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+
+
+<title>{if $seo.title}{$seo.title}{else}{$web.webtitle}{/if}</title>
+<meta name="keywords" content="{if $seo.keywords}{$seo.keywords}{else}{$web.webkey}{/if}" />
+<meta name="description" content="{if $seo.description}{$seo.description}{else}{$web.description}{/if}" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="qc:admins" content="326621721764117301356375" />
+<!--[if IE 6]>
+<script>alert('去死吧ie6');location.href='ie6die.html'</script>
+<![endif]-->
+<!--[if lt IE 9]>
+    <script src="/js/forward/lib/html5.js"></script>
+    <![endif]-->
+<script language="javascript" src="js/jquery.js"></script>
+<script language="javascript" src="js/jquery.center.js"></script>
+<script language="javascript" src="plugin/bootstrap/js/bootstrap-dropdown.js"></script>
+ <script src="plugin/bootstrap/js/bootstrap-collapse.js"></script>
+ <script src="plugin/bootstrap/js/bootstrap-carousel.js"></script>
+
+<script language="javascript" src="js/common.js"></script>
+<script language="javascript">
+$(document).ready(function()
+{
+	$('.dropdown-toggle').dropdown();
+	$('.carousel').carousel();
+	 
+	$('tr').addClass('odd'); 
+	$('tr:even').addClass('even'); //奇偶变色，添加样式 
+});
+</script>
+<link href="plugin/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
+<link href="{$skins}mybootstrap.css" rel="stylesheet" type="text/css">
+
+<style type="text/css">
+.pointer{cursor:pointer;}
+.h30{height:30px;}
+.f12{font-size:12px;}
+.f14{font-size:14px;}
+.f16{font-size:16px;font-weight: 800;}
+table{font-size:12px;}
+.caicatbtn .btn{margin-bottom:5px;}
+.pages {
+margin: 5px auto;
+padding: 3px;
+text-align: center;
+}
+.pages strong {
+background: #4BC7E5;
+color: white;
+}
+.pages em, .pages strong {
+border-color: #DB60CC;
+}
+.pages * {
+padding: 3px 6px;
+color: #999;
+}
+
+/*图片弹出框*/
+#showBox{ padding:6px; display:none; width:600px; min-height:100px;  position:absolute; background-color:#FFF; z-index:1111; border:1px solid #CCC;}
+#showBox_nav{line-height:25px; height:25px; background-color:#F0F0F0; padding:0px 4px;} 
+#showBox_title{float:left;}
+#showBox_close{float:right; cursor:pointer; height:25px; line-height:25px; padding:0 5px;}
+#showBox_close:hover{background-color:#808000; }
+#showBox_content{ display:block;}
+#showBox_footer{height:25px; line-height:25px;  }
+
+.border{border-radius: 5px; border:1px solid #ccc;}
+.linearcolor{
+  background-color: #f5f5f5;
+  background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: -ms-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
+  background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: linear-gradient(top, #ffffff, #e6e6e6);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e6e6e6', GradientType=0);
+}
+td img{max-width:100%;}
+.odd { background-color:#ffffff; } 
+.even,.even td { background-color:#F7F8FC;}
+/*餐盒*/
+.cart_min{
+	 width:300px;   background-color:#E0F0FF; line-height:30px; padding:0px 6px; height:30px;    border:1px #FFF solid;   z-index:10000; font-size:16px; font-weight:600; cursor:pointer;
+}
+.cart_min a{color:#82C748;}
+
+#header{ width:100%; background:#fff;}
+#headerarea{ width:100%; margin:0 auto; padding:15px 0; height:50px;}
+	#headerarea #news { float:left; color:#999;margin: 10px 130px 0px 0px; vertical-align:middle;line-height:32px;width: 245px; height:32px;padding: 0px 10px;font-size:12px; text-align:left; font-weight:100;background:url({$skins}images/newsbg1.png) no-repeat; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src={$skins}images/newsbg1.png);_background:none}
+		#headerarea #news a:link, #headerarea #news a:visited {color:#999;    margin-left: 5px;}		
+		#headerarea #news a:hover, #headerarea #news a:active { color:#f30;}	
+	#logo{ width:174px; height:49px;  float:left; }
+	#logo h2 {float:left;width:155px;height:49px;}
+	#logo h2 a {float:left;display:block;width:155px;height:49px;}
+	#logo a strong {display: none;}
+	
+#search{ float:left; width:368px; margin-top:10px;}
+.searchinput { float:left;display:inline; background:url({$skins}images/searchbg.gif) no-repeat; width:276px; border:none!important; height:33px!important;line-height:33px!important;}
+.searchbtn {float:left;display:inline;width:90px;height:33px; background:url({$skins}images/searchbtn.gif) no-repeat; border:none; border-radius:0px;}
+.search_tips{position:absolute; top:31px; border:1px solid  #F30; width:276px; margin:0px; background-color:#fff; display:none; z-index:9999;}
+.search_tips li{padding:6px; list-style-type:none;}
+.search_tips li:hover{background-color:#ccc;}
+</style>
+
+</head>
+
+<body>
+<div id="go" style="width:50px;height:50px; line-height:30px; text-align:center; color:#FFFFFF; font-size:20px; font-weight:600;background-color:#E0F0FF;display:none; position:fixed;_position:absolute; z-index:10000; ">挑</div>
+<div class="navbar navbar-fixed-top  ">
+<div class="navbar-inner">
+<div class="container" style="width:960px;  ;">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+</a>
+ 
+<div class="nav-collapse">
+<ul class="nav">
+<li {if $smarty.get.m eq 'index' or !$smarty.get.m}class="active"{/if}><a href="index.php">首页</a></li>
+<li {if $smarty.get.m eq 'shoplist' }class="active"{/if}><a href="index.php?m=shoplist">餐厅</a></li>
+<li {if $smarty.get.m eq 'groupbuy'} class="active"{/if} ><a href="index.php?m=groupbuy">明日团</a></li>
+<li {if $smarty.get.m eq 'caipu'} class="active"{/if}><a href="index.php?m=caipu">菜谱</a></li>
+<li {if $smarty.get.m eq 'activity'} class="active"{/if} ><a href="index.php?m=activity">活动</a></li>
+<li {if $smarty.get.m eq 'weibo'} class="active"{/if}><a href="index.php?m=weibo&a=userlist"> 微专栏 </a></li>
+<!--<li><a href="#">统一购</a></li>-->
+<li {if $smarty.get.m eq 'maps' }class="active"{/if}><a href="index.php?m=maps">地图</a></li>
+{if $ssuser.userid}<li {if $smarty.get.m eq 'member'} class="active"{/if} ><a href="index.php?m=blog">主页</a></li>{/if}
+<li {if $smarty.get.m eq 'goods' }class="active"{/if}><a href="index.php?m=goods&a=cat">积分商城</a></li>
+<li {if $smarty.get.m eq 'art_cat' }class="active"{/if}><a href="index.php?m=art_cat">资讯</a></li>
+{if $ssuser.shopid}
+<li><a href="shopadmin.php?m=shopadmin&shopid={$ssuser.shopid}" target="_blank">店铺管理</a></li>
+{else}
+<li {if $smarty.get.m eq 'shop' && $smarty.get.a eq 'apply' } class="active"{/if}><a href="index.php?m=shop&a=apply">申请开店</a></li>
+{/if}
+{if $ssuser.userid}
+<li><a href="index.php?m=message">消息<span id="getmsg" style="color:red"></span></a></li>
+<li  class="dropdown">
+<a href="javascript:;"   class="dropdown-toggle" data-toggle="dropdown">{$ssuser.nickname}<b class="caret"></b></a>
+<ul class="dropdown-menu">
+<li><a href="index.php?m=user&a=logout">退出</a></li>
+<li> <a href="index.php?m=user&a=chpwd">帐号密码</a> </li>
+<li> <a href="index.php?m=user&a=edi">手机号码</a> </li>
+<li> <a href="index.php?m=user&a=myaddress">常用地址</a> </li>
+<li> <a href="index.php?m=guest&a=my">我的答疑</a> </li>
+<li> <a href="index.php?m=shopcar&a=history">订单历史</a> </li>
+<li><a href="index.php?m=groupbuy&a=my">我的团购</a></li>
+<li><a href="index.php?m=recharge">在线充值</a></li>
+<li><a href="index.php?m=grade_log">兑换记录</a></li>
+<li><a href="index.php?m=user&a=spread">我要推广</a></li>
+<li><a href="index.php?m=paylog">账户余额</a></li>
+
+
+</ul>
+</li>
+{else}
+<li {if $smarty.get.a eq 'login' }class="active"{/if}><a href="index.php?m=user&a=login">登陆</a></li>
+<li {if $smarty.get.a eq 'reg' }class="active"{/if}><a href="index.php?m=user&a=reg">注册</a></li>
+{/if}
+
+<li id="getmsg"></li>
+</ul>
+
+<ul class="nav pull-right">
+<li class="divider-vertical"></li>
+<li class="dropdown">
+<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">{$site.sitename}<b class="caret"></b></a> 
+<ul class="dropdown-menu">
+{foreach item=p from=$sitelist}
+<li ><a href="{if $p.domain}http://{$p.domain}{$smarty.server.REQUEST_URI}{else}index.php?m=index&setsite=yes&siteid={$p.siteid}{/if}" title="{$p.sitename}">{$p.sitename}</a> </li>
+{/foreach}
+</ul>          
+</li>
+</ul>
+</div>
+
+</div>
+</div>
+</div>
+
+
+
+
+<div style="height:50px; width:100%;"></div>
+
+<div class="container">
+<div id="header">
+<div id="headerarea">
+<div id="logo"><a title="挑食客" href="http://www.tiaoshike.com/" target="_parent"><img src="images/logo.gif" style="height:49px;"></a></div>
+<div id="news"><a href="http://www.tiaoshike.com" target="_blank" style="color:#f30;">我是挑食客，我爱美食，我挑食</a></div>
+<div id="search" style="position:relative;">
+<form action="index.php" name="searchform" id="form_search_new" method="get" target="_blank" >
+		<input type="hidden" name="m" value="search">
+        <input type="text" value=" {$smarty.get.keyword|escape:html}" name="keyword" id="search_keywords" style="padding:0px; " autocomplete="off" class="searchinput"  >
+        <input type="submit" class="searchbtn" value=" " style="width:90px; height:33px;" name="submit">
+         
+</form>
+<ul class="search_tips" id="search_tips"  >
+ 
+</ul>
+<script>
+$(document).ready(function(){
+	$("#search_keywords").keyup(function(){
+	keywords=$("#search_keywords").val();
+	 
+	str="<li><a href='index.php?m=search&a=shop&keyword="+keywords+"'>搜索<font color='red'> "+keywords+" </font>相关店铺</a></li>";
+	str +="<li><a href='index.php?m=search&a=cai&keyword="+keywords+"'>搜索<font color='red'> "+keywords+" </font>相关美食</a></li>";
+	str +="<li><a href='index.php?m=search&a=people&keyword="+keywords+"'>搜索<font color='red'> "+keywords+" </font>相关好友</a></li>";
+	str +="<li><a href='index.php?m=search&a=caipu&keyword="+keywords+"'>搜索<font color='red'> "+keywords+" </font>相关菜谱</a></li>";
+	$("#search_tips li").remove();
+	$("#search_tips").append(str).show();
+})
+$("#search_keywords").bind("focus click",function(){
+	keywords=$("#search_keywords").val();
+	 
+	str="<li><a href='index.php?m=search&a=shop&keyword="+keywords+"'>搜索<font color='red'> "+keywords+" </font>相关店铺</a></li>";
+	str +="<li><a href='index.php?m=search&a=cai&keyword="+keywords+"'>搜索<font color='red'> "+keywords+" </font>相关美食</a></li>";
+	str +="<li><a href='index.php?m=search&a=people&keyword="+keywords+"'>搜索<font color='red'> "+keywords+" </font>相关好友</a></li>";
+	str +="<li><a href='index.php?m=search&a=caipu&keyword="+keywords+"'>搜索<font color='red'> "+keywords+" </font>相关菜谱</a></li>";
+	$("#search_tips li").remove();
+	$("#search_tips").append(str).show();
+})
+
+$("#search_tips").mouseleave(function(){
+	$("#search_tips").hide();
+})
+	
+});
+</script>
+
+</div>
+</div>
+</div>
+<div style="height:1px; width:100%; background-color:#F30; margin-bottom:10px;"></div>
+<div style="clear:both;"></div>

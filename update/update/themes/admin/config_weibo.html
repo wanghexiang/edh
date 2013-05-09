@@ -1,0 +1,44 @@
+{include file='lib/top.lbi'}
+<div class="nav">
+
+<a href="admin.php?m=config&a=phone">短信设置</a>
+<a href="admin.php?m=config&a=email">邮箱设置</a>
+<a href="admin.php?m=config&a=water">水印设置</a>
+</div>
+<div class="nav_title">伪静态设置</div>
+<div class="rbox">
+<form action="admin.php?m=config&a=weibo_db" method="post">
+<table width="100%" border="0" cellspacing="1" cellpadding="0" class="tb1">
+  <tr>
+    <td width="178" height="30" align="right">开启微博：</td>
+    <td width="918" height="30"><input name="sina_on" type="checkbox" id="sina_on" value="1" {if $rs.sina_on eq 1} checked="checked" {/if} />
+      新浪微博 
+        <input name="qq_on" type="checkbox" id="qq_on" value="1" {if $rs.qq_on eq 1} checked="checked"{/if} />
+        腾讯微博        </td>
+  </tr>
+  <tr>
+    <td height="30" align="right">新浪微博账号：</td>
+    <td height="30"><input type="text" name="sina_user" id="sina_user" value="{$rs.sina_user}" /></td>
+  </tr>
+  <tr>
+    <td height="30" align="right">新浪微博密码：</td>
+    <td height="30"><input type="text" name="sina_pwd" id="sina_pwd" value="{$rs.sina_pwd}" /></td>
+  </tr>
+  <tr>
+    <td height="30" align="right">腾讯微博账号：</td>
+    <td height="30"><input type="text" name="qq_user" id="qq_user" value="{$rs.qq_user}" /></td>
+  </tr>
+  <tr>
+    <td height="34" align="right">腾讯微博密码：</td>
+    <td height="34"><input type="text" name="qq_pwd" id="qq_pwd" value="{$rs.qq_pwd}" /></td>
+  </tr>
+  <tr>
+    <td height="30" align="right">&nbsp;</td>
+    <td height="30"><input type="submit" name="button" id="button" value="确定" /></td>
+  </tr>
+  </table>
+
+
+</form>
+
+</div>{include file='lib/foot.lbi'}

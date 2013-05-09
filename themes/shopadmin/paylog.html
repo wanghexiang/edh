@@ -1,0 +1,24 @@
+{include file='lib/top.lbi'}
+<div class="nav"><a href="shopadmin.php?m=paylog">收支记录</a></div>
+<div class="nav_title">收支记录</div>
+<div class="rbox">
+<h2>您目前的账户余额{$balance}元，满100可以<a href="shopadmin.php?m=tixian&a=apply" style="color:red;">申请提现</a>。</h2>
+<table class="tb1" width="100%">
+    <tr>
+    	<td>金额</td>
+        <td>内容</td>
+        <td>时间</td>
+    </tr>
+    {foreach item=g from=$list}
+     <tr>
+    	<td>{$g.money}</td>
+        <td>{$g.content}</td>
+        <td>{$g.dateline|date:Y-m-d H@i@s}</td>
+    </tr>
+    {/foreach}
+    
+
+</table>
+
+</div>
+{include file='lib/foot.lbi'}

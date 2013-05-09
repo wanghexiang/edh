@@ -1,0 +1,85 @@
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<link rel="stylesheet" type="text/css" href="image/gong.css"/>
+<link rel="stylesheet" type="text/css" href="image/nei.css"/>
+</head>
+
+<body>
+{include file='lib/header.html'}
+<div class="kuan clear col pb10">{$town}<a href="index.php" class="c">[切换地址]</a></div>
+<div class="kuan mt5"><img src="image/banner.jpg" /></div>
+<dl class="cang kuan">
+	<dt>推荐店铺</dt>
+    <dd><a href=""  ><img src="/image/cang_j.jpg"/></a></dd>
+    <dd><a href="#">推荐</a></dd>
+    <dd><a href="#">推荐</a></dd>
+    <dd><a href="#">推荐</a></dd>
+    <dd><a href="#">推荐</a></dd>
+    <dd><a href="#">推荐</a></dd>
+  	<dt class="bd"><h1 class="fb"><a href="#">点击设置</a></h1></dt>
+</dl>
+<dl class="cang kuan">
+	<dt>收藏店铺</dt>
+	 
+    <dd><a href="#">收藏</a></dd> 
+    <dd><a href="#">收藏</a></dd>
+    <dd><a href="#">收藏</a></dd>
+    <dd><a href="#">收藏</a></dd>
+    <dd><a href="#">收藏</a></dd>
+    <dd><a href="#">收藏</a></dd>
+  	<dt class="bd"><h1 class="fb"><a href="#">点击设置</a></h1></dt>
+</dl>
+<div class="can_ming">
+  <dl class="cai_lan">
+<dt>
+  <input type="checkbox" class="xuan" />    	
+  营业中       <span>
+  <a {if $smarty.get.catid eq 0} class="tabhover"{/if} href="index.php?m=shoplist&catid=0&provinceid={$smarty.get.provinceid}&cityid={$smarty.get.cityid}&townid={$smarty.get.townid}&smid={$smarty.get.smid}&amid={$smarty.get.amid}&orderby={$smarty.get.orderby}">全部</a>
+  {foreach item=c from=$catlist}
+           <a {if $smarty.get.catid eq $c.catid} class="tabhover"{/if} href="index.php?m=shoplist&catid={$c.catid}&provinceid={$smarty.get.provinceid}&cityid={$smarty.get.cityid}&townid={$smarty.get.townid}&smid={$smarty.get.smid}&amid={$smarty.get.amid}&orderby={$smarty.get.orderby}">{$c.cname}</a>
+            {/foreach}
+		</span>
+</dt>
+        <dd>起送价： <a {if $smarty.get.smid eq 0} class="tabhover"{/if} href="index.php?m=shoplist&catid={$smarty.get.catid}&provinceid={$smarty.get.provinceid}&cityid={$smarty.get.cityid}&townid={$smarty.get.townid}&smid=0&amid={$smarty.get.amid}&orderby={$smarty.get.orderby}">不限</a>
+        	{foreach item=s from=$smlist}
+            <a {if $smarty.get.smid eq $s.smid} class="tabhover"{/if} href="index.php?m=shoplist&catid={$smarty.get.catid}&provinceid={$smarty.get.provinceid}&cityid={$smarty.get.cityid}&townid={$smarty.get.townid}&smid={$s.smid}&amid={$smarty.get.amid}&orderby={$smarty.get.orderby}">{$s.cname}元</a>
+            {/foreach}</dd>
+  </dl>
+   {foreach item=shop from=$shoplist}
+  <div class="left dian_pu">
+  <div class="pu_on">
+  <dl class="can_nei">
+  <a href="index.php?m=shop&shopid={$shop.shopid}" >
+  	<dt> <img  width='46' height='46'src="{if $shop.logo}{$shop.logo}{else}images/nologo.gif{/if}"  />
+  	  <p><a href="index.php?m=shop&shopid={$shop.shopid}">{$shop.shopname}</a></p>
+	<p>主营：快餐</p>
+	<p>平均送餐时间：50分钟</p>
+    </dt>
+    <dd><h1>{if $shop.flag==2}休息中 {else}营业中{/if}</h1><span><a href="index.php?m=fav&a=shopadd&shopid={$shop.shopid}">收藏</a></span></dd>
+    </a>
+  </dl>
+  <div class="can_xiang">
+ <a href="index.php?m=shop&shopid={$shop.shopid}" ><img width='46' height='46' src="{if $shop.logo}{$shop.logo}{else}images/nologo.gif{/if}"  /></a>
+  <h1><a href="index.php?m=shop&shopid={$shop.shopid}">{$shop.shopname}</a></h1>
+  <p>主营：快餐</p>
+  <p>平均送餐时间：30分钟</p>
+  
+  <p>配送价格:{$shop.sendplace}</p>
+  <p>地址:{$shop.address}</p>
+  <p>电话:{$shop.phone}</p>
+  <p>营业时间: {$shop.starthour}:{$shop.startminute}-{$shop.endhour}:{$shop.endminute}</p>
+  </div>
+  </div>
+  </div>
+  {/foreach}
+  <div class="clear"></div>
+ {if empty($shoplist)}
+ <br/><br/><br/>
+ <center><font color='green'>本地区暂时还没有商铺哦!</font></center>
+ <br/><br/><br/>
+ {/if} 
+</div>
+{include file="lib/footer.html"}
+</body>
+</html>

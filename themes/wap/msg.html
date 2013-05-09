@@ -1,0 +1,18 @@
+{include file="lib/header.html"}
+
+
+<script language="javascript">
+function movenew()
+{
+	document.location='{$url}';
+}
+setTimeout(movenew,2000);
+
+</script>
+<div class="well">
+{$message} <br />如果浏览器不支持跳转请<a href="{$url}">点击手动跳转</a>
+
+</div>
+
+
+{include file="lib/footer.html"}

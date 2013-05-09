@@ -1,0 +1,61 @@
+{include file='lib/top.lbi'}
+<div class="nav"><a href="admin.php?m=user&">会员管理</a> <a href="admin.php?m=user&a=add">会员添加</a></div>
+<div class="nav_title">会员管理::
+{if $smarty.get.status eq 0}未审核{else}<a href="admin.php?m=user&status=0">未审核</a> {/if}  
+{if $smarty.get.status eq 1}已审核{else}<a href="admin.php?m=user&status=1">已审核</a> {/if} 
+{if $smarty.get.status eq -1}已禁止{else}<a href="admin.php?m=user&status=2">已禁止</a> {/if} 
+</div>
+<div class="rbox">
+<form method="get" action="admin.php">
+<input type="hidden" name="m" value="user" />
+<input type="hidden" name="status" value="{$smarty.get.status}" />
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="tb1">
+  <tr>
+    <td width="246" height="30" align="right">用户名:&nbsp;</td>
+    <td width="179" align="left"><input type="text" name="username" id="username" value="{$smarty.get.username}" /></td>
+    <td width="315" align="left"><input type="submit" name="button" id="button" value="快速搜索" class="btn" /></td>
+    </tr>
+  </table>
+
+</form>
+
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="1" class="tb1">
+  <tr>
+    <td width="85" height="30" align="center">userId</td>
+    <td width="126" align="center">用户名</td>
+    <td width="126" align="center">真实姓名</td>
+    <td width="92" align="center">qq</td>
+    <td width="115" align="center">手机</td>
+    <td width="123" align="center">邮箱</td>
+    <td width="78" align="center">状态</td>
+    <td width="467" align="center">操作</td>
+  </tr>
+  {foreach item=t from=$userlist}
+  <tr>
+    <td height="25" align="center">{$t.userid}</td>
+    <td align="center">{$t.username}</td>
+    <td align="center">{$t.truename}</td>
+    <td align="center">{$t.qq}</td>
+    <td align="center">{$t.phone}</td>
+    <td align="center">{$t.email}</td>
+    <td align="center">{if $t.status eq 1}已审核{elseif $t.status eq -1}已禁止{else}未审核{/if}</td>
+    <td align="center"> <a href="admin.php?m=user&a=info&amp;userid={$t.userid}">查看</a> 
+    {if $t.status eq 0} <a href="javascript:;" class="ajax_pass" url="admin.php?m=user&a=dotype&userid={$t.userid}&status=1">审核</a> 
+    <a href="javascript:;" class="ajax_forbid" url="admin.php?m=user&a=dotype&userid={$t.userid}&status=2"> 禁止</a>{/if}
+   
+   {if $t.status eq 1}<a href="javascript:;" class="ajax_forbid" url="admin.php?m=user&a=dotype&userid={$t.userid}&status=2"> 禁止</a>{/if}
+   {if $t.status eq 2}<a href="javascript:;" class="ajax_pass" url="admin.php?m=user&a=dotype&userid={$t.userid}&status=1">审核</a>{/if}
+    
+     <a href="admin.php?m=order&uid={$t.userid}">消费记录</a> <a href="admin.php?m=user&a=chpwd&amp;username={$t.username}">密码</a> <a href="admin.php?m=user&a=del&amp;userid={$t.userid}" onclick="return confirm('删除后不可恢复，确定删除？')">删除</a></td>
+  </tr>{/foreach}
+  {if $pagelist}
+  <tr>
+    <td height="25" colspan="9" align="center">{$pagelist}</td>
+    </tr>
+{/if}
+  
+</table>
+
+
+</div> 
+{include file='lib/foot.lbi'}

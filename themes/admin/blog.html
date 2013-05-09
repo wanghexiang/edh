@@ -1,0 +1,43 @@
+{include file='lib/top.lbi'}
+<script>
+$(document).ready(function()
+{
+	$(".blogdel").click(function()
+	{
+		if(confirm('删除后不可恢复,确认删除？'))
+		{
+			$.get("admin.php?m=blog&a=del&id="+$(this).attr('blogid'));
+			$(this).parents("tr").remove();
+		}
+		
+	});
+});
+</script>
+ 
+<div class="nav"><a href="admin.php?m=blog">说说</a></div>
+<div class="nav_title">说说管理</div>
+<div>
+{if $list}
+<table class="tb1"  style="width:90%">
+{foreach item=b from=$list}
+<tr>
+    <td width="30"><img src="{php echo getuserlogo($smarty['b']['userid'],0,'min');}" width=30></td>
+    <td><a href="index.php?m=blog&a=my&userid={$b.userid}" target="_blank">{$b.nickname}</a>:{$b.content} {php echo timeago($smarty['b']['dateline'])}
+    <div style="color:red; float:right;"><a href="javascript:;"   class="blogdel" blogid={$b.id}>删除</a></div>
+    </td>
+</tr>
+{/foreach}
+{if $pagelist}
+<tr>
+<td colspan="2">{$pagelist}</td>
+</tr>
+{/if}
+</table>
+{else}
+<h2>暂无说说</h2>
+{/if}
+
+</div>
+
+
+{include file='lib/foot.lbi'}

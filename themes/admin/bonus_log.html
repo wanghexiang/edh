@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>会员信息</title>
+<script language="javascript" src="js/jquery.js"></script>
+<script language="javascript" src="{$skins}js/common.js"></script>
+<link href="{$skins}css.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div class="body">
+
+<div class="right">
+<div class="nav"> <a href="admin.php?m=bonus" target="main-frame">充值消费记录</a>  <a href="admin.php?m=user&">会员管理</a> </div>
+<div class="nav_title">充值消费记录</div>
+<div class="rbox">
+<table width="100%"   cellpadding="0" cellspacing="2" class="tb1" style="padding:6px;">
+ {if $user} 
+ <tr>
+    <td height="30" colspan="4">{$user.username}目前可用余额为{$bonus}元，已下是他的余额/消费记录。</td>
+  </tr>
+  {else}
+   
+  <tr>
+    <td height="30" colspan="4" ><span style="width:600px; margin:0 auto; display:block;"><form method="get" action="admin.php">
+    <input type="hidden" name="m" value="bonus" />
+    <input type="hidden" name="a" value="log" />
+    昵称：<input type="text" name="nickname" value="{$smarty.get.nickname}" />
+    <input type="submit" value="搜索" class="btn" /></form></span></td>
+  </tr>
+  {/if}
+  <tr>
+    <td width="87" align="center">昵称</td>
+    <td width="87" height="23" align="center">优惠额</td>
+    <td width="468" align="center">详情</td>
+    <td width="141" align="center">时间</td>
+    </tr>
+     {foreach item=t from=$loglist}
+  <tr>
+    <td width="87" align="center">{$t.nickname}</td>
+    <td width="87" height="30" align="center">{$t.bonus}</td>
+    <td>{$t.content}</td>
+    <td width="141" align="center">{$t.dateline}</td>
+    
+  </tr> {/foreach}
+  {if $pagelist}
+  <tr>
+    <td height="30" colspan="4" align="center">{$pagelist}</td>
+    </tr>
+    {/if}
+</table>
+
+</div> 
+
+</div>
+
+
+</div>
+</body>
+</html>

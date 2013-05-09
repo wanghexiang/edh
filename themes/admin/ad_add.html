@@ -1,0 +1,75 @@
+{include file='lib/top.lbi'}
+<link rel="stylesheet" href="plugin/zebra/zebra_datepicker.css" type="text/css">
+<script type="text/javascript" src="plugin/zebra/zebra_datepicker.js"></script>
+<script language="javascript">
+$(document).ready(function(){
+	
+	$('#starttime').Zebra_DatePicker();
+
+	$('#endtime').Zebra_DatePicker();
+})
+
+</script>
+{include file='ad_nav.html'}
+<div class="nav_title"> 广告添加 </div>
+<div class="rbox">
+<form method="post" action="admin.php?m=ad&a=post&id={$rs.id}" name="f1">
+<table width="100%" class="tb1">
+    <tr>
+        <td width="15%" align="right">位置：</td>
+        <td width="85%">
+        <select name="cname" id="cname">
+        {foreach item=c from=$catlist}
+        <option value="{$c}"{if $c eq $rs.cname} selected="selected"{/if} >{$c}</option>
+        {/foreach}
+        </select></td>
+    </tr>
+    
+    <tr>
+        <td align="right">标题：</td>
+        <td><input type="text" name="title" id="title" value="{$rs.title}"></td>
+    </tr>
+    <tr>
+      <td align="right">链接：</td>
+      <td><input type="text" name="url" id="url"  value="{$rs.url}"></td>
+    </tr>
+    <tr>
+      <td align="right">图片：</td>
+      <td><input type="text" name="imgurl" id="imgurl" value="{$rs.imgurl}">  <input type="button" name="button2" id="button2" value="上传图片" onclick="window.open('admin.php?m=upload&formname=f1&editname=imgurl&f_type=1','文件上传','left=300px,height=400,width=500');" class="btn" /></td>
+    </tr>
+    <tr>
+      <td align="right">价格：</td>
+      <td><input name="price" type="text" id="price" size="10" value="{$rs.price}">
+        元</td>
+    </tr>
+    <tr>
+      <td align="right">开始时间：</td>
+      <td><span style="position:relative;"><input type="text" name="starttime" id="starttime" value="{if $rs.starttime}{$rs.starttime|date:Y-m-d }{/if}"></span></td>
+    </tr>
+    <tr>
+      <td align="right">结束时间：</td>
+      <td><span style="position:relative;"><input type="text" name="endtime" id="endtime" value="{if $rs.endtime}{$rs.endtime|date:Y-m-d }{/if}"></span></td>
+    </tr>
+    <tr>
+      <td align="right">描述：</td>
+      <td><textarea name="info" id="info" cols="45" rows="5">{$rs.info}</textarea></td>
+    </tr>
+    
+    <tr>
+      <td align="right">排序：</td>
+      <td><input name="orderindex" type="text" id="orderindex" size="10" value="{$rs.orderindex}">
+         </td>
+    </tr>
+    
+    <tr>
+      <td align="right">&nbsp;</td>
+      <td><input type="submit" name="button" id="button"  class="btn" value="保存">
+        <input type="reset"  class="btn" value="重置">
+        </td>
+    </tr>
+    </table>
+</form>
+
+</div>
+{include file='lib/foot.lbi'}
+

@@ -1,0 +1,49 @@
+{include file='lib/header.html'}
+<ul class="nav nav-tabs">
+<li {if !$smarty.get.cat_id} class="active"{/if}><a href="index.php?m=caipu">全部</a></li>
+{foreach item=c from=$catlist}
+<li {if $smarty.get.cat_id eq $c.catid} class="active"{/if}><a href="index.php?m=caipu&cat_id={$c.catid}">{$c.cname}</a></li>
+{/foreach}
+<li><a href="index.php?m=caipu&a=tags">热门标签</a></li>
+</ul>
+{if $catchild}
+<ul class="nav nav-pills">
+<li {if !$smarty.get.cat_id_two} class="active"{/if}><a href="index.php?m=caipu">全部</a></li>
+{foreach item=c from=$catchild}
+<li {if $smarty.get.cat_id_two eq $c.catid} class="active"{/if}><a href="index.php?m=caipu&cat_id={$smarty.get.cat_id}&cat_id_two={$c.catid}">{$c.cname}</a></li>
+{/foreach}
+</ul>
+{/if}
+<div  >
+<ul class="unstyled" id="container" > 
+{foreach item=c from=$list}
+<li  style="width:220px; border:1px #ccc solid; padding:2px; float:left; margin-top:10px; " class="box"  >
+     <div  >
+     <a href="index.php?m=caipu&a=show&id={$c.id}" target="_blank"> <img src="{$c.imgurl}.300x300.jpg" width="220"  > </a> 
+     </div>
+     <div  class="caption">
+     <p style="line-height:25px;"><a href="index.php?m=caipu&a=show&id={$c.id}" target="_blank">{$c.title}</a></p>
+     <p>主材：{$c.maincai}</p>
+     
+     </div>
+</li>
+{/foreach}
+
+</ul>
+<div>{$pagelist}</div>
+</div>
+<script language="javascript" src="js/jquery.masonry.min.js"></script>
+<script language="javascript">
+$(document).ready(function(){
+	
+	var $container=$("#container");
+    $container.imagesLoaded(function(){
+      $container.masonry({
+        itemSelector: '.box',
+        columnWidth: 230
+      });
+    });
+
+});
+</script>
+{include file='lib/footer.html'}

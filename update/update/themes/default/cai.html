@@ -1,0 +1,112 @@
+{include file='lib/header.html'}
+{include file='shopnav.html'}
+<div class="row">
+
+<div class="span8">
+
+<div class="breadcrumb">>>美食详情</div>
+<table class="table table-bordered">
+  <tr>
+    <td class="span4" rowspan="6"><img src="{if $cai.img}{$cai.img}{else}images/nologo.gif{/if}"  style="width:100%"></td>
+    <td  class="span5">菜名：{$cai.title}</td>
+    </tr>
+  <tr>
+    <td>分类：{$cai.cname}</td>
+    </tr>
+  <tr>
+    <td>做法：{$cai.dname}</td>
+    </tr>
+  <tr>
+    <td>口味：{$cai.wname}</td>
+  </tr>
+  <tr>
+    <td>价格：{$cai.price} {if $cai.shopping}<a  href="javascript:;" class="addCart btn btn-mini"  caiid="{$cai.id}"><i class="icon-shopping-cart"></i>购买</a>{/if}</td>
+  </tr>
+  <tr>
+    <td>关注：浏览({$cai.click}) &nbsp;<a href="index.php?m=cai&a=delicious&caiid={$cai.id}">好吃</a>({$cai.delicious}) &nbsp;
+<a href="index.php?m=cai&a=undelicious&caiid={$cai.id}">难吃</a>({$cai.undelicious}) 
+{if $cai.isfav}
+<a href="javascript:;" class="delcaifav btn btn-mini" caiid="{$cai.id}"  >取消收藏</a>({$cai.favs})
+{else}
+<a href="javascript:;" class="addcaifav btn btn-mini" caiid="{$cai.id}"  >收藏</a>({$cai.favs})
+{/if}
+</td>
+  </tr>
+</table>
+
+<div class="well">{$cai.content}</div>
+</div>
+
+
+
+
+<div class="span4">
+ {include file='lib/shopcar.html'}
+ <h3>餐厅基本信息</h3>
+ <table  class="table table-bordered table-striped table-condensed"  >
+<tr>
+<td >餐厅名称</td>
+<td><a href="index.php?m=shop&shopid={$shop.shopid}">{$shop.shopname}</a></td>
+</tr>
+<tr  >
+  <td class="span4">外卖时间</td>
+  <td class="span8">{$shopconfig.starthour}:{$shopconfig.startminute}-{$shopconfig.endhour}:{$shopconfig.endminute}</td>
+</tr>
+<tr  >
+  <td>送餐费用</td>
+  <td>{$shopconfig.sendprice}元</td>
+</tr>
+<tr >
+  <td>起送金额</td>
+  <td>{$shopconfig.minprice}元</td>
+</tr>
+
+<tr  >
+  <td>餐厅地址</td>
+  <td>{$shop.address}</td>
+</tr>
+
+<tr  >
+  <td>餐厅电话</td>
+  <td>{$shop.phone}</td>
+</tr>
+
+<tr class="restaurant_info_item">
+  <td>送餐范围</td>
+  <td>{$shop.sendarea}</td>
+</tr>
+  <tr  >
+  <td>还有……</td>
+  <td>
+      {$shop.info}
+  </td>
+</tr>
+								
+								
+</table>   
+ <div>
+ <h2>还是不太敢在线订餐？</h2>
+ <p>别担心，你的订单会立刻得到处理，进度还会实时反馈给你。很多人已经用上瘾了，你也试一次吧。</p>
+ </div>
+ {if $shop.lat}
+<h2>餐厅地图</h2>
+ <div id="map_canvas" ><iframe style="width:100%; border:0; height:320px;" src="index.php?m=map&shopid={$shop.shopid}"></iframe></div>
+ {/if}
+ {foreach item=guest from=$guestlist}
+ <table class="table table-bordered  table-condensed   ">
+ <tr>
+        <td><strong>{$guest.username}</strong> ： {$guest.content} </td>  </tr>
+ <tr>
+            
+             
+           <td> 口福答疑 {$guest.reply} </td>
+</tr>
+        
+ </table>      	
+          {/foreach}
+</div>
+<!--结束-->
+
+
+</div>
+{include file='lib/footer.html'}

@@ -1,0 +1,126 @@
+{include file='lib/top.lbi'}
+<script type="text/javascript" src="xheditor/xheditor.js" ></script>
+<script language="javascript">
+$(document).ready(function()
+{
+$('#content').xheditor({forcePtag:false,upImgUrl:"shopadmin.php?m=upfile&xh=1",upImgExt:"jpg,jpeg,gif,png",html5Upload:false});
+});
+</script>
+<div class="nav"><a href="shopadmin.php?m=cai&">美食管理</a> <a href="shopadmin.php?m=cai&a=add">添加美食</a></div>
+<div class="nav_title">添加美食</div>
+<div class="rbox">
+<form action="shopadmin.php?m=cai&a=add_db" method="post" name="f1" id="f1">
+<table width="100%" border="0"   cellpadisding="0" cellspacing="0" class="tb1">
+  <tr>
+    <td width="134" height="25" align="right">菜名：</td>
+    <td width="944" height="25">
+      <input name="title" type="text" id="title" value="{$rs.title}" size="40" />
+      <input name="id" type="hidden" id="id" value="{$rs.id}" /></td>
+  </tr>
+  <tr>
+    <td height="25" align="right">所属分类：</td>
+    <td height="25">
+      <select name="catid" id="catid">
+      {if $rs.catid}<option value="{$rs.catid}">{$rs.cname}</option>{/if}
+      <option>请选择分类</option>
+      {foreach item=t from=$catlist}
+      <option value="{$t.catid}">{$t.cname}</option>
+      {/foreach}
+      </select></td>
+  </tr>
+  <tr>
+    <td height="25" align="right">美食做法：</td>
+    <td height="25">
+      <select name="doid" id="doid">
+       {if $rs.doid}<option value="{$rs.doid}">{$rs.dname}</option>{/if}
+      <option>请选择做法</option>
+      {foreach item=t from=$dolist}
+      <option value="{$t.id}">{$t.dname}</option>
+      {/foreach}
+      </select></td>
+  </tr>
+  <tr>
+    <td height="25" align="right">美食味道：</td>
+    <td height="25">
+      <select name="weiid" id="weiid">
+       {if $rs.weiid}<option value="{$rs.weiid}">{$rs.wname}</option>{/if}
+      <option>请选择味道</option>
+      {foreach item=t from=$weilist}
+      <option value="{$t.id}">{$t.wname}</option>
+      {/foreach}
+      </select></td>
+  </tr>
+  {if $addpic==1}
+  <tr>
+    <td height="25" align="right">缩略图：</td>
+    <td height="25"><input name="thum_img" type="text" id="thum_img" value="{$rs.thum_img}" size="50" />
+      <input type="button" name="button3" id="button3" value="上传图片" onclick="window.open('shopadmin.php?m=upload&formname=f1&editname=thum_img&f_type=1','文件上传','left=300px,height=400,width=500');" class="btn" />
+      (可不填 图片宽高：200*200)</td>
+  </tr>
+  <tr>
+    <td height="25" align="right">美食图片：</td>
+    <td height="25">
+      <input name="img" type="text" id="img" value="{$rs.img}" size="50" />
+      <input type="button" name="button2" id="button2" value="上传图片" onclick="window.open('shopadmin.php?m=upload&formname=f1&editname=img&f_type=1','文件上传','left=300px,height=400,width=500');" class="btn" /></td>
+  </tr>
+  {/if}
+  <tr>
+    <td height="25" align="right">关键字：</td>
+    <td height="25">
+      <input name="keyword" type="text" id="keyword" value="{$rs.keyword}" size="60" /></td>
+  </tr>
+  <tr>
+    <td height="20" align="right">描述：</td>
+    <td height="20">
+      <textarea name="des" id="des" cols="60" rows="5">{$rs.des}</textarea></td>
+  </tr>
+  <tr>
+    <td height="25" align="right">价格：</td>
+    <td height="20"><input name="price" type="text" id="price" value="{$rs.price}" size="8" />
+      元</td>
+  </tr>
+  <tr>
+    <td height="25" align="right">标签：</td>
+    <td height="20"><input name="tagname" type="text" id="tagname" value="{$tagname}" size="60" />
+      <input name="tagname2" type="hidden" id="tagname2" value="{$tagname}" />
+      (多个用英文逗号隔开)</td>
+  </tr>
+  <tr>
+    <td height="25" align="right">推荐属性：</td>
+    <td height="20"><input name="isding" type="checkbox" id="isding" value="1" {if $rs.isding eq 1 } checked="checked"{/if} />推荐 
+        <input name="ishot" type="checkbox" id="ishot" value="1" {if $rs.ishot eq 1} checked="checked" {/if} />热门
+               
+          <input name="isnew" type="checkbox" id="isnew" value="1" {if $rs.isnew eq 1} checked="checked" {/if} /> 
+          最新 
+          <input name="promote" type="checkbox" id="promote" value="1" {if $rs.promote eq 1} checked="checked"{/if} />
+          促销 （促销价
+          <input name="lowprice" type="text" id="lowprice" size="8" value="{$rs.lowprice}" />
+          ）</td>
+  </tr>
+  <tr>
+    <td height="20" align="right">星期属性：</td>
+    <td height="20">
+    	<input name="week1" type="checkbox" id="week1" class="weeksele" value="1" {if $rs.week1 eq 1} checked="checked"{/if} />周一 
+        <input name="week2" type="checkbox" id="week2" class="weeksele" value="1" {if $rs.week2 eq 1} checked="checked"{/if}/>周二 
+        <input name="week3" type="checkbox" id="week3" class="weeksele" value="1" {if $rs.week3 eq 1} checked="checked"{/if}/>周三 
+        <input name="week4" type="checkbox" id="week4" class="weeksele" value="1" {if $rs.week4 eq 1} checked="checked"{/if}/>周四
+        <input name="week5" type="checkbox" id="week5" class="weeksele" value="1" {if $rs.week5 eq 1} checked="checked"{/if}/>
+        周五 
+        <input name="week6" type="checkbox" id="week6" class="weeksele" value="1" {if $rs.week6 eq 1} checked="checked"{/if}/>周六 
+        <input name="week7" type="checkbox" id="week7" class="weeksele" value="1" {if $rs.week7 eq 1} checked="checked"{/if}/>
+        周日
+        <a href="javascript:;" onclick="$('.weeksele').attr('checked',true)">全选</a></td>
+  </tr>
+  <tr>
+    <td height="20" align="right">详情：</td>
+    <td height="20"><textarea name="content" id="content"  style="width:100%; height:600px;">
+    {$rs.content}</textarea></td>
+  </tr>
+  <tr>
+    <td height="30" align="right">&nbsp;</td>
+    <td height="20"><input type="submit" name="button" id="button" class="btn" value="确定" /></td>
+  </tr>
+</table>
+
+</form>
+</div>{include file='lib/foot.lbi'}

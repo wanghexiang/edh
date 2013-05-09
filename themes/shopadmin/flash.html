@@ -1,0 +1,51 @@
+{include file='lib/top.lbi'}
+<div class="nav">
+
+<a href="shopadmin.php?m=flash&">轮显管理</a>
+</div>
+<div class="nav_title">轮显管理</div>
+<div class="rbox">
+
+<table width="100%" border="0" cellspacing="1" cellpadding="0" class="tb1">
+  <tr>
+    <td align="center">排序</td>
+    <td height="30" align="center">标题</td>
+    <td height="30" align="center">链接</td>
+    <td align="center">图片</td>
+    <td align="center">操作</td>
+    
+  </tr>
+  {foreach item=t from=$flashlist}
+  <form method="post" name="f{$t.fid}" action="shopadmin.php?m=flash&a=add_db">
+  <tr><input type="hidden" name="fid" value="{$t.fid}" />
+    <td width="28" align="center"><input name="forder" type="text" id="forder" size="4" value="{$t.forder}" /></td>
+    <td width="140" height="30" align="center"><input name="ftitle" type="text" id="ftitle" value="{$t.ftitle}" size="20" /></td>
+    <td width="140" height="30" align="center"><input name="furl" type="text" id="furl"  value="{$t.furl}" size="20"/></td>
+    <td width="140" align="center"><input name="fimg" type="text" id="fimg"  value="{$t.fimg}" size="20"/></td>
+    <td width="306" align="center"><input type="button" name="button3" id="button3" value="上传图片" onclick="window.open('upload.php?formname=f{$t.fid}&editname=fimg&f_type=1','文件上传','left=300px,height=400,width=500');"  />
+      <input type="submit" name="button4" id="button4" value="编辑"   />
+      <input type="button" name="button5" id="button5" value="删除" onclick="location.href='shopadmin.php?m=flash&a=del&fid={$t.fid}'" /></td>
+    
+  </tr>
+  </form>
+  {/foreach}
+ <form method="post" name="f" action="shopadmin.php?m=flash&a=add_db">
+  <tr>
+    <td height="30" align="center"><input name="forder" type="text" id="forder" size="4" /></td>
+    <td height="30" align="center"><input name="ftitle" type="text" id="ftitle" size="20" /></td>
+    <td align="center"><input name="furl" type="text" id="furl" size="20" /></td>
+    <td align="center"><input name="fimg" type="text" id="fimg" size="20" /></td>
+    <td align="center"><input type="button" name="button" id="button" value="上传图片" onclick="window.open('upload.php?formname=f&editname=fimg&f_type=1','文件上传','left=300px,height=400,width=500');" class="btn" /> 
+    
+    <input type="submit" name="button2" id="button2" value="添加"  class="btn"/></td>
+  </tr>
+  </form>
+  <tr>
+    <td height="30" colspan="5" align="center">&nbsp;</td>
+    </tr>
+  </table>
+
+
+
+
+</div>{include file='lib/foot.lbi'}

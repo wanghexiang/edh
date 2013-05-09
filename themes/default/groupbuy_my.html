@@ -1,0 +1,46 @@
+{include file='lib/header.html'}
+<div class="row">
+<div class="span2">
+{include file="usernavleft.html"}
+</div>
+<div class="span10">
+<p><h2>我的团购</h2></p>
+<p>记录你参与过的团购</p>
+<table class="table table-bordered">
+<tr>
+<td>团购主题</td>
+<td>数量</td>
+<td>总价</td>
+<td>手机</td>
+<td>地址</td>
+<td>下单时间</td>
+<td>支付</td>
+<td>状态</td>
+</tr>
+
+{foreach item=g from=$list}
+<tr>
+<td><a href="index.php?m=groupbuy&a=show&id={$g.groupid}" target="_blank">{$g.title}</a></td>
+<td>{$g.goodsnum}</td>
+<td>{$g.totalprice}</td>
+<td>{$g.phone}</td>
+<td>{$g.address}</td>
+<td>{$g.dateline|date:Y-m-d}</td>
+<td>
+	{if $g.ispay}已在线支付{else}货到付款{/if}
+</td>
+<td>
+{if $g.status eq 0}未确认{elseif $g.status eq 1}已确认{elseif $g.status eq 2}配送中{elseif $g.status eq 3}已完成{/if}
+</td>
+</tr>
+{/foreach}
+{if $pagelist}
+<tr>
+<td colspan="6">{$pagelist}</td>
+</tr>
+{/if}
+</table>
+</div>
+ 
+</div>
+{include file='lib/footer.html'}

@@ -1,0 +1,165 @@
+{include file='lib/header.bak(2).html'}
+<div class="row">
+<div class="span8">
+		<ul class="breadcrumb">
+  <li>
+    <a href="javascript:;">创建订单</a> <span class="divider">></span>
+  </li>
+  <li>
+    <a href="#">确定联系方式</a> <span class="divider">></span>
+  </li>
+  <li >完成</li>
+</ul>
+        										 
+		
+	<!--订单信息开始-->
+ {foreach item=order from=$orderlist}
+			<form class="well" action="index.php?m=shopcar&a=orderphone_db" method="post">
+				<h2><a href="index.php?m=shop&shopid={$order.shopid}" target="_blank">{$order.shopname}</a> <small>{$order.phone}</small></h2>
+				<div class="row-fluid">
+                <div class="span6">
+                <h3>您的餐饮：{$order.money}元 (送餐费用{$order.config.sendprice}元)</h3>
+              
+                 {foreach item=cai  from=$order.cailist}
+                <div class="row-fluid">
+                <div class="span4">{$cai.title} </div>
+                
+				<div class="span4">{$cai.cainum}</div>
+                <div class="span4">{$cai.price}</div>
+				</div>
+				{/foreach}
+				
+                </div>
+                <!--左边结束-->
+                <div class="span6">
+                <label>您的手机：</label>
+				{if $order.sendtype eq 0}                                               
+                <input type="hidden" value="{$order.id}" name="orderid">
+				<input type="text" name="orderphone" class="text mobile_number" id="mobile_number" value="{$order.orderphone}">
+                {else}{$order.orderphone}{/if}
+				<p>稍后我们会发一条短信给您</p>
+                {if $order.money<$balance  }
+                <p>支付方式：{if $order.ispay}已经付款{else}<input type="checkbox" name="ispay" value="1" /> 余额支付 <br />(默认货到付款，可不选){/if}</p>
+                {/if}
+				<label>详细地址：</label>
+					{if $order.sendtype eq 0}
+					{foreach item=address from=$addresslist}
+					<p>
+                    
+                    <input type="radio" name="orderaddress" {if $address.address eq $order.orderaddress} checked="checked"{/if}  id="address_old_{$address.id}" value="{$address.address}" > {$address.address}  
+					</p>
+                    {/foreach}
+                   <p>(<a href="javascript:;"   class="ajax_addaddress"><span style="color:#03F;">添加新地址</span></a>)
+                   </p>
+																						
+                            {else}
+                                         <p>{$order.orderaddress}</p>
+							 {/if}														
+									
+											<label>餐饮要求：</label>
+										
+												{if $order.sendtype eq 0}<textarea name="orderinfo" style="width:300px; height:60px;">{$order.orderinfo}</textarea>
+                                                {else}
+                                                {$order.orderinfo}
+                                                {/if}
+											<p> 如果菜品有大份/小份选择，请在这里注明。<br>添加上您的姓氏和称谓会更便于餐厅联系。</p>
+                                            
+																								
+																																						<p>{if $order.sendtype eq  0}<input class="btn btn-success" type="submit" value="确认信息，提交">
+<input onclick="window.location='index.php?m=shopcar&a=delorder&id={$order.id}&url=orderphone'; return confirm('删除后不可恢复,确认删除?');"  class="btn btn-danger" type="reset" value="删除">{else}订单已确定，如要修改请联系客服
+{/if}</p>
+											</div>
+											
+											
+											</div></form>
+{if $order.sendtype eq 3}
+<script language="javascript" src="plugin/raty/js/jquery.raty.min.js" ></script>
+
+
+       
+      
+<div class="well">
+<form method="post" class="form-horizontal" action="index.php?m=shopcar&a=ordercomment">
+<h2>对店铺评论</h2>
+<table class="table">
+<tr><td width="60">服务:</td><td><span id="star_fuwu" style="width:200px;"></span><input type="hidden" id="jf_fuwu" name="jf_fuwu" value="{$order.comment.jf_fuwu}" /></td></tr>
+<tr><td>口味:</td><td><span id="star_kouwei" style="width:200px;"></span><input type="hidden" id="jf_kouwei" name="jf_kouwei" value="{$order.comment.jf_kouwei}" /></td></tr>
+<tr><td>价格:</td><td><span id="star_jiage" style="width:200px;"></span><input type="hidden" id="jf_jiage" name="jf_jiage" value="{$order.comment.jf_jiage}" /></td></tr>
+<tr><td>配送时间:</td><td><span id="star_shijian" style="width:200px;"></span><input type="hidden" id="jf_shijian" name="jf_shijian" value="{$order.comment.jf_shijian}" /></td></tr>
+<tr><td>总评：</td><td><span id="star_all" style="width:200px;"></span><input type="hidden" id="jf_all" name="jf_all" value="{$order.comment.jf_all}" /></td></tr>
+
+</table>
+<input type="hidden" name="orderid" value="{$order.id}" />
+<p><textarea name="content" style="width:400px;">{$order.comment.content}</textarea></p>
+<p><input type="submit" value="订单评价" class="btn-primary" /></p>
+</form>
+</div>
+
+<script>
+
+pingfen("#star_fuwu","#jf_fuwu"{if $order.comment.jf_fuwu},{$order.comment.jf_fuwu}{/if});
+pingfen("#star_kouwei","#jf_kouwei"{if $order.comment.jf_kouwei},{$order.comment.jf_kouwei}{/if});
+pingfen("#star_jiage","#jf_jiage"{if $order.comment.jf_jiage},{$order.comment.jf_jiage}{/if});
+pingfen("#star_shijian","#jf_shijian"{if $order.comment.jf_shijian},{$order.comment.jf_shijian}{/if});
+pingfen("#star_all","#jf_all"{if $order.comment.jf_all},{$order.comment.jf_all}{/if});
+
+function pingfen(objstar,objval,jf)
+{
+	jf=jf?jf:0;
+	$(objstar).raty(
+	{
+		 width :'200px',
+		 hints : [1,2,3,4,5],
+		 score : jf,
+		 number : 5 ,
+		 path	:'plugin/raty/img/',
+		 click : function(score, evt)
+		 {
+			 $(objval).val(score);
+		 }
+	}
+	);
+}
+
+
+</script> 
+ 
+
+{/if}          
+                <!--右边结束-->
+                
+{/foreach}
+<!--订单信息结束-->
+</div>			
+					
+			
+									 
+						<div class="span4">
+                        
+                         <table class="table table-bordered  table-condensed   ">
+ <tr>
+        <td><strong>Q：</strong>我的餐饮多长时间能送到？ </td>  </tr>
+ <tr>
+            
+             
+           <td><strong>A：</strong>平均送餐时间大概在<span>40</span>分钟左右，非常快和非常慢的餐厅我们都会特别注明 </td>
+</tr>
+
+<tr>
+<td><strong>Q：</strong>口福网负责送餐吗？</td>
+</tr>
+
+<tr>
+<td><strong>A：</strong>我们每20分钟会帮你联系餐厅催餐，您也可以点击"请帮我催一下"，我们会帮您催餐并告知您催餐结果。</td>
+</tr>
+
+
+        
+ </table>      	
+							</div>
+		
+</div>
+
+
+{include file='lib/footer.html'}
+

@@ -1,0 +1,52 @@
+{include file='lib/top.lbi'}
+
+{include file='caipu_nav.html'}
+
+<div class="nav_title">菜谱标签</div>
+<div class="rbox">
+<table  class="tb1" width="100%">
+<tr>
+	<td width="14%" align="center">ID</td>
+    <td width="17%" align="center">名称</td>
+    <td width="12%" align="center">数量</td>
+    <td width="12%" align="center">排序</td>
+    <td width="45%" align="center">显示</td>
+  
+</tr>
+
+{foreach item=c from=$list}
+<tr>
+	<td align="center">{$c.tagid}</td>
+    <td align="center"><a href="index.php?m=caipu&a=tags&tagid={$c.tagid}" target="_blank">{$c.tagname}</a></td>
+    <td align="center">{$c.c_num}</td>
+    <td align="center">{$c.orderindex}</td>
+    <td align="center">
+    {if $c.status}
+    <img src="images/yes.gif" class="ajax_no" url="admin.php?m=caipu&a=tags&op=changestatus&tagid={$c.tagid}&status=0" rurl="admin.php?m=caipu&a=tags&op=changestatus&tagid={$c.tagid}&status=1" />
+    {else}
+    <img src="images/no.gif" class="ajax_yes" url="admin.php?m=caipu&a=tags&op=changestatus&tagid={$c.tagid}&status=1" rurl="admin.php?m=caipu&a=tags&op=changestatus&tagid={$c.tagid}&status=0" />
+    {/if}
+     </td>
+    
+</tr>
+{/foreach}
+
+</table>
+</div>
+<script language="javascript" >
+$(document).ready(function(){
+	$(".changestatus").click(function(){
+		tagid=$(this).attr("tagid");
+		status=parseInt($(this).attr("status"));
+		
+		$.get("admin.php?m=caipu&a=tags&op=changestatus&tagid="+tagid+"&status="+(status==1?0:1));
+		if(status==1){
+			$(this).attr("status",0).text("显示");
+		}else{
+			$(this).attr("status",1).text("隐藏");
+		}
+	});
+	
+});
+</script>
+{include file='lib/foot.lbi'}

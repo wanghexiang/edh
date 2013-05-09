@@ -1,0 +1,17 @@
+<form class="form form-inline" method="post"  >
+<textarea name="content" id="content_{$smarty.get.blogid}" style="width:320px;"></textarea>
+<input type="button" value="ÆÀÂÛ" class="btn btn-success" onclick="$.post('index.php?m=blog&a=commentpost&blogid={$smarty.get.blogid}',{content : $('#content_{$smarty.get.blogid}').val() },function(data){$('#commentlist_{$smarty.get.blogid}').html(data);$('#comments_{$smarty.get.blogid}').html(parseInt($('#comments_{$smarty.get.blogid}').html())+1);return false;})" >
+</form>
+{if $list}
+<table class="table table-bordered">
+{foreach item=c from=$list}
+<tr>
+<td width="30"><a href="index.php?m=blog&a=my&userid={$c.userid}"><img src='{php echo getuserlogo($smarty['c']["userid"]);}.min.jpg' onerror="this.src='images/nologo.gif'" width="30" /></a></td>
+<td>@<a href="index.php?m=blog&a=my&userid={$c.userid}">{$c.nickname}</a>:{$c.content} ({php echo timeago($smarty['c']['dateline'])})</td>
+</tr>
+{/foreach}
+</table>
+<p>{$pagelist}</p>
+{else}
+
+{/if}

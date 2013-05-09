@@ -1,0 +1,26 @@
+{include file="lib/header.html"}
+<h2>用户注册</h2>
+
+<form action="index.php?m=user&a=regdb" method="post">
+<label>用户名</label>
+<input type="text" name="username" id="username" class="h30" />
+<label>密码</label>
+<input type="password" name="pwd1" id="pwd1" class="h30" />
+<label>重复密码</label>
+<input type="password" name="pwd2" id="pwd2" class="h30" />
+<label>邮箱</label>
+<input type="text" name="email" id="email" class="h30" />
+<label>手机</label>
+<input type="text" name="phone" id="phone" class="h30" />
+<label>推荐人
+<input type="tel" name="fuserid" class="h30" />
+
+<div class="form-actions">
+<input type="submit" name="button" id="button" value="注册"  class="btn"/>
+      <input type="reset" name="button2" id="button2" value="重置" class="btn" />
+</div>
+
+</form>
+
+
+{include file="lib/footer.html"}

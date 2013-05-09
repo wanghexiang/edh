@@ -1,0 +1,121 @@
+{include file='lib/top.lbi'}
+<link rel="stylesheet" href="plugin/zebra/zebra_datepicker.css" type="text/css">
+<script type="text/javascript" src="plugin/zebra/zebra_datepicker.js"></script>
+<script language="javascript">
+$(document).ready(function()
+{
+	$("#chkall").click(function()
+	{
+		$(".orderid").attr("checked","checked");
+	});
+	$("#chknone").click(function()
+	{
+		$(".orderid").attr("checked",false);
+	});
+	
+	$('#starttime').Zebra_DatePicker();
+
+	$('#endtime').Zebra_DatePicker();
+});
+
+
+
+</script>
+<div class="nav">
+<a href="admin.php?m=order&">订单管理</a>
+<a href="admin.php?m=order&t=1">今天</a>
+<a href="admin.php?m=order&t=2">昨天</a>
+<a href="admin.php?m=order&t=3">7天</a>
+<a href="admin.php?m=order&t=4">本月</a>
+<a href="admin.php?m=order&t=5">上月</a>
+</div>
+<div class="nav_title">订单管理  </div>
+<div class="rbox">
+<table width="100%" border="0" align="center" cellspacing="1" class="tb1">
+  <tr>
+    <td width="93" align="right">订单统计：</td>
+    <td width="640" height="50">共<font color="red">{$rscount}</font>笔订单，
+    总收入(<font color="red">{$money.summoney}</font>)元，
+    平均每笔(<font color="red">{$money.avgmoney}</font>)元。 </td>
+  </tr>
+  </table>
+
+
+<form action="admin.php" method="get">
+<input type="hidden" name="m" value="order" />
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="1" class="tb1">
+  <tr>
+    <td height="30" align="center">客户：
+      <input name="username" type="text" id="username" value="{$username}" size="16" />
+      订单号
+<input name="orderno" type="text" id="orderno" value="{$orderno}" size="16" />
+      配送状态
+      <label for="sendtype"></label>
+      <select name="sendtype" id="sendtype">
+      <option value="-1" {if $sendtype eq -1} selected="selected"{/if}>全部</option>
+      <option value="0" {if $sendtype eq 0} selected="selected"{/if}>未确认</option>
+      <option value="1" {if $sendtype eq 1} selected="selected"{/if}>已确认</option>
+      <option value="2" {if $sendtype eq 2} selected="selected"{/if}>正在配送</option>
+      <option value="3" {if $sendtype eq 3} selected="selected"{/if}>配送中</option>
+      <option value="4" {if $sendtype eq 4} selected="selected"{/if}>已完成</option>
+      </select>
+      开始时间 <span style="position:relative;"><input name="starttime" type="text" id="starttime" value="{$smarty.get.starttime}" size="12" /></span>
+       结束时间 <span style="position:relative;"><input name="endtime" type="text" id="endtime" value="{$smarty.get.endtime}" size="12" /></span>     
+       <input type="submit" name="button" id="button" value="查询" class="btn"/></td>
+    </tr>
+  </table>
+
+</form>
+
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="1" class="tb1">
+  <tr>
+    <td width="32" height="30" align="center">ID</td>
+    <td width="92" align="center">订单号</td>
+    <td width="98" align="center">客户</td>
+    <td width="81" align="center">价格</td>
+    <td width="102" align="center">订单状态</td>
+    <td width="43" align="center">付款</td>
+    <td width="87" align="center">收货</td>
+    <td width="196" align="center">联系方式</td>
+    <td width="107" align="center">商家</td>
+    <td width="104" align="center">时间</td>
+    <td width="128" align="center">操作</td>
+    </tr>
+    <form action="admin.php?m=order&" method="post" id="aa">
+    {foreach item=t from=$orderlist}
+  <tr>
+    <td height="25" align="center"><input name="id[]" type="checkbox" id="id[]" value="{$t.id}" class="orderid" />
+      <label for="id[]"></label></td>
+    <td align="center">{$t.orderno}</td>
+    <td align="center">{$t.orderuser}</td>
+    <td align="center">{$t.money}</td>
+    <td align="center">{$t.sendtype}</td>
+    <td align="center"><!--{if $t.ispay}-->已付<!--{else}-->到付<!--{/if}--></td>
+    <td align="center"><!--{if $t.received}-->已收货<!--{else}-->未收货<!--{/if}--></td>
+    <td align="center">{$t.orderphone}</td>
+    <td align="center">{$t.shopname}</td>
+    <td align="center">{$t.dateline}</td>
+    <td align="center">  <a href="admin.php?m=order&a=view&amp;id={$t.id}">查看</a> <a href="admin.php?m=order&a=del&amp;id={$t.id}" onclick="return confirm('订单删除后不可恢复，确认删除？')">删除</a></td>
+    </tr>
+    {/foreach}
+  
+    <tr>
+      <td height="30" colspan="11" align="center">
+      <a href="javascript::" id="chkall"  >全选</a>
+      &nbsp;<a href="javascript::" id="chknone"  >全不选</a>
+        <input type="submit" name="button2" id="button2" value="未确认" class="btn" onclick="this.form.action='admin.php?m=order&a=sendtype&sendtype=0'"  />
+        <input type="submit" name="button3" id="button3" value="已确认" class="btn"  onclick="this.form.action='admin.php?m=order&a=sendtype&sendtype=1'"  />
+        <input type="submit" name="button4" id="button4" value="正在配送" class="btn"  onclick="this.form.action='admin.php?m=order&a=sendtype&sendtype=2'"  
+         />
+         
+        <input type="submit" name="button6" id="button6" value="已完成" class="btn"  onclick="this.form.action='admin.php?m=order&a=sendtype&sendtype=3';return confirm('订单完成后将不可再更改订单状态');"   /></td>
+      </tr>
+      </form>
+    {if $pagelist}  <tr>
+    <td height="30" colspan="11" align="center">{$pagelist}</td>
+    </tr>
+    {/if}
+</table>
+
+</div> 
+{include file='lib/foot.lbi'}

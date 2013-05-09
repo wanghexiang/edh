@@ -1,0 +1,9 @@
+{include file='lib/top.lbi'}
+
+<div class="nav"><a href="#">绑定用户</a></div>
+<div class="nav_title">绑定用户</div>
+<div class="rbox">
+<p>{if $smarty.session.ssuser}{if $user}您已经绑定了<a href="index.php?m=blog&userid={$user.userid}" target="_blank">{$user.nickname}</a>，{/if}您确定将您的店铺与前台账户<a href="index.php?m=blog&userid={$smarty.session.ssuser.userid}" target="_blank"><font color="red">{$smarty.session.ssuser.nickname}</font></a>绑定吗？绑定之后前台账户可以直接进入后台管理。 <a href="shopadmin.php?m=binduser&a=bind">确定绑定</a>{else}请到前台<a href="index.php?m=user&a=login"><font color="red">登陆</font></a>{/if}</p>
+</div>
+
+{include file='lib/foot.lbi'}

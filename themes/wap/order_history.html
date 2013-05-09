@@ -1,0 +1,27 @@
+{include file='lib/header.html'}
+{include file='lib/user.html'}
+<h2>我的购物记录</h2>
+
+
+  <table class="table"  >
+    
+    
+    <tr>
+      <td width="50%" height="25" align="center">订单号</td>
+      <td width="20%" align="center">总价</td>
+      <td width="30%" align="center">时间</td>
+    </tr>
+ {foreach item=t from=$orderlist}   <tr>
+    <td width="284" height="25" align="center"><a href="index.php?m=shopcar&a=view&amp;id={$t.id}">{$t.orderno}</a></td>
+    <td width="197" align="center">{$t.money}</td>
+    <td width="215" align="center">{$t.dateline|date:Y-m-d}</td>
+  </tr>
+  {/foreach}
+  <tr>
+    <td height="25" colspan="3" align="center">{$pagelist}</td>
+    </tr>
+</table>
+
+
+
+{include file='lib/footer.html'}

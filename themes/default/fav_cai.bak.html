@@ -1,0 +1,30 @@
+{include file='lib/header.html'}
+<div class="row">
+<div class="span2">{include file="usernavleft.html"}</div>
+<div class="span10">
+{include file="fav_nav.html"}
+{if $list}
+
+<table class="table table-bordered">
+{foreach item=c from=$list}
+<tr>
+<td style="width:100px;"><img src="{if $cai.img}{$cai.thum_img}{else}images/nologo.gif{/if}"  style="height:100px;"/></td>
+<td>
+<p><a href="index.php?m=cai&id={$c.id}" target="_blank">{$c.title}</a> {if $c.promote}{$c.lowprice}元(促销) <i style="text-decoration:line-through">{$c.price}</i>{else} {$c.price}{/if}元 <a href="javascript:;" class="delcaifav" style="float:right; margin-right:10px;" caiid="{$c.id}">取消收藏</a></p>
+<p>所在店铺：<a href="index.php?m=shop&shopid={$c.shopid}" target="_blank">{$c.shopname}</a></p>
+<p>简介：{$c.info}</p>
+</td>
+</tr>
+{/foreach}
+</table>
+{if $pagelist}
+<p>{$pagelist}</p>
+{/if}
+{else}
+<h2>暂无收藏</h2>
+{/if}
+</div>
+ 
+
+</div>
+{include file='lib/footer.html'}

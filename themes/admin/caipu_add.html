@@ -1,0 +1,107 @@
+{include file='lib/top.lbi'}
+<script type="text/javascript" src="xheditor/xheditor.js" ></script>
+<script language="javascript">
+$(document).ready(function()
+{
+	$('#content').xheditor({forcePtag:false,upImgUrl:"admin.php?m=upfile&xh=1",upImgExt:"jpg,jpeg,gif,png",html5Upload:false});
+	$("#catid").change(function(){
+		
+		$.get("admin.php?m=caipu&a=getcatchild&pid="+$(this).val(),function(data){
+			$("#catid_two").empty().append(data).show();
+		})
+	});
+});
+</script>
+{include file='caipu_nav.html'}
+
+<div class="nav_title">菜谱添加</div>
+<div class="rbox">
+<form method="post" name="f1" action="admin.php?m=caipu&a=post"  >
+<input type="hidden" name="id" value="{$rs.id}" />
+<table width="100%" class="tb1">
+<tr>
+	<td width="7%" align="right">标题：</td>
+    <td width="93%"><input name="title" type="text" id="title" value="{$rs.title}" size="40" /></td>
+</tr>
+<tr>
+	<td width="7%" align="right">分类：</td>
+    <td width="93%"><select name="cat_id" id="catid">
+    <option value="0">请选择</option>
+    {foreach item=c from=$catlist}
+    <option value="{$c.catid}" {if $c.catid eq $rs.cat_id} selected="selected"{/if}>{$c.cname}</option>
+    {/foreach}
+    
+    </select>
+    <select name="cat_id_two" id="catid_two">
+     <option value="0">请选择</option>
+    {if $rs.cat_id_two}
+    {foreach item=cc from=$pcatlist}
+    <option value="{$cc.catid}" {if $cc.catid eq $rs.cat_id_two} selected="selected"{/if}>{$cc.cname}</option>
+    {/foreach}
+     
+   
+    {/if}
+    </select>
+    </td>
+</tr>
+
+<tr>
+  <td align="right">味道：</td>
+  <td><select name="wei_id" id="wei_id">
+  <option value="0">请选择</option>
+  {foreach item=w from=$weilist}
+  <option value="{$w.id}" {if $rs.wei_id eq $w.id} selected="selected"{/if}>{$w.wname}</option>
+  {/foreach}
+  </select></td>
+</tr>
+<tr>
+  <td align="right">工艺：</td>
+  <td><select name="do_id" id="do_id">
+  <option value="0">请选择</option>
+  {foreach item=w from=$dolist}
+  <option value="{$w.id}" {if $rs.do_id eq $w.id} selected="selected"{/if}>{$w.dname}</option>
+  {/foreach}
+  </select></td>
+</tr>
+<tr>
+  <td align="right">主料：</td>
+  <td><input name="maincai" type="text" id="maincai" value="{$rs.maincai}" size="40" /></td>
+</tr>
+<tr>
+  <td align="right">配料：</td>
+  <td><input name="othercai" type="text" id="othercai" value="{$rs.othercai}" size="40" /></td>
+</tr>
+<tr>
+  <td align="right">关键字：</td>
+  <td><input name="keywords" type="text" id="keywords" value="{$rs.keywords}" size="40" /> </td>
+</tr>
+
+<tr>
+	<td align="right">标签：</td>
+    <td><input name="tags" type="text" value="{$tags}" size="60" /> (多个用空格隔开)</td>
+</tr>
+
+<tr>
+  <td align="right">描述：</td>
+  <td><textarea name="description" cols="60" rows="6" id="description">{$rs.description}</textarea></td>
+</tr>
+<tr>
+  <td align="right">图片：</td>
+  <td><input name="imgurl" type="text" id="imgurl" value="{$rs.imgurl}" size="40" />
+  <input type="button" name="button2" id="button2" value="上传图片" onclick="window.open('admin.php?m=upload&formname=f1&editname=imgurl&f_type=1','文件上传','left=300px,height=400,width=500');" class="btn" />
+  </td>
+</tr>
+<tr>
+  <td align="right">内容：</td>
+  <td><textarea name="content" cols="60" rows="6" id="content" style="width:100%; height:400px;">{$rs.content}</textarea></td>
+</tr>
+<tr>
+  <td align="right">&nbsp;</td>
+  <td><input type="submit" name="button" id="button" value="保存" class="btn" /></td>
+</tr>
+
+</table>
+
+</form>
+</div>
+{include file="lib/foot.lbi"}

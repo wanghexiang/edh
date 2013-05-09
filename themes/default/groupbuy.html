@@ -1,0 +1,46 @@
+{include file='lib/header.html'}
+<div class="row">
+<div class="span9">
+<ul class="nav nav-tabs">
+<li {if !$smarty.get.catid}class="active"{/if}><a href="index.php?m=groupbuy">今日团购</a></li>
+{foreach item=c from=$catlist}
+<li {if $smarty.get.catid eq $c.catid} class="active"{/if}><a href="index.php?m=groupbuy&catid={$c.catid}">{$c.cname}</a></li>
+{/foreach}
+</ul>
+{if $list}
+<ul class="thumbnails">
+{foreach item=g from=$list}
+<li class="span3" style="height:340px;">
+<div class="thumbnail"><a href="index.php?m=groupbuy&a=show&id={$g.id}"><img src="{if $g.img}{$g.img}.thumb.jpg{else}images/nologo.gif{/if}" onerror='images/nologo.gif' style="width:200px; height:140px;"   /></a>
+<div class="caption">
+<p>{$g.title}</p>
+<p>{$g.groupprice}元  <span style="text-decoration:line-through">￥{$g.goodsprice}({php echo round($smarty['g']['groupprice']/$smarty['g']['goodsprice'],1)}折)</span></p>
+
+<p><span class="lefttime" endtime={$g.endtime}>离团购结束....</span></p>
+</div>
+</div>
+</li>
+{/foreach}
+<script language="javascript">
+setInterval("changelefttime()",1000);
+</script>
+</ul>
+{else}
+<h2>暂无团购 </h2>
+{/if}
+</div>
+<div class="span3">
+<table class="table table-bordered">
+	<tr>
+    	<td class="btn-success">推荐团购</td>
+    </tr>
+    {php mod_base('hotlist',"SELECT * FROM ".table('groupbuy')." WHERE siteid=".$GLOBALS['cksiteid']." AND status=1 AND isrecommend=1 LIMIT 10 ");}
+    {foreach item=g from=$hotlist}
+    <tr>
+    	<td><a href="index.php?m=groupbuy&a=show&id={$g.id}">{$g.title}</a></td>
+    </tr>
+    {/foreach}
+</table>
+</div>
+</div>
+{include file='lib/footer.html'}

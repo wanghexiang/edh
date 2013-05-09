@@ -1,0 +1,37 @@
+{include file="lib/header.html"}
+<p>
+<div class="btn-group">
+  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+    文章分类
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu">
+{foreach item=t from=$artcat}
+<li><a href="index.php?m=art_cat&catid={$t.catid}">{$t.cname}</a></li>
+{if $t.child}{/if}  
+{foreach item=c from=$t.child}
+<li><a href="index.php?m=art_cat&catid={$c.catid}">{$c.cname}</a></li>
+{/foreach}
+{/foreach}
+  </ul>
+</div>
+</p>
+
+
+{if $artlist}
+<ul class="nav nav-tabs nav-stacked">
+<li><a href="javascript:;">{$catrs.cname}文章列表::</a></li>
+<?php mod_artlist('artlist',$_GET['catid']);?>
+{foreach item=t from=$artlist}
+<li><a href="index.php?m=art&id={$t.id}">{$t.title}</a></li>
+{/foreach}
+</ul>
+{else}
+<p>该分类下暂无文章</p>
+{/if}
+
+
+{if $pagelist}<p>{$pagelist}</p>{/if}
+
+
+{include file="lib/footer.html"}

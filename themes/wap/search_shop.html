@@ -1,0 +1,32 @@
+{include file='lib/header.html'}
+<form method="get" action="index.php">
+                            <input type="hidden" name="m" value="search" />
+                                
+                                   
+                                    <label id="map_search_cai">美食:</label>
+                                    <input id="map_search_cai" class="text" type="text" name="cai" style="height:30px;" placeholder="美食名称" value="{$smarty.get.cai}">
+                                    <label id="map_search_shop">餐厅:</label>
+                                    <input id="map_search_shop" class="text" type="text" name="shop"  style="height:30px;" placeholder="餐厅名称" value="{$smarty.get.shop}">
+                                    <div class="form-actions">
+                                    <input id="map_search_restaurant" type="submit" value="搜索" class="btn">
+                                    </div>
+
+</form>
+
+{foreach item=shop from=$shoplist}
+<p><a href="index.php?m=shop&shopid={$shop.shopid}" class="btn btn-success">{$shop.shopname}</a>
+{if $ssuser}{if $shop.isfav} 
+      <a href="jindex.php?m=fav&a=shopdel&shopid={$shop.shopid}" class="btn btn-warning" shopid="{$shop.shopid}">移出首页</a>
+      {else}<a href="index.php?m=fav&a=shopadd&shopid={$shop.shopid}" class="addshopfav btn" shopid="{$shop.shopid}">加入首页</a>{/if}
+      {else}<a href="index.php?m=user&a=login" class="btn">登录收藏</a>{/if}
+</p>
+
+<p class="breadcrumb">
+店铺地址：{$shop.address}<br>
+联系电话：{$shop.phone}<br>
+店铺简介：{$shop.info}
+</p>
+{/foreach}
+{$pagelist}
+
+{include file='lib/footer.html'}

@@ -1,0 +1,40 @@
+{include file='lib/top.lbi'}
+<div class="nav"><a href="admin.php?m=canwei&">餐位管理</a><a href="admin.php?m=canwei&a=order">餐位预定</a></div>
+<div class="nav_title">餐位管理</div>
+<div class="rbox">
+<table width="100%" border="0" align="center" cellpadding="0" class="tb1" cellspacing="1">
+  <tr>
+    <td width="72" height="30" align="center">ID</td>
+    <td width="225" align="center">餐位名称</td>
+    <td width="90" align="center">容纳人数</td>
+    <td width="82" align="center">预订状态</td>
+    <td width="271" align="center">操作</td>
+  </tr>
+  {foreach item=t from=$roomlist}
+  
+  <tr>
+    <td height="25" align="center">{$t.id}</td>
+    <td align="center">{$t.room}</td>
+    <td align="center">{$t.room_men}</td>
+    <td align="center">
+    {if $t.room_type}
+    <img src="images/yes.gif" class="ajax_no" url="admin.php?m=canwei&a=dotype&id={$t.id}&room_type=0" rurl="admin.php?m=canwei&a=dotype&id={$t.id}&room_type=1" />
+    {else}
+    <img src="images/no.gif" class="ajax_yes" url="admin.php?m=canwei&a=dotype&id={$t.id}&room_type=1" rurl="admin.php?m=canwei&a=dotype&id={$t.id}&room_type=0" />
+    {/if}
+    
+    </td>
+    <td align="center">
+    <a href="admin.php?m=room&roomid={$t.id}" target="_blank">查看</a>
+    <a href="admin.php?m=canwei&a=add&amp;id={$t.id}">编辑</a> <a href="admin.php?m=canwei&a=del&amp;id={$t.id}">删除</a></td>
+  </tr>
+  
+  {/foreach}
+  {if $pagelist}
+  <tr>
+    <td height="25" colspan="8" align="center" >{$pagelist}</td>
+    </tr>
+{/if}
+</table>
+
+</div> {include file='lib/foot.lbi'}

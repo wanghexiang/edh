@@ -1,0 +1,87 @@
+{include file='lib/header.html'}
+<script language="javascript" src="plugin/raty/js/jquery.raty.min.js" ></script>
+
+
+<div class="row">
+<div class="span2">{include file='usernavleft.html'}</div>
+<div class="span7">
+<h2>评论管理</h2>
+{if $list}
+
+<script>
+
+
+
+function pingfen(objstar,jf)
+{
+	$(objstar).raty(
+	{
+		 width :'100px',
+		 hints : [1,2,3,4,5],
+		 readOnly:true,
+		 score : jf,
+		 number : 5 ,
+		 path	:'plugin/raty/img/'
+	}
+	);
+}
+
+
+</script> 
+<pre>店铺评论是基于购买用户对于该店的评论，每个订单只能评价一次，店铺无权删除！</pre>
+{foreach item=g from=$list}
+
+<table class="table table-bordered">
+<tr>
+<td  >点评者：{if $g.nickname}{$g.nickname}{else}游客{/if}</td>
+<td> 点评时间:{$g.dateline|date:Y-m-d}</td>
+</tr>
+<tr>
+<td>服务：<span id="star_fuwu_{$g.id}"></span></td>
+<td>口味：<span id="star_kouwei_{$g.id}"></span></td>
+</tr>
+<tr>
+<td>价格：<span id="star_jiage_{$g.id}"></span></td>
+<td>配送时间：<span id="star_shijian_{$g.id}"></span></td>
+</tr>
+<tr><td colspan="2">总体评价：<span id="start_all_{$g.id}"></span></td></tr>
+
+<tr>
+<td colspan="2">内容：{$g.content}</td>
+</tr>
+
+{if $g.reply}
+<tr>
+<td colspan="2">
+回复：{$g.reply}
+</td>
+</tr>
+{/if}
+</table>
+<script>
+pingfen("#star_fuwu_{$g.id}",{$g.jf_fuwu});
+pingfen("#star_kouwei_{$g.id}",{$g.jf_kouwei});
+pingfen("#star_jiage_{$g.id}",{$g.jf_jiage});
+pingfen("#star_shijian_{$g.id}",{$g.jf_shijian});
+pingfen("#star_all_{$g.id}",{$g.jf_all});
+</script>
+{/foreach}
+
+{if $pagelist}{$pagelist}{/if}
+{else}
+<h2>暂无评论</h2>
+{/if}
+
+</div>
+
+<div class="span3">
+            <h2>评论管理</h2>
+            
+            <p>
+                关于您对店铺的评论都在这里。
+            </p>
+		</div>
+
+</div>
+
+{include file='lib/footer.html'}

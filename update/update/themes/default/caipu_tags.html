@@ -1,0 +1,40 @@
+{include file='lib/header.html'}
+ 
+ <div style="padding:6px;">
+{foreach item=c from=$tagslist}
+<a href="index.php?m=caipu&a=tags&tagid={$c.tagid}" class=" btn {if $smarty.get.tagid eq $c.tagid} active{/if}">{$c.tagname}</a>
+{/foreach}
+ </div>
+ 
+<div  >
+<ul class="unstyled" id="container" > 
+{foreach item=c from=$list}
+<li  style="width:220px; border:1px #ccc solid; padding:2px; " class="box"  >
+     <div  >
+     <a href="index.php?m=caipu&a=show&id={$c.id}" target="_blank"> <img src="{$c.imgurl}.300x300.jpg" width="220"  > </a> 
+     </div>
+     <div  class="caption">
+     <p style=" line-height:25px;"><a href="index.php?m=caipu&a=show&id={$c.id}" target="_blank">{$c.title}</a></p>
+     <p>Ö÷²Ä£º{$c.maincai}</p>
+     </div>
+</li>
+{/foreach}
+
+</ul>
+<div>{$pagelist}</div>
+</div>
+<script language="javascript" src="js/jquery.masonry.min.js"></script>
+<script language="javascript">
+$(document).ready(function(){
+	
+	var $container=$("#container");
+    $container.imagesLoaded(function(){
+      $container.masonry({
+        itemSelector: '.box',
+        columnWidth: 230
+      });
+    });
+
+});
+</script>
+{include file='lib/footer.html'}

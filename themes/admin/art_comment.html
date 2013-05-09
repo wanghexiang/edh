@@ -1,0 +1,56 @@
+{include file='lib/top.lbi'}
+<script language="javascript">
+$(document).ready(function()
+{
+	$("#chkall").click(function()
+	{
+		$(".ck").attr("checked","checked");
+	});
+	$("#chknone").click(function()
+	{
+		$(".ck").attr("checked",false);
+	});
+});
+
+</script>
+<div class="nav">
+<a href="admin.php?m=art&">文章管理</a> 
+<a href="admin.php?m=art_comment&">文章评论</a> 
+<a href="admin.php?m=art_comment&status=0">未审核</a>
+<a href="admin.php?m=art_comment&status=1">已审核</a>
+</div>
+<div class="nav_title">文章评论管理</div>
+<div class="rbox">
+{if $commentlist}
+<form method="post" action="admin.php?m=art_comment&a=del">
+<table width="100%" border="0" align="center" cellspacing="1" class="tb1">
+{foreach item=t from=$commentlist}
+<tr>
+<td width="59" height="25" align="center"><input type="checkbox" class="ck" name="rids[]" value="{$t.rid}" /></td>
+<td width="528" height="25">{$t.content}</td>
+<td width="104" align="center">{if $t.status eq 0}未审核{else}已审核{/if}</td>
+</tr>
+{/foreach}
+<tr>
+
+
+<td colspan="3" align="center">
+<a href="javascript::" id="chkall">全选</a>
+ &nbsp;<a href="javascript::" id="chknone">全不选</a>
+<input type="submit" class="btn" value="删除" />
+<input type="submit" class="btn" value="审核通过" onclick="this.form.action='admin.php?m=art_comment&a=status'" />
+<input type="submit" name="button"  class="btn" value="不通过" onclick="this.form.action='admin.php?m=art_comment&a=nostatus'"/></td>
+</tr>
+{if $pagelist}
+<tr>
+<td height="30" colspan="3" align="center">{$pagelist}</td>
+</tr>
+{/if}
+</table>
+
+</form>
+{else}
+暂无评论
+{/if}
+</div> 
+{include file='lib/foot.lbi'}

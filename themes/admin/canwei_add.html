@@ -1,0 +1,45 @@
+{include file='lib/top.lbi'}
+<script type="text/javascript" src="xheditor/xheditor.js" ></script>
+<script language="javascript">
+$(document).ready(function()
+{
+$('#content').xheditor({forcePtag:false,upImgUrl:"admin.php?m=upfile&xh=1",upImgExt:"jpg,jpeg,gif,png",html5Upload:false});
+});
+</script>
+<div class="nav"><a href="admin.php?m=canwei&">餐位管理</a>  <a href="admin.php?m=canwei&a=order">餐位预定</a></div>
+<div class="nav_title">餐位编辑/div>
+<div class="rbox">
+<form action="admin.php?m=canwei&a=add_db" method="post" name="f1">
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="tb1">
+  <tr>
+    <td width="135" height="25" align="right">餐位名称：</td>
+    <td width="964" height="25"><input name="room" type="text" id="room" value="{$rs.room}" size="40" />
+      <input name="id" type="hidden" id="id" value="{$rs.id}" /></td>
+  </tr>
+  <tr>
+    <td height="25" align="right">容纳人数：</td>
+    <td height="25"><input name="room_men" type="text" id="room_men" value="{$rs.room_men}" size="10" />
+      人</td>
+  </tr>
+  <tr>
+    <td height="25" align="right">餐位图片：</td>
+    <td height="25"><input name="room_pic" type="text" id="room_pic" value="{$rs.room_pic}" size="50" />
+      <input type="button" name="button" id="button" value="上传图片" onclick="window.open('admin.php?m=upload&formname=f1&editname=room_pic&f_type=1','文件上传','left=300px,height=400,width=500');" class="btn" /></td>
+  </tr>
+  <tr>
+    <td height="25" align="right">餐位简介：</td>
+    <td height="25"><textarea name="room_desc" id="room_desc" cols="60" rows="5">{$rs.room_desc}</textarea></td>
+  </tr>
+  <tr>
+    <td height="25" align="right">餐位详情：</td>
+    <td height="25"><textarea name="room_content" id="content"  style="width:100%; height:600px;">
+    {$rs.room_content}</textarea></td>
+  </tr>
+  <tr>
+    <td height="30" align="right">&nbsp;</td>
+    <td height="25"><input type="submit" name="button2" id="button2" value="确定"  class="btn"/></td>
+  </tr>
+  </table>
+
+</form>
+</div> {include file='lib/foot.lbi'}

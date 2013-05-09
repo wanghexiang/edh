@@ -1,0 +1,31 @@
+{include file='lib/top.lbi'}
+<div class="nav"><a href="admin.php?m=tixian">提现管理</a> </div>
+<div class="nav_title">提现处理  </div>
+<div class="rbox">
+
+
+<form method="post" action="admin.php?m=tixian&a=do&op=post&id={$tixian.id}">
+<table width="100%"  class="tb1">
+  <tr>
+    <td width="13%" align="right">提现金额：</td>
+    <td width="87%">{$tixian.money}</td>
+    </tr>
+  <tr>
+    <td align="right">账户信息：</td>
+    <td>{$tixian.info|nl2br}</td>
+  </tr>
+  
+  <tr>
+  	<td align="right">处理信息：</td>
+    <td><textarea style="width:400px; height:100px;" name="reply">{if $tixian.reply}{$tixian.reply}{else}尊敬的客户您好，您的提现申请已经处理完毕，请去银行账户查看，如有问题尽请反馈。{/if}</textarea></td>
+  </tr>  
+    
+  <tr>
+    <td align="right">&nbsp;</td>
+    <td><input type="submit" name="button" id="button" class="btn" value="确定处理"></td>
+    </tr>
+</table>
+</form>
+</div>
+
+{include file='lib/foot.lbi'}

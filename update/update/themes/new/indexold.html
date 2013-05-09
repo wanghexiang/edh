@@ -1,0 +1,210 @@
+{include file='lib/header.html'}
+<?php mod_caipu('caipulist',""," order by id desc",16); ?>
+<div class="breadcrumb">::菜谱推荐</div>
+<div style=" margin:0 auto; width:930px; border:1px solid #ccc; padding:6px; border-radius:5px; margin-bottom:10px; height:310px;">
+{foreach item=c from=$caipulist}
+<div style="width:100px; float:left; margin-left:14px; margin-bottom:10px; height:145px; overflow:hidden">
+<p><a href="index.php?m=caipu&a=show&id={$c.id}" target="_blank"><img src="{$c.imgurl}.100x100.jpg" style="width:100px;" title="{$c.title}" /></a></p>
+<p><a href="index.php?m=caipu&a=show&id={$c.id}" target="_blank">{$c.title}</a></p>
+</div>
+
+{/foreach}
+</div>
+
+ <!--左侧浮动开始-->
+<div style="position:fixed; left:10px; top:50px; z-index:1000; background-color:#FFFFFF;">
+<ul class="nav nav-tabs nav-stacked">
+<li><a href="javascript:;"><i class="icon-home"></i>店铺收藏</a></li>
+  {foreach item=shop from=$shoplist} 
+ <li class="dropdown">
+ <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">{$shop.shopname|cutstr:16} <b class="caret"></b></a>
+ <ul class="dropdown-menu">
+ {foreach item=c from=$shop.caicat}
+	<li> <a href="#section{$c.catid}" >{$c.cname}</a> </li>
+    {/foreach}
+    
+    </ul>
+</li> 
+{/foreach}
+</ul> 
+</div>
+<!--左侧浮动结束-->
+ <div class="row">
+ <div class="span8">
+ 
+<div id="myCarousel" class="carousel slide">
+            <div class="carousel-inner">
+            <?php 
+            global $cksiteid;
+            mod_base("flashlist","SELECT * FROM ".table('flash')." WHERE siteid=".$cksiteid." ORDER BY fid DESC LIMIT 4" ); ?>
+           {foreach item=f key=k from=$flashlist}
+              <div class="item {if $k eq 0}active{/if}">
+                <a href="{$f.linkurl}" target="_blank"><img src="{$f.fimg}" alt="" style="width:100%; height:400px;"></a>
+                <div class="carousel-caption">
+                  <h4>{$f.ftitle}</h4>
+                 
+                </div>
+              </div>
+              {/foreach}
+            </div>
+            <a class="left carousel-control icon-chevron-left" href="#myCarousel" data-slide="prev">&#8249;</a>
+            <a class="right carousel-control icon-chevron-right" href="#myCarousel" data-slide="next">&#8250;</a>
+          </div>
+ <table class="table table-bordered table-striped table-condensed">
+ <thead><th   colspan="2" style="height:25px; line-height:25px; font-size:14px;"> {if $favshops} 您定制的餐厅{else}您还没有定制的餐厅{/if} (<a href="index.php?m=maps">从地图页定制</a>)</th></thead>
+ <tbody>
+  {foreach item=shop from=$shoplist} 
+ <tr>
+ <td class="span3 f14"><strong><a href="index.php?m=shop&shopid={$shop.shopid}" target="_blank">{$shop.shopname}</a></strong>{if $favshops} <a href="index.php?m=fav&a=shopdel&shopid={$shop.shopid}"  class="icon-remove" title="从首页删除" rel="nofollow">&nbsp;</a>{/if}</td>
+ <td class="span9 caicatbtn">{foreach item=c from=$shop.caicat}
+	 <a href="#section{$c.catid}" class="btn" >{$c.cname}</a> 
+    {/foreach}</td>
+ </tr> {/foreach}
+ </tbody>
+ 
+ </table>
+ 
+ {foreach item=shop from=$shoplist}
+ <table class="table table-bordered">
+ <tr><td>
+ <h2>
+ <a href="index.php?m=shop&shopid={$shop.shopid}" class="value" target="_blank">{$shop.shopname}</a>
+ <small>{if $shop.opentype eq 'doing'}营业中{elseif $shop.opentype eq 'will'}即将营业{else}已打烊{/if} {if $shop.shopconfig.ordertype}本店只支持电话订餐{/if} {$shop.phone} 
+ 
+ {if $shop.isfav}
+                        <a rel="nofollow" href="javascript:;" shopid="{$shop.shopid}"  class="btn btn-warning delshopfav">移出首页</a>
+                        {else}
+						<a rel="nofollow" href="javascript:;" shopid="{$shop.shopid}"  class="btn btn_success fav-add addshopfav">加到首页</a>
+                        {/if}</small></h2>
+ </td>
+ </tr>
+ <tr><td>
+  外卖时间：{$shop.shopconfig.starthour}:{$shop.shopconfig.startminute}-{$shop.shopconfig.endhour}:{$shop.shopconfig.endminute}
+ 	餐厅地址：{$shop.address}  {if $shop.distance}距您{$shop.distance}米{/if}
+ </td></tr>
+ <tr><td>   
+    送餐费用:{$shop.shopconfig.sendprice}元 起送金额：{$shop.shopconfig.minprice}元 <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={$shop.qq}&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:{$shop.qq}:41 &r=0.0803054568823427" alt="点击联系我{$shop.qq}" title="点击联系我{$shop.qq}"></a>
+ </td></tr>
+ </table>
+ {foreach item=cat from=$shop.caicat}
+ <a name="section{$cat.catid}" id="section{$cat.catid}"></a>
+ <div style="height:40px; width:100%;"></div>
+ <table class="table table-bordered  table-condensed">
+ <thead><th  class="span11"  colspan="2"><h3  > {$cat.cname} </h3> </th>
+ <th class="span1" ><a class="btn pull-right" href="#top">TOP</a></th>
+ </thead>
+ <tbody>
+ {foreach item=cai from=$cat.cailist}
+ <tr id="dish{$cai.id}" class=" dish ">
+ 
+ <td class="span1"><span class="cart_count">{if $shop.shopconfig.ordertype eq 0}<a href="javascript:;" class="addCart btn btn-success " caiid="{$cai.id}"  shopid='{$cai.shopid}' name="{$cai.title}" price="{$cai.price}" cart_count='0' >买</a>{else}<a href="javascript:;" title="电话预定" class="btn btn-warning">电</a>{/if}</span></td>
+ <td class="span9"><span class="title">{$cai.title} </span> {if $cai.promote}<font style="color:red;">促销</font>{/if}</td>
+ <td class="span2"><span class="price">{if $cai.promote}{$cai.lowprice} <span style="text-decoration:line-through;">{$cai.price}元</span>{else}{$cai.price}{/if}</span></td>
+ </tr>
+ {/foreach}
+ </tbody>
+ 
+ </table>
+ {/foreach}
+ {/foreach}
+ {if $pagelist}
+ <div class="breadcrumb">{$pagelist}</div>
+ {/if}
+ </div>
+ <!--左边结束-->
+ 
+ <div class="span4">
+ 
+ 
+ 	{include file='lib/shopcar.html'}
+    <div class="well">
+    	{if !$isqiandao}<span class="btn btn-warning" id="qiandao_btn">签到</span>{/if}
+        签到获取积分,连续几天就加几分。积分可以用来兑换积分商品。
+    </div>
+    
+    
+<?php mod_shoplist('shoplists',' AND s.isrecommend=1',' ORDER BY s.shopid DESC ',10);?>
+<table class="table table-bordered">
+<tr>
+<th class="linearcolor">店铺推荐</th>
+</tr>
+{foreach item=shop from=$shoplists}
+<tr>
+<td><a href="index.php?m=shop&shopid={$shop.shopid}">{$shop.shopname}</a></td>
+</tr>
+
+{/foreach}
+</table>
+
+<table class="table table-bordered">
+<tr><th class="f16 linearcolor">最新订餐动态</th></tr>
+<?php mod_orderfeed('orderfeed');?>
+{foreach item=o from=$orderfeed}
+<tr><td>
+<a href="index.php?m=blog&userid={$o.userid}" target="_blank">{$o.orderuser}</a> 在<a href="index.php?m=shop&shopid={$o.shopid}" target="_blank">{$o.shopname}</a> 点了一份餐 
+</td></tr>
+{/foreach}
+</table>
+    
+ <div>
+ <h2>还是不太敢在线订餐？</h2>
+ <p>别担心，你的订单会立刻得到处理，进度还会实时反馈给你。很多人已经用上瘾了，你也试一次吧。</p>
+ </div>
+ <form   action="index.php?m=guest&a=add_db" method="post">
+								 
+					<textarea id="ask_answer_content"  class="input-xlarge"  style="height:100px;" name="content"></textarea>
+				 
+					<p><input   type="submit" value="好了，提交" class="btn btn-success"></p>
+				 
+			</form>
+ 
+ {if $guestlist}
+ <h2>口福答疑</h2>
+ {foreach item=guest from=$guestlist}
+ <table class="table table-bordered   ">
+ <tr>
+        <td  ><strong>{$guest.username}：</strong>{$guest.content} </td>  </tr>
+ <tr>
+            
+             
+           <td><strong>口福答疑：</strong>{$guest.reply} </td>
+</tr>
+        
+ </table>      	
+ {/foreach}
+ {/if}
+ </div>
+ <!--右侧结束-->
+ </div>
+ 
+ 
+ <!--签到弹框-->
+<div id="qiandaobox" style="position: absolute; top:30px; left:200px; display:none;" >
+<div>
+<form method="post" id="qiandao_form" action="index.php?m=qiandao&a=post">
+<p style="height:30px; line-height:30px; display:block;">心情：
+高兴<input type="radio" value="高兴" checked="checked" name="xinqing" /> 
+悲伤<input type="radio" value="悲伤" name="xinqing" />
+愤怒<input type="radio" value="愤怒" name="xinqing" />
+</p>
+<p>内容：<textarea id="qiandao_content" name="content" style="width:400px; height:100px;"></textarea></p>
+<p><button type="submit" class="btn_f60_6030" id="qiandao_submit" style="margin-left:60px;">签到</button></p>
+</form>
+</div>
+</div>
+<!--签到弹框-->
+<script language="javascript">
+
+$(document).ready(function(){
+	
+	$("#qiandao_btn").click(function(){
+		$("#showBox_title").html("签到");
+		$("#showBox_content").html($("#qiandaobox").html());
+		$("#showBox").css({top:"100px",left:"300px"}).show();
+	});
+	
+	
+});
+</script>
+
+{include file='lib/footer.html'}

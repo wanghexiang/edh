@@ -1,0 +1,55 @@
+{include file='lib/header.html'}
+{include file='lib/user.html'}
+<h2>我的订单</h2>
+
+<table width="100%" class="table">
+  <tr>
+    <td width="30%" height="30" align="right">订单号：</td>
+    <td width="70">{$order.orderno}  <a href="index.php?m=shopcar&a=orderphone&ids={$order.id}">更改联系方式</a></td>
+  </tr>
+  <tr>
+    <td height="30" align="right">总价：</td>
+    <td>{$order.money}</td>
+  </tr>
+  <tr>
+    <td height="30" align="right">订单时间：</td>
+    <td>{$order.dateline}</td>
+  </tr>
+  <tr>
+    <td height="30" align="right">餐厅名字：</td>
+    <td><a href="index.php?m=shop&shopid={$order.shopid}">{$order.shopname}</a></td>
+  </tr>
+  <tr>
+    <td height="30" align="right">状态：</td>
+    <td>{if $order.sendtype eq 0}未审核{elseif $order.sendtype eq 1}已确认{elseif $order.sendtype eq 2}正在配送{elseif $order.sendtype eq 3}完成{/if} {if !$order.isvalid}未生效{/if}</td>
+  </tr>
+  <tr>
+    <td height="30" align="right">收货：</td>
+    <td>{if $order.received}已收货{else}<a href="javascript:;" onclick="$.get('index.php?m=shopcar&a=received&id={$order.id}');$(this).text('已收货')">确认收货</a>{/if}</td>
+  </tr>
+</table>
+
+
+<table class="table" >
+  
+  
+    <tr>
+      <td width="50%" height="25" align="center">菜名</td>
+      <td width="30%" align="center">价格</td>
+      <td width="20%" align="center">数量</td>
+    </tr>
+ {foreach item=t from=$cailist}   <tr>
+    <td height="25" align="center">{$t.title}</td>
+    <td align="center">{$t.price}</td>
+    <td align="center">{$t.cainum}</td>
+  </tr>
+  {/foreach}
+  <tr>
+    <td height="25" colspan="3" align="center">&nbsp;</td>
+    </tr>
+</table>
+
+
+
+
+{include file='lib/footer.html'}

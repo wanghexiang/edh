@@ -1,0 +1,112 @@
+{include file='lib/header.html'}
+<div class="row">
+<div class="span9">
+{include file="shopnav.html"}
+<table width="100%" class="table table-bordered">
+<tr>
+<td height="19" colspan="2"><h2>{$groupbuy.title}</h2><br>{$groupbuy.info}</td>
+</tr>
+<tr>
+  <td width="40%" height="30">
+  <p >
+  <div class="btn-group" style="margin-left:40px;">
+  <button class="btn btn-large">￥{$groupbuy.groupprice}</button>
+  <a href="index.php?m=groupbuy&a=join&id={$groupbuy.id}" class="btn btn-large btn-success" style="margin:0 auto;">抢购</a>
+  </div>
+  </p>
+  <p>&nbsp;</p>
+  
+  <div class="btn-group" style=" margin-left:10px;">
+  <button class="btn">原价<br>￥{$groupbuy.goodsprice}</button>
+  <button class="btn">折扣<br />{php   echo round($smarty['groupbuy']['groupprice']/$smarty['groupbuy']['goodsprice'],2)}</button>   
+  <button class="btn">节省<br />{php echo $smarty['groupbuy']['goodsprice']-$smarty['groupbuy']['groupprice']}元</button>   
+  </div>
+   
+   <h3 style="padding-left:30px; height:40px; line-height:40px;">{$groupbuy.joins}人已购买</h3> 
+   
+  
+  <div class="lefttime" endtime={$groupbuy.endtime} style="font-size:16px;  "></div> 
+  <script language="javascript">
+   setInterval("changelefttime()",1);
+  </script>
+  </td>
+  <td width="75%" rowspan="3"><img src="{if $groupbuy.img}{$groupbuy.img}.middle.jpg{else}images/nologo.gif{/if}" style="width:400px; height:200px;"></td>
+</tr>
+
+</table>
+<table class="table table-bordered">
+<tr>
+<td class=" btn-success">团购详情</td>
+</tr>
+<tr>
+<td>{$groupbuy.content}</td>
+</tr>
+</table>
+
+</div>
+<div class="span3">
+
+ 
+ <table  class="table table-bordered  "  >
+ 				
+                <tr>
+                	<td colspan="2" class="btn-success">餐厅基本信息</td>
+                </tr>
+                
+ 				<tr>
+                	<td colspan="2"><a href="index.php?m=shop&shopid={$shop.shopid}">{$shop.shopname}</a></td>
+                </tr>
+				<tr  >
+					<td  width="120">外卖时间</td>
+					<td class="span8">{$shopconfig.starthour}:{if !$shopcaonfig.startminute}00{else}{$shopconfig.startminute}{/if}-{$shopconfig.endhour}:{if !$shopconfig.endminute}00{else}{$shopconfig.endminute}{/if}</td>
+				</tr>
+				<tr  >
+					<td>送餐费用</td>
+					<td>{$shopconfig.sendprice}元</td>
+				</tr>
+				<tr >
+					<td>起送金额</td>
+					<td>{$shopconfig.minprice}元</td>
+				</tr>
+                
+                <tr  >
+					<td>餐厅地址</td>
+					<td>{$shop.address}</td>
+				</tr>
+                
+                <tr  >
+					<td>餐厅电话</td>
+					<td>{$shop.phone}</td>
+				</tr>
+                
+				<tr class="restaurant_info_item">
+					<td>送餐范围</td>
+					<td>{$shop.sendarea}</td>
+				</tr>
+					<tr  >
+					<td>还有……</td>
+					<td>
+						{$shop.info}
+					</td>
+				</tr>
+								
+								
+			</table>   
+ <div>
+
+<div class="accordion-group">
+	<div class="accordion-heading"><div class="accordion-toggle f14 btn-success ">热门团购</div></div>
+    <div class="accordion-inner">
+    <ul class="unstyled">
+    {php mod_base('hotlist',"SELECT * FROM ".table('groupbuy')." ")} 
+    {foreach item=t from=$hotlist}
+    <li>{$t.title}</li>
+    {/foreach}
+    
+    </ul>
+    </div>
+</div>
+
+</div>
+</div>
+{include file='lib/footer.html'}

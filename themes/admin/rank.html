@@ -1,0 +1,57 @@
+{include file='lib/top.lbi'}
+<div class="nav">
+
+<a href="admin.php?m=config&a=phone">短信设置</a>
+<a href="admin.php?m=config&a=email">邮箱设置</a>
+<a href="admin.php?m=config&a=water">水印设置</a>
+</div>
+<div class="nav_title">邮箱设置</div>
+<div class="rbox">
+<form action="admin.php?m=rank&" method="post">
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="1" class="tb1">
+  <tr>
+    <td width="190" height="30" align="center">名称</td>
+    <td width="130" height="30" align="center">积分下限</td>
+    <td width="98" align="center">积分上限</td>
+    <td width="133" align="center">优惠折扣</td>
+    <td width="183" align="center">操作</td>
+  </tr>
+  {foreach from=$ranklist item=rank}
+  <tr>
+    <td height="30" align="center"><input name="rank_name[{$rank.id}]" type="text" id="rank_name[]" value="{$rank.rank_name}" size="20" /></td>
+    <td height="30" align="center">
+      <input name="mingrade[{$rank.id}]" type="text" id="mingrade[{$rank.id}]" size="8" value="{$rank.min_grade}" /></td>
+    <td align="center">
+      <input name="maxgrade[{$rank.id}]" type="text" id="maxgrade[{$rank.id}]" size="8" value="{$rank.max_grade}" /></td>
+    <td align="center">
+      <input name="discount[{$rank.id}]" type="text" id="discount[{$rank.id}]" size="6" value="{$rank.discount}" />
+      %</td>
+    <td align="center"><a href="admin.php?m=rank&a=del&amp;id={$rank.id}">删除</a></td>
+  </tr>
+  {/foreach}
+  <tr>
+    <td height="30" align="center">
+      <input name="new_rank_name" type="text" id="textfield2" size="20" /></td>
+    <td height="30" align="center">
+      <input name="new_mingrade" type="text" id="textfield3" size="8" /></td>
+    <td align="center">
+      <input name="new_maxgrade" type="text" id="textfield4" size="8" /></td>
+    <td align="center">
+      <input name="new_discount" type="text" id="textfield5" size="6" />
+      %</td>
+    <td align="center">新增</td>
+  </tr>
+  <tr>
+    <td height="30" align="center">&nbsp;</td>
+    <td height="30" align="center">&nbsp;</td>
+    <td align="center">&nbsp;</td>
+    <td align="center">&nbsp;</td>
+    <td align="center"><input type="submit" name="button" id="button" value="确定" class="btn" /></td>
+  </tr>
+  </table>
+
+
+</form>
+
+</div>
+{include file='lib/foot.lbi'}

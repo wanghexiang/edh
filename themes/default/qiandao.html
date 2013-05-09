@@ -1,0 +1,47 @@
+{include file="header.html"}
+<link href="{$skins}css/manager.css" rel="stylesheet" type="text/css">
+<div class="content">
+<div class="contenter">
+<div class="box">
+
+  
+ 
+<div class="user_center_ctn page_content">
+
+
+<div class="content_ctn">
+{include file="usernav.html"}
+<div class="right_ctn">
+            	<h5>您现在的位置：<a>首页</a> &gt;&gt; 我的签到<b class="lt"></b><b class="lb"></b><b class="rt"></b><b class="rb"></b></h5>
+                <div class="info_ctn">
+<table class="table table-bordered">
+ 
+    
+ 
+  
+  <tr>
+    <td width="87" height="23" align="center">心情</td>
+    <td width="468" align="center">内容</td>
+    <td>获得积分</td>
+    <td width="141" align="center">时间</td>
+    </tr>
+     {foreach item=t from=$list}
+  <tr>
+    <td width="87" height="30" align="center">{$t.xinqing}</td>
+    <td>{$t.content}</td>
+    <td>{$t.times}</td>
+    <td width="141" align="center">{$t.dateline|date:Y-m-d H@i@s}</td>
+  </tr> {/foreach}
+  <tr>
+    <td height="30" colspan="3" align="center">{$pagelist}</td>
+    </tr>
+</table>
+                 
+                </div>
+
+            </div>
+            </div>
+</div>
+
+<div class="clear"></div></div></div></div>
+{include file="footer.html"}

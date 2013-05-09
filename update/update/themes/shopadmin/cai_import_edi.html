@@ -1,0 +1,50 @@
+{include file='lib/top.lbi'}
+<div class="nav"><a >美食导入</a></div>
+<div class="nav">美食导入编辑</div>
+<div class="rbox">
+<form method="post" action="shopadmin.php?m=cai&a=import&op=save">
+<table width="100%" border="0" cellspacing="0" class="tb1">
+  <tr>
+    <td width="15%" align="center">美食名称</td>
+    <td width="30%" align="center">美食分类</td>
+    <td width="28%" align="center">美食口味</td>
+    <td width="27%" align="center">美食做法</td>
+    </tr>
+    
+    {foreach item=c from=$cailist}
+  <tr>
+    <td align="center">{$c.title}</td>
+    <td align="center"><select name="catid[{$c.id}]">
+    	{foreach item=cat from=$catlist}
+        <option value="{$cat.catid}">{$cat.cname}</option>
+        {/foreach}
+    </select></td>
+    <td align="center">
+    	<select name="weiid[{$c.id}]">
+    	{foreach item=w from=$weilist}
+        <option value="{$w.catid}" selected="selected">{$w.wname}</option>
+        {/foreach}
+    </select>
+    </td>
+    <td align="center">
+    	<select name="doid[{$c.id}]">
+    	{foreach item=do from=$dolist}
+        <option value="{$do.catid}">{$do.dname}</option>
+        {/foreach}
+    </select>
+    </td>
+    </tr>
+    
+    {/foreach}
+  <tr>
+    <td colspan="4"><input type="submit" name="button" id="button" class="btn" value="提交" /></td>
+    </tr>
+</table>
+
+
+</form>
+
+</div>
+
+
+{include file='lib/foot.lbi'}

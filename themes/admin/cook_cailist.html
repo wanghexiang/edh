@@ -1,0 +1,31 @@
+{include file='lib/top.lbi'}
+<div class="nav">
+<a href="admin.php?m=cook&">厨师管理</a> 
+<a href="admin.php?m=cook&a=add">添加厨师</a>
+<a href="admin.php?m=cook&a=cai&cookid={$cookid}">拿手菜</a>
+ </div>
+<div class="nav_title">添加拿手菜</div>
+<div class="rbox">
+<form action="admin.php?m=cook&a=addcai" method="post">
+<input type="hidden" value="{$cookid}" name="cookid" />
+<table width="100%" border="0" align="center" cellpadisding="0" cellspacing="1" class="tb1">
+  <tr>
+    <td width="138" height="25" align="center">菜名</td>
+    <td width="167" height="25" align="center">操作</td>
+    </tr>
+  {foreach item=t from=$cailist}
+  <tr>
+    <td height="20" align="center">{$t.title}</td>
+    <td align="center"><input type="checkbox" value="{$t.id}" name="caiid[]" id="caiid[]" />
+      <label for="caiid[]"></label></td>
+  </tr>
+  {/foreach}
+  <tr>
+    <td height="20" align="center">&nbsp;</td>
+    <td align="center"><input type="submit" name="button" id="button" value="添加" class="btn" /></td>
+  </tr>
+
+
+  </table>
+</form>
+</div> {include file='lib/foot.lbi'}

@@ -1,0 +1,14 @@
+<p >
+<a href="index.php?m=activity&a=apply" class="btn btn-success btn-large">发起活动</a>
+</p>
+<table class="table-bordered table">
+<tr>
+	<td><h2>活动推荐</h2></td>
+</tr>
+<?php mod_activity("actlist"); ?>
+{foreach item=c from=$actlist}
+<tr>
+<td><a href="index.php?m=activity&a=show&id={$c.id}">{$c.title}</a></td>
+</tr>
+{/foreach}
+</table>

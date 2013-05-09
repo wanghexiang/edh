@@ -1,0 +1,42 @@
+{include file='lib/top.lbi'}
+<div class="nav"><a href="admin.php?m=web_nav&">导航管理</a> <a href="admin.php?m=web_nav&a=add">导航添加</a></div>
+<div class="nav_title">导航添加</div>
+<div class="rbox">
+<form action="admin.php?m=web_nav&a=add_db" method="post">
+<table width="100%" border="0" cellspacing="1" cellpadding="0" class="tb1">
+  <tr>
+    <td width="16%" height="30" align="right">父类：</td>
+    <td width="84%">
+      <select name="pid" id="pid">
+      {if $nav.pid }<option value="{$nav.pid}">{$nav.pname}</option>{/if}      
+        <option>作为顶级导航</option>
+        {foreach from=$plist item=t}
+        <option value="{$t.id}">{$t.title}</option>
+        {/foreach}
+      </select></td>
+  </tr>
+  <tr>
+    <td height="30" align="right">名称：</td>
+    <td><input name="title" type="text" value="{$nav.title}" />
+      <input name="id" type="hidden" id="id" value="{$nav.id}" /></td>
+  </tr>
+  <tr>
+    <td height="30" align="right">网址：</td>
+    <td><input name="navurl" type="text" id="navurl" value="{$nav.navurl}" size="40" /></td>
+  </tr>
+  <tr>
+    <td height="30" align="right">打开方式：</td>
+    <td><select name="ctype" id="ctype">
+      <option value="0">默认</option>
+      <option value="1" {if $nav.ctype eq 1} selected="selected"{/if}>新窗口</option>
+    </select></td>
+  </tr>
+  <tr>
+    <td height="30" align="right">&nbsp;</td>
+    <td><input type="submit" name="button" id="button" value="确定" class="btn" /></td>
+  </tr>
+</table>
+
+</form>
+</div>
+{include file='lib/foot.lbi'}

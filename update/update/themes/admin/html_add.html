@@ -1,0 +1,62 @@
+{include file='lib/top.lbi'}
+<script type="text/javascript" src="xheditor/xheditor.js" ></script>
+<script language="javascript">
+$(document).ready(function()
+{
+$('#content').xheditor({upImgUrl:"admin.php?m=upfile&xh=1",forcePtag:false,upImgExt:"jpg,jpeg,gif,png",html5Upload:false});
+});
+</script>
+<div class="nav"><a href="admin.php?m=html&a=cat">单页分类</a> <a href="admin.php?m=html&">单页管理</a> <a href="admin.php?m=html&a=add">单页添加</a></div>
+<div class="nav_title">单页添加</div>
+<div class="rbox">
+<form action="admin.php?m=html&a=add_db" method="post">
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="tb1">
+  <tr>
+    <td width="100" height="30" align="right">名称：</td>
+    <td width="629"><input name="title" type="text" id="title" value="{$rs.title}" size="30" />
+      <input name="id" type="hidden" id="id" value="{$rs.id}" /></td>
+  </tr>
+  <tr>
+    <td height="30" align="right">调用标签：</td>
+    <td><input name="tagname" type="text" id="tagname" value="{$rs.tagname}" size="20" onkeyup="$('#tagname_res').html($(this).val())" />
+      (调用方法 {<b></b>html_<span id="tagname_res">{$rs.tagname}</span>})</td>
+  </tr>
+  <tr>
+    <td height="30" align="right">所属类别：</td>
+    <td>
+    <select name="catid" id="catid">
+    {if $rs.catid}<option value="{$rs.catid}">{$rs.cname}</option>{/if}
+    <option value="0">请选择类别</option>
+    {foreach item=t from=$catlist}   
+    <option value="{$t.catid}">{$t.cname}</option>
+    {/foreach}
+    </select></td>
+  </tr>
+  <tr>
+    <td height="30" align="right">列表显示：</td>
+    <td><input name="isnav" type="radio" id="radio" value="0" {if $rs.isnav neq 1} checked="checked" {/if} />
+      否 
+        <input type="radio" name="isnav" id="radio2" value="1" {if $rs.isnav eq 1} checked="checked" {/if} />
+        是 (在单页左侧显示)</td>
+  </tr>
+  <tr>
+    <td height="30" align="right">关键字：</td>
+    <td><input name="keyword" type="text" id="keyword" value="{$rs.keyword}" size="60" /></td>
+  </tr>
+  <tr>
+    <td height="30" align="right">描述：</td>
+    <td><textarea name="des" id="des" cols="60" rows="5">{$rs.des}</textarea></td>
+  </tr>
+  <tr>
+    <td height="30" align="right">内容：</td>
+    <td><textarea name="content" id="content"  style="width:100%; height:600px;">
+    {$rs.content}</textarea></td>
+  </tr>
+  <tr>
+    <td height="30" align="right">&nbsp;</td>
+    <td><input type="submit" name="button" id="button" value="提交" class="btn" /></td>
+  </tr>
+</table>
+</form>
+</div> 
+{include file='lib/foot.lbi'}

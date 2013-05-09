@@ -1,0 +1,18 @@
+{include file="lib/top.lbi"}
+<div class="nav_title">消息提示</div> 
+
+<script language="javascript">
+function movenew()
+{
+	document.location='{$url}';
+}
+setTimeout(movenew,2000);
+
+</script>
+<div class="rbox">
+<div style="padding:20px; line-height:30px;"> 
+{$message},如果浏览器没有自动跳转，请点击<a href="{$url}">跳转</a>！
+</div>
+</div>
+ 
+{include file="lib/foot.lbi"}

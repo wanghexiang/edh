@@ -1,0 +1,74 @@
+{include file='lib/header.html'}
+<script type="text/javascript" src="plugin/My97DatePicker/WdatePicker.js"></script>
+<script language="javascript">
+ 
+
+
+
+</script>
+<div class="row">
+{include file='shopnav.html'}
+<div class="span9">
+<table class="table table-bordered">
+<tr>
+<td width="100">包间名称</td>
+<td>{$room.room_name}</td>
+</tr>
+
+
+<tr>
+<td>容纳人数</td>
+<td>{$room.room_men}</td>
+</tr>
+
+<tr>
+<td>详情</td>
+<td>{$room.room_content}</td>
+</tr>
+
+</table>
+</div>
+<div class="span3">
+<form method="post" action="index.php?m=room&a=order"> 
+<input type="hidden" name="roomid" value="{$room.id}" />
+<input type="hidden" name="shopid" value="{$room.shopid}" />
+<table class="table table-bordered">
+<tr>
+<td class="linearcolor">我要预定</td>
+</tr>
+<tr>
+<td><label>时间</label> <input type="text" name="order_time" id="order_time" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})" /></td>
+</tr>
+
+<tr>
+	<td><label>昵称</label> <input type="text" name="nickname" /></td>
+</tr>
+
+<tr>
+	<td><label>手机</label> <input type="text" name="telephone" /></td>
+</tr>
+
+<tr>
+	<td><label>其他</label> <textarea name="info">总共人数：</textarea></td>
+</tr>
+
+<tr>
+ 
+<td  style="text-align:center;"><button type="submit" class="btn btn-success"  >预定</button></td>
+</tr>
+
+</table>
+</form>
+<h1>排队情况</h1>
+<table class="table table-bordered">
+{foreach item=c from=$neworder}
+<tr>
+	<td>{$c.order_time|date:Y-m-d H@i} {$c.room_name}</td>
+</tr>
+{/foreach}
+</table>
+</div>
+</div>
+
+
+{include file='lib/footer.html'}

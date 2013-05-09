@@ -1,0 +1,33 @@
+{include file='lib/top.lbi'}
+<div class="nav"><a href="shopadmin.php?m=guest">留言管理</a> </div>
+<div class="nav_title">留言管理:{if $smarty.get.status eq 0}未审核{else}<a href="shopadmin.php?m=guest&status=0">未审核</a>{/if}  
+{if $smarty.get.status eq 1}已审核{else}<a href="shopadmin.php?m=guest&status=1">已审核</a>{/if} 
+{if $smarty.get.status eq 2}已禁止{else}<a href="shopadmin.php?m=guest&status=2">已禁止</a>{/if} </div>
+<div class="rbox">
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="1" class="tb1">
+  <tr>
+    <td width="52" height="30" align="center">ID</td>
+    <td width="232" height="30" align="center">留言主题</td>
+    <td width="134" height="30" align="center">留言者</td>
+    <td width="152" height="30" align="center">时间</td>
+    <td>状态</td>
+    <td width="164" height="30" align="center">操作</td>
+  </tr>
+  {foreach item=t from=$glist}
+  <tr>
+    <td height="25" align="center">{$t.id}</td>
+    <td>{if $t.title}{$t.title} <br />{/if}{$t.content}</td>
+    <td align="center">{$t.username}</td>
+    <td align="center">{$t.dateline|date:Y-m-d}</td>
+    <td>{if $t.status eq 0}未审核{elseif $t.status eq 1}已审核{else}已禁止{/if}</td>
+    <td align="center">{$t.dotype} <a href="shopadmin.php?m=guest&a=reply&amp;id={$t.id}">回复</a> <a href="shopadmin.php?m=guest&a=del&amp;id={$t.id}">删除</a></td>
+  </tr>
+  {/foreach}
+  {if $pagelist}
+  <tr>
+    <td height="25" colspan="5" align="center">{$pagelist}</td>
+    </tr>
+    {/if}
+</table>
+
+</div> {include file='lib/foot.lbi'}

@@ -1,0 +1,64 @@
+{include file='lib/header.html'}
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.3"></script>
+<script language="javascript">
+	
+
+function getlatlng()
+{
+	
+	var geolocation = new BMap.Geolocation();
+	geolocation.getCurrentPosition(function(r){
+    if(this.getStatus() == BMAP_STATUS_SUCCESS){
+        var mk = new BMap.Marker(r.point);
+		setlatlng(r.point.lat,r.point.lng);
+    }
+         
+})
+
+}
+
+
+function setlatlng(lat,lng)
+{
+	$.get("index.php?m=setgps&lat="+lat+"&lng="+lng,function(data)
+	{
+		if(data=='OK')
+		{
+			location.href='index.php?m=near';
+		}
+	});
+	
+}
+
+</script>
+
+<p><button  class="btn btn-primary" onclick="$(this).html('定位中...');getlatlng()">定位</button></p>
+<p>
+<div class="btn-group">
+  <a class="btn" href="index.php?m=near&mi=100">100</a>
+  <a class="btn"  href="index.php?m=near&mi=500">500</a>
+  <a class="btn"  href="index.php?m=near&mi=1000">1K</a>
+  <a class="btn"  href="index.php?m=near&mi=2000">2K</a>
+  <a class="btn" href="index.php?m=near&mi=5000">5K</a>
+</div>
+</p>
+
+{foreach item=shop from=$shoplist}
+<p><a href="index.php?m=shop&shopid={$shop.shopid}" class="btn btn-success">{$shop.shopname}</a>
+{if $ssuser}{if $shop.isfav} 
+      <a href="javascript:;" class="delshopfav btn btn-warning" shopid="{$shop.shopid}">移出首页</a>
+      {else}<a href="javascript:;" class="addshopfav btn" shopid="{$shop.shopid}">加入首页</a>{/if}
+      {else}<a href="index.php?m=user&a=login" class="btn">登录收藏</a>{/if}
+</p>
+{if $shop.distance}
+<p>距您约{$shop.distance}米</p>
+{/if}
+<p class="breadcrumb">
+店铺地址：{$shop.address}<br>
+联系电话：{$shop.phone}<br>
+店铺简介：{$shop.info}
+</p>
+{/foreach}
+{$pagelist}
+
+{include file='lib/footer.html'}

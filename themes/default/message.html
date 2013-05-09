@@ -1,0 +1,41 @@
+{include file='lib/header.html'}
+<div class="row">
+<div class="span2">{include file="usernavleft.html"}</div>
+<div class="span7">
+<div class="breadcrumb">消息列表</div>
+<p><a href="index.php?m=message&status=0" class="btn {if $smarty.get.status eq 0}btn-success{/if}">未读</a> 
+<a href="index.php?m=message&status=1" class="btn {if $smarty.get.status eq 1}btn-success{/if}">已读</a></p>
+{if $list}
+<table class="table table-bordered">
+{foreach item=t from=$list}
+<tr>
+<td class="span6">{$t.content}</td>
+<td class="span3">{$t.dateline|date:Y-m-d H@i}</td>
+<td class="span3">
+<a href="index.php?m=message&a=del&id={$t.id}" class="btn btn-warning">删除</a>
+{if $t.status eq 0}
+<a href="index.php?m=message&a=status&id={$t.id}" class="btn btn-success">已读</a>
+{/if}
+</td>
+</tr>
+{/foreach}
+</table>
+{if $pagelist}
+<div class="breadcrumb">{$pagelist}</div>
+{/if}
+{else}
+<h2>暂无消息</h2>
+{/if}
+</div>
+<div class="span3">
+<h2>关于消息</h2>
+<div class="breadcrumb">
+消息是关于你各种操作的信息
+
+</div>
+</div>
+
+
+</div>
+
+{include file='lib/footer.html'}

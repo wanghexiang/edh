@@ -1,0 +1,11 @@
+/* CSS Document */
+*{ margin:0; padding:0;}
+ul{list-style-type:none;}
+div,p,span{font-size:12px; position:relative;}
+#header{width:100%;  height:50px; background-color:#9F3;}
+#header .fl{ left:5px; position:absolute; display:block; height:50px; line-height:50px; background-color:#993; padding:0 6px;}
+#header .fm{ text-align:center; width:100%; display:block; position:absolute; height:50px; line-height:50px; }
+#header .fr{right:5px; position:absolute; display:block; height:50px; line-height:50px; background-color:#FC6; padding:0 6px;}
+
+.navbar{ height:30px; display:block; background-color:#9C0; }
+.navbar ul li{ height:30px; line-height:30px; display:block; float:left; text-align:center; width:20%; background-color:#FC6; }

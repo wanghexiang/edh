@@ -1,0 +1,36 @@
+{include file='lib/top.lbi'}
+{include file='caipu_nav.html'}
+<div class="nav_title">菜谱分类编辑</div>
+<div class="rbox">
+<form method="post" action="admin.php?m=caipu&a=cat_add&op=post">
+<input type="hidden" name="catid" value="{$cat.catid}">
+<table width="90%" class="tb1">
+<tr>
+	<td width="65">分类：</td>
+    <td width="557"><input type="text" name="cname" value="{$cat.cname}"></td>
+</tr>
+
+<tr>
+	<td>所属分类：</td>
+    <td>
+    	<select name="pid">
+        	<option value="0">顶级分类</option>
+            {foreach item=c from=$catlist}
+            <option value="{$c.catid}" {if $c.catid eq $cat.pid} selected{/if}>{$c.cname}</option>
+            {/foreach}
+        </select>
+    </td>
+</tr>
+
+<tr>
+	<td>排序：</td>
+    <td><input type="text" name="orderindex" value="{$cat.orderindex}"></td>
+</tr>
+<tr>
+	<td></td>
+    <td><input type="submit" value="保存" class="btn"></td>
+</tr>
+</table>
+</form>
+</div>
+{include file='lib/foot.lbi'}

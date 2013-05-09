@@ -1,0 +1,44 @@
+{include file='lib/top.lbi'}
+<div class="nav">
+<a href="admin.php?m=vote&">投票管理</a> 
+<a href="admin.php?m=vote&a=add">投票添加</a>
+<a href="admin.php?m=vote&a=ttcat">选项分类</a>  
+<a href="admin.php?m=vote&a=tt">选项管理</a> 
+<a href="admin.php?m=vote&a=ttadd">选项添加</a>
+ </div>
+<div class="nav_title">投票管理</div>
+<div class="rbox">
+<table width="100%" border="0" align="center" class="tb1">
+  <tr>
+    <td><h2>投票{$vote.title}的选项 </h2></td>
+  </tr>
+  </table>
+
+
+<table width="100%" border="0" align="center" cellspacing="1" class="tb1">
+  <tr>
+    <td width="403" align="center">选项名称</td>
+    <td width="223" align="center">排序</td>
+    <td width="223" align="center">&nbsp;</td>
+    </tr>
+<form action="admin.php?m=vote&a=selett" method="post">
+{foreach item=s from=$selelist}
+  <tr>
+    <td align="center">{$s.title}</td>
+    <td align="center"><input name="orderid[{$s.sid}]" type="text" id="orderid[{$s.sid}]" size="8" value="{$s.orderid}" /></td>
+    <td align="center"><a href="admin.php?m=vote&a=seledel&amp;sid={$s.sid}">删除</a></td>
+    </tr>
+{/foreach}
+   
+  <tr>  
+    <td align="center">&nbsp;</td>
+    <td align="center">&nbsp;</td>
+    <td align="center"><input type="submit" name="button2" id="button2" value="更新排序" class="btn" />
+      <input type="button" name="button" id="button" value="去添加" class="btn" onclick="location.href='admin.php?m=vote&a=tt&vid={$vote.vid}';" /></td>
+    </tr>
+   </form>
+</table>
+
+
+</div>
+{include file='lib/foot.lbi'}

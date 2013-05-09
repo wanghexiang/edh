@@ -1,0 +1,51 @@
+{include file='lib/header.html'}
+<div class="row">
+<div class="span9">
+<div class="breadcrumb"  >商品列表</div>
+<ul class="thumbnails">
+{foreach item=goods from=$list}
+  <li class="span3">
+    <div class="thumbnail">
+      <a href="index.php?m=goods&a=detail&id={$goods.id}"><img src="{$goods.thumb_img}" alt=""></a>
+      <h5><a href="index.php?m=goods&a=detail&id={$goods.id}">{$goods.title}</a></h5>
+      <p> 市场价格：{$goods.price}元 兑换积分：{$goods.grade}  {if $g.grade lte $usegrade}<a href="index.php?m=goods&a=order&id={$goods.id}" target="_blank" >兑换</a>{/if}</p>
+    </div>
+  </li>
+{/foreach}
+</ul>
+<div >{$pagelist}</div>
+
+</div>
+<div class="span3">
+<div class="accordion-group">
+<div class="accordion-heading">
+<a href="JavaScript:;" class="accordion-toggle f14">{if $catrs}{$catrs.cname}{else}商品分类{/if}</a>
+</div>
+<div class="accordion-inner">
+<ul class="unstyled">
+{foreach item=cat from=$goodscat}
+<li><a href="index.php?m=goods&a=cat&catid={$cat.catid}">{$cat.cname}</a></li>
+{/foreach}
+</ul>
+</div>
+</div>
+
+<div class="accordion-group">
+<div class="accordion-heading">
+<a href="javascript:;" class="accordion-toggle f14">商品推荐</a>
+</div>
+<div class="accordion-inner">
+<ol>
+{foreach item=g from=$recommendgoods}
+<li><a href="index.php?m=goods&a=detail&id={$g.id}">{$g.title}</a></li>
+{/foreach}
+
+</ol>
+</div>
+
+</div>
+
+</div>
+</div>
+
+{include file='lib/footer.html'}

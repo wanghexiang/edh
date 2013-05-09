@@ -1,0 +1,30 @@
+{include file='lib/top.lbi'}
+<div class="nav"><a href="admin.php?m=caches">缓存管理</a> </div>
+<div class="nav_title">缓存管理</div>
+<div class="rbox">
+
+<table width="100%"   cellpadding="0" cellspacing="1" class="tb1">
+  <tr>
+    <td width="520" height="30" align="center">缓存内容</td>
+    <td width="237" height="30" align="center">操作</td>
+  </tr>
+
+  <tr>
+    <td height="30" align="center">数据缓存：各类数据查询语句缓存，在sqlcache目录下</td>
+    <td align="center"><a href="admin.php?m=caches&a=clear&amp;type=2">清理</a></td>
+  </tr>
+  <tr>
+    <td height="30" align="center"> 模板缓存清理：在caches目录下</td>
+    <td align="center"><a href="admin.php?m=caches&a=clear&amp;type=3">清理</a></td>
+  </tr>
+  
+  <tr>
+    <td height="30" align="center">&nbsp;</td>
+    <td align="center"><a href="admin.php?m=caches&a=clear&amp;type=all">全部清理</a></td>
+  </tr>
+</table>
+
+
+
+
+</div> {include file='lib/foot.lbi'}

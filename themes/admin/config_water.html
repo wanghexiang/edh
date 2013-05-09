@@ -1,0 +1,62 @@
+{include file='lib/top.lbi'}
+<div class="nav">
+
+<a href="admin.php?m=config&a=phone">短信设置</a>
+<a href="admin.php?m=config&a=email">邮箱设置</a>
+<a href="admin.php?m=config&a=water">水印设置</a>
+
+</div>
+<div class="nav_title">水印设置</div>
+<div class="rbox">
+<form action="admin.php?m=config&a=water_db" name="f1" method="post">
+<table width="100%" border="0" cellspacing="1" cellpadding="0" class="tb1">
+  <tr>
+    <td height="30" align="right">开启水印：</td>
+    <td height="30"><input name="water_on" type="radio" id="radio" value="1" {if $rs.water_on eq 1} checked="checked" {/if} />开启 
+        <input type="radio" name="water_on" id="radio2" value="0" {if $rs.water_on eq 0} checked="checked" {/if} />关闭</td>
+  </tr>
+  <tr>
+    <td width="156" height="30" align="right">水印类型：</td>
+    <td width="581" height="30"><input name="water_type" type="radio" id="radio3" value="0" {if $rs.water_type eq 0} checked="checked" {/if}/>图片水印 
+        <input type="radio" name="water_type" id="radio4" value="1"  {if $rs.water_type eq 1} checked="checked" {/if} />文字水印</td>
+  </tr>
+  <tr>
+    <td height="30" align="right">水印位置：</td>
+    <td height="30">
+    <select name="water_pos" id="water_pos">
+    <option value="9" {if $rs.water_pos eq 9} selected="selected"{/if}>右下</option>
+    <option value="0" {if $rs.water_pos eq 0} selected="selected"{/if}>随机</option>
+    <option value="1" {if $rs.water_pos eq 1} selected="selected"{/if}>左上</option>
+    <option value="2" {if $rs.water_pos eq 2} selected="selected"{/if}>中上</option>
+    <option value="3" {if $rs.water_pos eq 3} selected="selected"{/if}>右上</option>
+    <option value="4" {if $rs.water_pos eq 4} selected="selected"{/if}>左中</option>
+    <option value="5" {if $rs.water_pos eq 5} selected="selected"{/if}>中中</option>
+    <option value="6" {if $rs.water_pos eq 6} selected="selected"{/if}>右中</option>
+    <option value="7" {if $rs.water_pos eq 7} selected="selected"{/if}>左下</option>
+    <option value="8" {if $rs.water_pos eq 8} selected="selected"{/if}>中下</option>
+    </select></td>
+  </tr>
+  <tr>
+    <td height="30" align="right">文字大小：</td>
+    <td height="30"><input name="water_size" type="text" id="water_size" size="8" value="{$rs.water_size}" />
+      px</td>
+  </tr>
+  <tr>
+    <td height="30" align="right">水印文字：</td>
+    <td height="30"><input name="water_str" type="text" id="water_str" size="40" value="{$rs.water_str}" /></td>
+  </tr>
+  <tr>
+    <td height="30" align="right">水印图片：</td>
+    <td height="30"><input name="water_img" type="text" id="water_img" size="40" value="{$rs.water_img}" />
+      <input type="button" name="button2" id="button2" value="上传图片" onclick="window.open('admin.php?m=upload&formname=f1&editname=water_img&f_type=1','文件上传','left=300px,height=400,width=500');" /> </td>
+  </tr>
+  <tr>
+    <td height="30" align="right">&nbsp;</td>
+    <td height="30"><input type="submit" name="button" id="button" value="提交" class="btn" /></td>
+  </tr>
+  </table>
+
+
+</form>
+
+</div>{include file='lib/foot.lbi'}

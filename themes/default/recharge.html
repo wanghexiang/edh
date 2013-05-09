@@ -1,0 +1,25 @@
+
+{include file='lib/header.html'}
+<div class="row ">
+<div class="span2">{include file='usernavleft.html'}</div>
+<div class="span7 ">
+<h2>在线充值</h2>
+<table class="table table-striped table-bordered table-condensed">
+<tr><td>选择支付类型</td></tr>
+{foreach item=p from=$paylist}
+<tr><td>{$p}</td></tr>
+{/foreach}
+
+</table></div>
+<div class="span3">
+<h2>在线充值</h2>
+<p>充值后你可以用来在线支付，在线支付可以获得更多的优惠</p>
+</div>
+
+</div>
+
+
+{include file='lib/footer.html'}
+
+
+

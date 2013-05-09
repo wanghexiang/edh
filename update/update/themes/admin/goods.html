@@ -1,0 +1,84 @@
+{include file='lib/top.lbi'}
+<div class="nav"><a href="admin.php?m=goods&">商品管理</a> <a href="admin.php?m=goods&a=add">商品添加</a> </div>
+<div class="nav_title">商品管理</div>
+<div class="rbox">
+<form action="admin.php" method="get">
+<input type="hidden" name="m" value="goods" />
+<table width="100%" border="0"   cellpadding="0" cellspacing="0" cellpadisrecommend="0">
+
+
+  <tr>
+    <td width="63%" height="30"  align="center">名称：
+      <input name="title" type="text" id="title" size="40" value="{$smarty.get.title}" /> 
+      </td>
+    <td width="37%">&nbsp; <input type="submit" name="button" id="button" value="搜索"  class="btn" /></td>
+  </tr>
+ 
+  </table>
+   </form>
+
+
+<table width="100%" border="0"   cellpadding="0" cellspacing="0" class="tb1" cellpadisrecommend="0">
+  <tr>
+    <td width="49" height="25" align="center">ID</td>
+    <td width="200" height="25" align="center">名称</td>
+    <td width="70" align="center">兑换积分</td>
+    <td width="70" align="center">价格</td>
+    <td width="70" height="25" align="center">所属分类</td>
+    <td width="77" height="25" align="center">推荐</td>
+    <td width="70" align="center">热门</td>
+    <td width="70" align="center">最新</td>
+    <td width="84" align="center">显示</td>
+    <td width="262" align="center">操作</td>
+  </tr>
+  {foreach item=t from=$goodslist}
+  <tr>
+    <td height="20" align="center">{$t.id}</td>
+    <td>{$t.title}</td>
+    <td align="center">{$t.grade}</td>
+    <td align="center">￥{$t.price}</td>
+    <td align="center">{$t.cname}</td>
+    <td width="77" align="center">
+    {if $t.isrecommend}
+    <img src='images/yes.gif' class="ajax_no" url="admin.php?m=goods&a=isrecommend&t=0&id={$t.id}" rurl="admin.php?m=goods&a=isrecommend&t=1&id={$t.id}">
+    {else}
+    <img src='images/no.gif' class="ajax_yes" rurl="admin.php?m=goods&a=isrecommend&t=0&id={$t.id}" url="admin.php?m=goods&a=isrecommend&t=1&id={$t.id}">
+    {/if}
+    </td>
+    <td width="70" align="center">
+    {if $t.ishot}
+    <img src='images/yes.gif' class="ajax_no" url="admin.php?m=goods&a=ishot&t=0&id={$t.id}" rurl="admin.php?m=goods&a=ishot&t=1&id={$t.id}">
+    {else}
+    <img src='images/no.gif' class="ajax_yes" rurl="admin.php?m=goods&a=ishot&t=0&id={$t.id}" url="admin.php?m=goods&a=ishot&t=1&id={$t.id}">
+    {/if}
+    </td>
+    <td width="70" align="center">
+    {if $t.isnew}
+    <img src='images/yes.gif' class="ajax_no" url="admin.php?m=goods&a=isnew&t=0&id={$t.id}" rurl="admin.php?m=goods&a=isnew&t=1&id={$t.id}">
+    {else}
+    <img src='images/no.gif' class="ajax_yes" rurl="admin.php?m=goods&a=isnew&t=0&id={$t.id}" url="admin.php?m=goods&a=isnew&t=1&id={$t.id}">
+    {/if}
+    </td>
+    <td align="center">
+      {if $t.visible}
+      <img src='images/yes.gif' class="ajax_no" url="admin.php?m=goods&a=visible&visible=0&id={$t.id}" rurl="admin.php?m=goods&a=visible&visible=1&t=1&id={$t.id}">
+      {else}
+      <img src='images/no.gif' class="ajax_yes" rurl="admin.php?m=goods&a=visible&visible=0&id={$t.id}" url="admin.php?m=goods&a=visible&visible=1&id={$t.id}">
+      {/if}
+    </td>
+    <td align="center"><a href="index.php?m=goods&id={$t.id}" target="_blank">查看</a> 
+      <a href="admin.php?m=goods_comment&pid={$t.id}">评论</a>
+      <a href="admin.php?m=goods&a=add&amp;id={$t.id}">编辑</a> 
+      <a href="admin.php?m=goods&a=del&amp;id={$t.id}">删除</a></td>
+  </tr>
+  {/foreach}
+{if $pagelist}
+  <tr>
+    <td height="25" colspan="10" align="center">{$pagelist}</td>
+    </tr>
+{/if}
+</table>
+
+</div> 
+
+{include file='lib/foot.lbi'}

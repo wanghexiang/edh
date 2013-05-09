@@ -1,0 +1,295 @@
+{include file='lib/header.html'}
+<style type="text/css">
+.mapsli li a{
+display: block;
+width: 180px;
+overflow: hidden;
+height: 15px;
+line-height: 20px	
+}
+</style>
+
+<!--商店信息ajax调用-->
+ <div id="mapinfo" style="position:absolute; z-index:10000; top:120px; width:440px; height:400px; display:none; background-color:#FFF; left:300px;">
+ <div id="mapinfo_nav" style="display:block;background-color:#CCC; width:100%; height:30px;background-color:#CCC; "><span id="mapinfo_title" style="height:30px; line-height:30px; padding-left:6px; display:block; width:200px; float:left; font-weight:600;">::店铺信息</span> <span id="mapinfo_close" style="height:30px; line-height:30px; display:block; cursor:pointer; padding-right:6px; padding-left:6px; float:right; background-color:#CDC2BE;">关闭</span></div>
+ <div id="mapinfo_content"></div>
+ </div>
+<!--商店信息ajax调用结束-->
+<div class="row">
+<div class="span9">
+<div id="map_canvas" style="width:100%; height:600px;"></div>
+</div>
+<div class="span3 ">
+<p>
+<div class="btn-group">
+<div class="btn">地图上的餐厅</div>
+  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+    <span id="shopareanote">热点区域</span>
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu">
+    {foreach item=t from=$hotarea}
+    <li><a href="javascript:;" onclick="setbound({$t.lat},{$t.lng},'{$t.title}')">{$t.title}</a></li>
+    {/foreach}
+  </ul>
+</div>
+</p>
+
+<p>
+
+<div class="btn-group">
+<div class="btn">店铺分类</div>
+<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+<span id="shopcatnote">请选择</span>
+<span class="caret"></span>
+</a>
+<ul class="dropdown-menu">
+    {foreach item=t from=$shopcats}
+    <li><a href="javascript:;" onclick="setcats({$t.catid},'{$t.cname}')">{$t.cname}</a></li>
+    {/foreach}
+  </ul>
+</div>
+</p>
+
+<p class="form-inline">
+<input type="text" id="mapshopname" value="" style="width:100px; height:30px;" /> 
+<input type="button" id="mapsearchshop" class="btn btn-success" value="搜索" /> 
+<input type="button" id="mapsearchshopclear" class="btn btn-warning" value="清除" />
+</p>
+
+
+ 
+<ul id="restaurant_search_result" class="nav mapsli  nav-tabs nav-stacked nav-list" ></ol>
+
+
+<div  id="pagelist"></div>
+</div>
+
+</div>
+                
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.2"></script>
+<script type="text/javascript">
+var markersArray=[];
+var map;
+var start=false;
+var picfirst=0;
+var test;
+var infowindow;
+var times=0;
+var mdata;
+var bounds;
+var center;
+var shopname='';
+var circle;
+var _catid=0;
+
+
+map = new BMap.Map("map_canvas");
+map.enableScrollWheelZoom();
+{if $smarty.get.center}
+map.centerAndZoom(new BMap.Point({$smarty.get.center}), 14);
+{else}
+map.centerAndZoom(new BMap.Point({if $site.lat neq 0}{$site.lat},{$site.lng}{else}118.18045211417393,24.481007243304155 {/if}), 14);
+{/if}
+map.addEventListener("zoomend", function(){
+		b=map.getBounds();
+		bounds=b.getSouthWest().lat+","+b.getSouthWest().lng+","+b.getNorthEast().lat+","+b.getNorthEast().lng;
+		center=map.getCenter().lat+","+map.getCenter().lng;
+		markfun(); 
+});
+
+
+map.addEventListener("dragend", function(){
+		b=map.getBounds();
+		bounds=b.getSouthWest().lat+","+b.getSouthWest().lng+","+b.getNorthEast().lat+","+b.getNorthEast().lng;
+		center=map.getCenter().lng+","+map.getCenter().lat;
+		markfun(); 
+});
+
+
+
+b=map.getBounds();
+bounds=b.getSouthWest().lat+","+b.getSouthWest().lng+","+b.getNorthEast().lat+","+b.getNorthEast().lng;
+center=map.getCenter().lat+","+map.getCenter().lng;
+markfun(); 
+
+$("#mapsearchshopclear").click(function()
+{
+	shopname="";
+	$("#mapshopname").val("");
+	b=map.getBounds();
+	bounds=b.getSouthWest().lat+","+b.getSouthWest().lng+","+b.getNorthEast().lat+","+b.getNorthEast().lng;
+	center=map.getCenter().lng+","+map.getCenter().lat;
+	markfun(); 
+});
+
+$("#mapsearchshop").click(function()
+{
+	shopname=$("#mapshopname").val();
+	b=map.getBounds();
+	bounds=b.getSouthWest().lat+","+b.getSouthWest().lng+","+b.getNorthEast().lat+","+b.getNorthEast().lng;
+	center=map.getCenter().lng+","+map.getCenter().lat;
+	markfun(); 
+});
+
+function markcircle(i)
+{
+	
+	map.removeOverlay(circle);
+	
+	var point = new BMap.Point(mdata[i].lat,mdata[i].lng);
+	 circle = new BMap.Circle(point,mdata[i].sendmeter?mdata[i].sendmeter:1000);
+	circle.setFillColor("#ccd");
+	circle.setStrokeWeight(1);
+	map.addOverlay(circle);
+	
+}
+
+function setbound(lat,lng,note)
+{
+	center=lat+","+lng;
+	map.setCenter(new BMap.Point(lat,lng));
+	b=map.getBounds();
+	bounds=b.getSouthWest().lat+","+b.getSouthWest().lng+","+b.getNorthEast().lat+","+b.getNorthEast().lng;
+	$("#shopareanote").html(note);
+	markfun(); 
+}
+
+function setcats(catid,note)
+{
+	_catid = parseInt(catid);
+ 
+	$("#shopcatnote").html(note);
+	markfun(); 
+}
+
+
+//标记事件函数
+function markfun(page)
+{
+		deleteOverlays();
+		markersArray.length=0;
+		
+		times=0;
+		if(map.getZoom()>4)
+		{
+			
+			url='index.php?m=maps&a=maps&bounds='+bounds+'&center='+center+'&shopname='+encodeURI(shopname)+'&catid='+_catid;
+			if(page)
+			{
+				url=url+'&page='+page;
+			}
+			$.getJSON(url,function(data)
+			 {
+				
+				if(data && times==0)
+				{
+					mdata=data['list'];
+					$("#restaurant_search_result").html("");
+					times=1;
+					var dlist=data['list'];
+					for(i=0;i<dlist.length;i++)
+					{
+						
+						addMarker(new BMap.Point(dlist[i].lat, dlist[i].lng),i);
+						$("#restaurant_search_result").append("<li id='restaurant_"+dlist[i].shopid+"' class=' restaurant"+dlist[i].shopid+"'><a class=' triggerAjax restaurants_item' onClick=\"trigwindow("+i+")\"  id='restaurant_bubble_trigger_"+dlist[i].shopid+"' href='javascript:;' shopid='"+dlist[i].shopid+"'>"+dlist[i].shopname+"</a></li>");
+						
+					}
+					if(data['pagelist'])
+					{
+						$("#pagelist").html(data['pagelist']);
+					}else
+					{
+						$("#pagelist").html("");
+					}
+					showOverlays(data['list']);
+					
+				}else
+				{
+					$("#pagelist").html("");
+					$("#restaurant_search_result").html("").append("<span>当前窗口暂无数据</span>");
+				}
+			  });
+		 
+		  
+		}else
+		{
+			$("#pagelist").html("");
+			$("#restaurant_search_result").html("").append("<span>地图缩放级别过大</span>");
+		}
+	  	
+}
+  
+//标记地图
+function addMarker(location,number) {
+ var myIcon = new BMap.Icon( "images/map_icon.png",new BMap.Size(18, 22),
+  {
+     offset: new BMap.Size(10, 25),
+  imageOffset: new BMap.Size(-40,0)
+  });
+  
+
+	marker = new BMap.Marker(location,{title:mdata[number].shopname,icon:myIcon}); 
+	markersArray.push(marker);
+}
+//显示地图
+function showOverlays(data) {
+  if (markersArray) {
+    for (i in markersArray) {
+		map.addOverlay(markersArray[i]); 
+	  windowinfo(i);
+    }
+  }
+}
+
+
+//删除标记
+
+function deleteOverlays() {
+map.clearOverlays();
+}
+//信息窗口
+function windowinfo( number) {
+
+var m=markersArray[number];
+  	m.addEventListener( 'click', function() {
+		var content;
+		
+		 
+			
+		$.get('index.php?m=shop&ajax=1&shopid='+mdata[number].shopid,function(data)
+		{
+			
+		
+			
+			var infoWindow = new BMap.InfoWindow(data);
+			  m.openInfoWindow(infoWindow);
+			  markcircle(number)
+			
+		});
+	
+   
+  });
+  
+}  
+function trigwindow(i)
+{
+	var s=markersArray[i];
+	$.get('index.php?m=shop&ajax=1&shopid='+mdata[i].shopid,function(data)
+		{
+			/*圆形区域
+			 point = new BMap.Point(mdata[i].lat, mdata[i].lng);
+			 circle = new BMap.Circle(point,500);
+			map.addOverlay(circle);		
+			*/	
+			var infoWindow = new BMap.InfoWindow(data);
+			  s.openInfoWindow(infoWindow);
+			  markcircle(i)
+			
+		});
+	
+	
+}
+
+</script>
+{include file='lib/footer.html'}

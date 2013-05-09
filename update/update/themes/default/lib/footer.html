@@ -1,0 +1,51 @@
+<table class="table table-bordered">
+<tr><td style=" font-size:14px; font-weight:600px;">友情链接</td></tr>
+<tr>
+<td>{foreach item=t from=$links}
+<a href="{$t.linkurl}" target="_blank">{$t.title}</a>  
+{/foreach}</td>
+</tr>
+
+</table>
+<div id="footer"  style="text-align:center; height:100px; margin-top:30px;" >
+<span style="display:none"><script src="http://s95.cnzz.com/stat.php?id=4767080&web_id=4767080" language="JavaScript"></script></span>
+	  <p>&copy;&nbsp;2011 口福网</p>
+		<div class="links">
+			 <a href="index.php?m=html&">用户帮助</a> 
+			 <a href="index.php?m=html&">联系口福</a> 
+			 <a href="index.php?m=html&">企业订餐</a>  
+			 <a href="index.php?m=html&">关于我们</a> 
+			 <a href="http://weibo.com/lrjxgl" target="_blank">我们在新浪微博</a> 
+		</div>
+	</div>
+    
+    <div style="position:fixed;  left:10px;bottom:10px;"  ><a  href="javascript:;" class="btn" onclick="$(document).scrollTop(0)">Top</a></div>
+</div>
+
+ 
+
+<!--弹出框-->
+
+<div id="showBox" style="">
+
+<div id="showBox_nav">
+
+<div id="showBox_title">  </div>
+
+<div id="showBox_close">关闭</a></div>
+
+</div>
+
+<div id="showBox_content"></div>
+
+
+
+<div id="showBox_footer"></div>
+
+
+
+</div>
+
+
+</body>
+</html>

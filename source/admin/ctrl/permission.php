@@ -1,0 +1,176 @@
+<?php
+//权限表
+$permission['web']=
+	array(
+		array("网站信息",array("all")),
+		array("网站信息管理",array("index","add_db"))
+	);
+$permission['config']=
+	array(
+		array("网站设置",array("all")),
+		array("基本设置",array("index","index_db")),
+		array("短信设置",array("phone","phone_db")),
+		array("邮箱设置",array("email","email_db")),
+		array("水印设置",array("water","water_db")),
+		array("推广设置",array("spread","spread_db")),
+		array("营业设置",array("opentime")),
+		array("支付设置",array("pay")),
+		array("伪静态设置",array("rewrite"))
+		
+	);
+$permission['order']=
+	array(
+		array("订单",array("all")),
+		array("订单管理",array("index","view","dotype","sendtype","senddes")),
+		array("订单删除",array("del")),
+		array("订单导出",array("tocsv","downcsv"))
+	);
+$permission['sendarea']=
+	array(
+		array("配送区域",array("all")),
+		array("区域管理",array("index","add","add_db","order","getcat")),
+		array("区域删除",array("del"))
+	);
+$permission['guest']=
+	array(
+		array("留言",array("all")),
+		array("留言管理",array("index","reply","reply_db","dotype")),
+		array("留言删除",array("del"))
+	);
+$permission['flash']=
+	array(
+		array("轮显",array("all")),
+		array("轮显管理",array("index","add_db")),
+		array("轮显删除",array("del"))
+	);
+$permission['nav']=
+	array(
+		array("导航",array("all")),
+		array("导航管理",array("index","add","add_db","order","getnav")),
+		array("导航删除",array("del"))
+	);
+$permission['html']=
+	array(
+		array("单页",array("all")),
+		array("分类管理",array("cat","catadd_db")),
+		array("分类删除",array("del")),
+		array("单页管理",array("index","isnav","noisnav","order")),
+		array("单页添加",array("add","add_db")),
+		array("单页删除",array("del"))
+	);
+$permission['link']=
+	array(
+		array("链接",array("all")),
+		array("链接管理",array("index","add","add_db","order")),
+		array("链接删除",array("del"))
+	);
+$permission['rank']=
+	array(
+		array("积分",array("all")),
+		array("积分管理",array("index")),
+		array("删除",array("del"))
+	);
+$permission['art']=
+	array(
+		array("文章",array("all")),
+		array("文章管理",array("index","isnew","isding","ishot","istop")),
+		array("文章删除",array("del")),
+		array("文章添加",array("add","add_db"))
+	);
+$permission['art_cat']=
+	array(
+		array("文章分类",array("all")),
+		array("分类管理",array("index","add","add_db","order","getcat")),
+		array("分类删除",array("del"))
+	
+	);
+$permission['art_comment']=
+	array(
+		array("文章评论",array("all")),
+		array("评论管理",array("index","status","nostatus")),
+		array("评论删除",array("del"))
+	);
+$permission['cai']=
+	array(
+		array("美食",array("all")),
+		array("美食管理",array("index","add","add_db","isding","ishot","isnew","visible","promote","oos")),
+		array("美食删除",array("del"))
+	);	
+$permission['cai_cat']=
+	array(
+		array("美食分类",array("all")),
+		array("分类管理",array("index","add_db")),
+		array("分类删除",array("del"))
+	);
+$permission['cai_comment']=
+	array(
+		array("美食评论",array("all")),
+		array("评论管理",array("index","status","nostatus")),
+		array("评论删除",array("del"))
+	);
+$permission['cook']=
+	array(
+		array("厨师",array("all")),
+		array("厨师管理",array("index","add","post","ding","cai","caidel","cailist","addcai")),
+		array("厨师上传",array("del"))
+	);
+$permission['canwei']=
+	array(
+		array("餐位",array("all")),
+		array("餐位管理",array("index","add","add_db","dotype")),
+		array("餐位删除",array("del")),
+		array("餐位预订",array("order","orderstatus","orderreply","orderdel","getorderreply"))
+	);
+$permission['photo']=
+	array(
+		array("相册",array("all")),
+		array("相册管理",array("index","add","post",'pic','isding','noisding','ishot','noishot','isnew','noisnew')),
+		array("相册删除",array("del")),
+		array("照片删除",array("picdel"))
+	);
+$permission['vote']=
+	array(
+		array("投票",array("all")),
+		array("投票管理",array("index","selett","add","tt2vote","seledel")),
+		array("投票删除",array("del")),
+		array("选项管理",array("tt","ttadd")),
+		array("选项删除",array("ttdel")),
+		array("选项分类",array("ttcat","ttcat_add")),
+		array("分类删除",array("ttcat_del"))
+	
+	);
+$permission['user']=
+	array(
+		array("会员",array("all")),
+		array("会员管理",array("index","add","add_db","dotype","info")),
+		array("会员删除",array("del")),
+		array("密码更改",array("chpwd","chpwd_db"))
+	);
+$permission["admin"]=
+	array(
+		array("管理员",array("all")),
+		array("管理员管理",array("index")),
+		array("管理员添加",array("add")),
+		array("管理员删除",array("del")),
+		array("管理员密码",array("chpwd")),
+		array("管理员组",array("zu"))
+		);
+$permission['caches']=
+	array(
+		array("缓存",array("all")),
+		array("缓存管理",array("index","clear"))  
+	);
+$permission['skins']=
+	array(
+		array("模板",array("all")),
+		array("模板管理",array("index","using")),
+		array("模板编辑",array("skinsedi","edifile"))
+	);
+$permission['backup']=
+	array(
+		array("备份还原",array("all")),
+		array("备份",array("index","backtable","backdata")),
+		array("还原",array("index","restoretable","restoredb"))
+	);
+
+?>

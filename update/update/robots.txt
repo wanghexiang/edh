@@ -1,0 +1,3 @@
+User-agent: *
+Sitemap: http://www.tiaoshike.com/sitemap.xml
+Sitemap: http://www.tiaoshike.com/sitemap.html

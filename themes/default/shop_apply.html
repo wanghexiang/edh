@@ -1,0 +1,126 @@
+{include file='lib/header.html'}
+<script language="javascript">
+$(document).ready(function()
+{
+	$("#provinceid").live("change",function()
+	{
+		$.get("index.php?m=ajax&a=ajaxcitys&provinceid="+$(this).val(),function(data)
+		{
+			
+			$("#cityid").empty().css("display"," ").append(data);
+			$("#townid").empty().css("display","none");
+			 
+		})
+	});
+	
+	$("#cityid").live("change",function()
+	{
+		$.get("index.php?m=ajax&a=ajaxtowns&cityid="+$(this).val(),function(data)
+		{
+			
+			$("#townid").empty().append(data).show();
+		
+		});
+	});
+});
+</script>
+<div class="row">
+<div class="span9">
+<h2>开店申请</h2>
+<p>开店资格：良好的店铺环境，卫生，合格的经营许可证。</p>
+<div>
+<form method="post" class="form  form-horizontal" action="index.php?m=shop&a=apply&op=post">
+
+<table  class="table table-bordered">
+  <tr>
+    <td width="13%" height="36" align="right">商店名称：</td>
+    <td width="87%" align="left"><input name="shopname" class="h30" type="text" id="shopname" value="" size="50" /></td>
+    </tr>
+  
+  <tr>
+    <td align="right">分类：</td>
+    <td align="left">
+    <select name="catid" style="width:100px;">
+    <option value="0">请选择分类</option>
+    {foreach item=c from=$catlist}
+    <option value="{$c.catid}" {if $c.catid eq $shop.catid} selected="selected" {/if} >{$c.cname}</option>
+    {/foreach}
+    
+    </select>
+    
+    </td>
+  </tr>
+  <tr>
+    <td align="right">所在区域：</td>
+    <td align="left">
+    <span>
+    <select name="provinceid" id="provinceid" class="input-small">
+      <option value="0">一级区域</option>
+      {foreach item=p from=$provinces}
+      <option value="{$p.provinceid}" {if $shop.provinceid eq $p.provinceid} selected="selected"{/if}>{$p.province}</option>
+      {/foreach}
+    </select>
+    </span>
+    <span>
+      <select name="cityid" id="cityid" class="input-small">
+        <option value="0">二级区域</option>
+        {foreach item=c from=$citys}
+        <option value="{$c.cityid}" {if $c.cityid eq $shop.cityid} selected="selected"{/if}>{$c.city}</option>
+        {/foreach}
+      </select>
+      </span>
+      <span>
+      <select name="townid" id="townid" class="input-small">
+        <option value="0">三级区域</option>
+        {foreach item=t from=$towns}
+        <option value="{$t.townid}" {if $t.townid eq $shop.townid} selected="selected"{/if}>{$t.town}</option>
+        {/foreach}
+      </select>
+      </span></td>
+    </tr>
+ 
+  
+  <tr>
+    <td align="right">详细地址：</td>
+    <td align="left"><input name="address" type="text" id="address" class="h30" value="{$shop.address}" size="50" /></td>
+    </tr>
+  <tr>
+    <td align="right">QQ：</td>
+    <td align="left"><label for="qq"></label>
+      <input name="qq" type="text" id="qq" value="{$shop.qq}" size="30" class="h30" /></td>
+  </tr>
+  <tr>
+    <td align="right">phone：</td>
+    <td align="left"><label for="phone"></label>
+      <input name="phone" type="text" id="phone" value="{$shop.phone}" size="40" class="h30" /></td>
+  </tr>
+  <tr>
+    <td align="right">经营许可证：</td>
+    <td align="left"><label for="shopno"></label>
+      <input name="shopno" type="text" id="shopno" value="{$shop.shopno}" size="40" class="h30" /></td>
+  </tr>
+   
+  <tr>
+    <td align="right">简介：</td>
+    <td align="left"><label for="info"></label>
+      <textarea name="info" id="info"  style="width:500px; height:200px;" >{$shop.info}</textarea></td>
+  </tr>
+   
+  <tr>
+    <td align="right">&nbsp;</td>
+    <td align="left"><input type="submit" name="button" id="button" value="提交" class="btn" /></td>
+    </tr>
+</table>
+
+
+</form>
+</div>
+</div>
+<div class="span3">
+<h2>开店申请</h2>
+<p>在此提交开店申请，申请发出后我们会尽快审核，如果符合我们的要求，我们将会为您开通店铺。</p>
+</div>
+
+</div>
+
+{include file='lib/footer.html'}

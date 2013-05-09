@@ -1,0 +1,70 @@
+{include file='lib/top.lbi'}
+<div class="nav">
+
+<a href="admin.php?m=config&a=phone">短信设置</a>
+<a href="admin.php?m=config&a=email">邮箱设置</a>
+<a href="admin.php?m=config&a=water">水印设置</a>
+
+</div>
+<div class="nav_title">基本设置</div>
+<div class="rbox">
+<form action="admin.php?m=config&a=index_db" method="post">
+<table width="100%" border="0" cellspacing="1" cellpadding="0" class="tb1">
+  <tr>
+    <td width="134" height="30" align="right">首页文章：</td>
+    <td width="962" height="30"> 推荐
+      <input name="art_indexding" type="text" id="art_indexding" value="{$rs.art_indexding}" size="6" />
+      篇，最新
+      <input name="art_indexnew" type="text" id="art_indexnew" value="{$rs.art_indexnew}" size="6" />
+篇，热门
+<input name="art_indexhot" type="text" id="art_indexhot" value="{$rs.art_indexhot}" size="6" />
+篇,其他
+<input name="art_index" type="text" id="art_index" value="{$rs.art_index}" size="6" />
+篇</td>
+  </tr>
+  <tr>
+    <td height="30" align="right">首页美食：</td>
+    <td height="30">推荐
+      <input name="cai_indexding" type="text" id="cai_indexding" value="{$rs.cai_indexding}" size="6" />
+      篇，最新
+      <input name="cai_indexnew" type="text" id="cai_indexnew" value="{$rs.cai_indexnew}" size="6" />
+      篇，热门
+      <input name="cai_indexhot" type="text" id="cai_indexhot" value="{$rs.cai_indexhot}" size="6" />
+      篇,其他
+      <input name="cai_index" type="text" id="cai_index" value="{$rs.cai_index}" size="6" />
+      篇</td>
+  </tr>
+  <tr>
+    <td height="30" align="right">文章列表：</td>
+    <td height="30">推荐
+      <input name="art_listding" type="text" id="art_listding" value="{$rs.art_listding}" size="6" />
+篇，最新
+<input name="art_listnew" type="text" id="art_listnew" value="{$rs.art_listnew}" size="6" />
+篇，热门
+<input name="art_listhot" type="text" id="art_listhot" value="{$rs.art_listhot}" size="6" />
+篇,其他
+<input name="art_list" type="text" id="art_list" value="{$rs.art_list}" size="6" />
+篇</td>
+  </tr>
+  <tr>
+    <td height="30" align="right">美食列表：</td>
+    <td height="30">推荐
+      <input name="cai_listding" type="text" id="cai_listding" value="{$rs.cai_listding}" size="6" />
+篇，最新
+<input name="cai_listnew" type="text" id="cai_listnew" value="{$rs.cai_listnew}" size="6" />
+篇，热门
+<input name="cai_listhot" type="text" id="cai_listhot" value="{$rs.cai_listhot}" size="6" />
+篇,其他
+<input name="cai_list" type="text" id="cai_list" value="{$rs.cai_list}" size="6" />
+篇</td>
+  </tr>
+  <tr>
+    <td height="30" align="right">&nbsp;</td>
+    <td height="30"><input type="submit" name="button" id="button" value="确定" class="btn" /></td>
+  </tr>
+  </table>
+
+
+</form>
+
+</div>{include file='lib/foot.lbi'}

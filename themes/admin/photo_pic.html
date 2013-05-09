@@ -1,0 +1,29 @@
+{include file='lib/top.lbi'}
+<div class="nav"><a href="admin.php?m=photo&">相册管理</a> <a href="admin.php?m=photo&a=add">添加相册</a> <a href="admin.php?m=photo&a=pic">相片管理</a></div>
+<div class="nav_title">相册管理</div>
+<div class="rbox">
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="1" class="tb1">
+  <tr>
+    <td width="78" height="30" align="center">ID</td>
+    <td width="123" align="center">缩略图</td>
+    <td width="282" align="center">所属相册</td>
+    <td width="272" align="center">操作</td>
+  </tr>
+  {foreach item=t from=$piclist}
+  <tr>
+    <td height="25" align="center">{$t.id}</td>
+    <td align="center"><img src="{$t.thumb_picurl}" width="100" /></td>
+    <td>{$t.title}</td>
+    <td align="center"><a href="admin.php?m=photo&a=picdel&id={$t.id}"  >删除</a></td>
+  </tr>
+  {/foreach}
+  {if $pagelist}
+  <tr>
+    <td height="25" colspan="4" align="center">{$pagelist}</td>
+    </tr>
+    {/if}
+</table>
+
+
+</div> 
+{include file='lib/foot.lbi'}

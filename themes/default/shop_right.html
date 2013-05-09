@@ -1,0 +1,75 @@
+ <h3>餐厅基本信息</h3>
+ <table  class="table table-bordered table-striped table-condensed"  >
+				<tr>
+                    <td>店铺名称</td>
+                    <td>{$shop.shopname}</td>
+                </tr>
+				<tr  >
+					<td  width="100">外卖时间</td>
+					<td class="span8">{$shopconfig.starthour}:{if !$shopconfig.startminute}00{else}{$shopconfig.startminute}{/if}-{$shopconfig.endhour}:{if !$shopconfig.endminute}00{else}{$shopconfig.endminute}{/if}</td>
+				</tr>
+				<tr  >
+					<td>送餐费用</td>
+					<td>{$shopconfig.sendprice}元</td>
+				</tr>
+				<tr >
+					<td>起送金额</td>
+					<td>{$shopconfig.minprice}元</td>
+				</tr>
+                
+                <tr  >
+					<td>餐厅地址</td>
+					<td>{$shop.address}</td>
+				</tr>
+                
+                <tr  >
+					<td>餐厅电话</td>
+					<td>{$shop.phone}</td>
+				</tr>
+                
+				<tr class="restaurant_info_item">
+					<td>送餐范围</td>
+					<td>{$shop.sendarea}</td>
+				</tr>
+					<tr  >
+					<td>还有……</td>
+					<td>
+						{$shop.info}
+					</td>
+				</tr>
+								
+								
+			</table>   
+ <div>
+ <h2>给我留言</h2>
+ </div>
+ <form   action="index.php?m=guest&a=add_db" method="post">
+					<input type="hidden" name="shopid" value="{$smarty.get.shopid}" />			 
+					<textarea id="ask_answer_content"  class="input-xlarge"  style="height:100px;" name="content"></textarea>
+				 
+					<p><input   type="submit" value="好了，提交" class="btn btn-success"></p>
+				 
+			</form>
+
+ 
+ {if $shop.lat}
+ 
+<h2>餐厅地图</h2>
+ <div id="map_canvas" ><iframe style="width:100%; border:0; height:320px;" src="index.php?m=map&shopid={$shop.shopid}"></iframe></div>
+ {/if}
+  {if $guestlist}
+  <h2>{$shop.shopname}答疑</h2>
+ {foreach item=guest from=$guestlist}
+ <table class="table table-bordered  table-condensed   ">
+ <tr>
+        <td><strong>{if $guest.username}{$guest.username}{else}游客{/if}：</strong>{$guest.content} </td>  </tr>
+ <tr>
+            
+             
+           <td><strong>{$shop.shopname}：</strong>{$guest.reply} </td>
+</tr>
+        
+ </table>      	
+          {/foreach}
+          
+          {/if}

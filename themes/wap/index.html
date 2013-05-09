@@ -1,0 +1,46 @@
+{include file='lib/header.html'}
+<h2>收藏的店铺</h2>
+<p>
+{foreach item=shop from=$shoplist} 
+<a href="#res{$shop.shopid}" class="btn">{$shop.shopname}</a>
+{/foreach}
+</p>
+{foreach item=shop from=$shoplist}
+<div>
+<p><a href="index.php?m=shop&shopid={$shop.shopid}" class="btn btn-primary" id="res{$shop.shopid}" >{$shop.shopname}</a> 
+{if $shop.isfav}
+                        <a href="index.php?m=fav&a=shopdel&shopid={$shop.shopid}" rel="nofollow"   class="btn btn-warning">移出首页</a>
+                        {else}
+						<a href="index.php?m=fav&a=shopadd&shopid={$shop.shopid}"  rel="nofollow"  class="btn btn-success fav-add">加到首页</a>
+                        {/if}</p>
+{if $shop.distance}
+<p>距您约{$shop.distance}米</p>
+{/if}                        
+<p>该餐厅订餐成功率颇高/最低消费
+{if $shop.config.minprice}{$shop.config.minprice}{else}0{/if}元 送餐费用{$shop.config.sendprice}元</p>
+                                
+{foreach item=cat from=$shop.caicat}
+<div class="accordion-group">
+<div class="accordion-heading"><span class="accordion-toggle f14"><strong>{$cat.cname}</strong></span></div>
+
+
+<table class="table">
+{foreach item=c from=$cat.cailist}
+<tr>
+<td class="span6">{$c.title}</td>
+<td class="span3">{$c.price}</td>
+<td class="span3"><a href="index.php?m=shopcar&a=add_db&caiid={$c.id}" class="btn btn-mini btn-success" >购买</a></td>
+</tr>
+{/foreach}
+
+
+
+</table>
+
+</div>
+{/foreach}
+</div>
+{/foreach}
+{$pagelist}
+
+{include file='lib/footer.html'}

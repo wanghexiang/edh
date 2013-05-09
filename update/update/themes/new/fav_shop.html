@@ -1,0 +1,24 @@
+{include file='lib/header.html'}
+<div class="row">
+<div class="span2">{include file="usernavleft.html"}</div>
+<div class="span10">
+{include file="fav_nav.html"}
+{if $list}
+{foreach item=s from=$list}
+<table class="table table-bordered">
+<tr>
+<td width="100"><a href="index.php?m=shop&shopid={$s.shopid}"><img src="{if $s.logo}{$s.logo}{else}images/nologo.gif{/if}" width="100" /></a></td>
+<td><p><a href="index.php?m=shop&shopid={$s.shopid}">{$s.shopname}</a> <a href="javascript:;" class="btn btn-mini btn-warning delshopfav" shopid={$s.shopid}>取消收藏</a></p>
+	<p>电话：{$s.phone} </p>
+	<p>简介：{$s.info}</p>
+</td>
+</tr>
+</table>
+{/foreach}
+{else}
+<h2>暂无收藏</h2>
+{/if}
+</div>
+ 
+</div>
+{include file='lib/footer.html'}

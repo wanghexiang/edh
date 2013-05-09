@@ -1,0 +1,43 @@
+{include file='lib/top.lbi'}
+{include file='room_nav.html'}
+<div class="nav_title">餐位管理</div>
+<div class="rbox">
+<table width="100%" border="0" align="center" cellpadding="0" class="tb1" cellspacing="1">
+  <tr>
+    <td width="72" height="30" align="center">ID</td>
+    <td width="225" align="center">餐位名称</td>
+    <td width="90" align="center">容纳人数</td>
+    <td width="82" align="center">预订状态</td>
+    <td width="271" align="center">操作</td>
+  </tr>
+  {foreach item=t from=$list}
+  
+  <tr>
+    <td height="25" align="center">{$t.id}</td>
+    <td align="center">{$t.room_name}</td>
+    <td align="center">{$t.room_men}</td>
+    <td align="center">
+    {if $t.status}
+    <img src="images/yes.gif" class="ajax_no" url="shopadmin.php?m=room&a=changestatus&id={$t.id}&status=0" rurl="shopadmin.php?m=room&a=changestatus&id={$t.id}&status=1" />
+    {else}
+    <img src="images/no.gif" class="ajax_yes" url="shopadmin.php?m=room&a=changestatus&id={$t.id}&status=1" rurl="shopadmin.php?m=room&a=changestatus&id={$t.id}&status=0" />
+    {/if}
+    
+    </td>
+    <td align="center">
+    <a href="index.php?m=room&a=show&id={$t.id}" target="_blank">查看</a>
+    <a href="shopadmin.php?m=room&a=add&amp;id={$t.id}">编辑</a> 
+    <a href="javascript:;" class="ajax_del" url="shopadmin.php?m=room&a=del&amp;id={$t.id}">删除</a></td>
+  </tr>
+  
+  {/foreach}
+  {if $pagelist}
+  <tr>
+    <td height="25" colspan="8" align="center" >{$pagelist}</td>
+    </tr>
+{/if}
+</table>
+
+</div> 
+
+{include file='lib/foot.lbi'}
