@@ -7,6 +7,8 @@ if(!defined("CT"))
 $_GET['a']=$_GET['a']?htmlspecialchars(trim($_GET['a'])):'shop';
 check_login();
 $userid=$_SESSION['ssuser']['userid'];
+//ÅÐ¶ÏµÇÂ½
+
 switch($_GET['a'])
 {
 	case 'shop':

@@ -12,7 +12,7 @@ tr{height:32px;}
 </style>
 </head>
 <body>
-{include file='lib/header.html'}
+<?php echo $this->fetch('lib/header.html'); ?>
 <script src="formvalidator/formValidator-4.1.1.js" type="text/javascript" ></script>
 <script src="formvalidator/formValidatorRegex.js" type="text/javascript" ></script>
 <div class="kuan clear col">1. 选择美食 →2. 填写核对订单信息 →3. 成功提交订单</div>
@@ -77,7 +77,7 @@ tr{height:32px;}
  <div class="clear"></div>
 </div>
 
-{include file='lib/footer.html'}
+<?php echo $this->fetch('lib/footer.html'); ?>
 </body>
 </html>
 

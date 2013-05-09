@@ -54,17 +54,19 @@
   	<dt> <img  width='46' height='46'src="{if $shop.logo}{$shop.logo}{else}images/nologo.gif{/if}"  />
   	  <p><a href="index.php?m=shop&shopid={$shop.shopid}">{$shop.shopname}</a></p>
 	<p>主营：快餐</p>
-	<p>平均送餐时间：50分钟</p>
+	<br/>
     </dt>
-    <dd><h1>{if $shop.flag==2}休息中 {else}营业中{/if}</h1><span><a href="index.php?m=fav&a=shopadd&shopid={$shop.shopid}">收藏</a></span></dd>
+    <dd><h1>{if $shop.flag==2}休息中 {else}营业中{/if}</h1>
+		<span>
+			<a style="padding-left:18px;padding-top:2px;padding-right:10px;background-size:50px 22px;"  href="index.php?m=fav&a=shopadd&shopid={$shop.shopid}">收藏</a>
+		</span>
+	</dd>
     </a>
   </dl>
   <div class="can_xiang">
  <a href="index.php?m=shop&shopid={$shop.shopid}" ><img width='46' height='46' src="{if $shop.logo}{$shop.logo}{else}images/nologo.gif{/if}"  /></a>
   <h1><a href="index.php?m=shop&shopid={$shop.shopid}">{$shop.shopname}</a></h1>
   <p>主营：快餐</p>
-  <p>平均送餐时间：30分钟</p>
-  
   <p>配送价格:{$shop.sendplace}</p>
   <p>地址:{$shop.address}</p>
   <p>电话:{$shop.phone}</p>
@@ -83,3 +85,7 @@
 {include file="lib/footer.html"}
 </body>
 </html>
+<script>
+	
+
+</script>

@@ -60,17 +60,19 @@
   	<dt> <img  width='46' height='46'src="<?php if ($this->_var['shop']['logo']): ?><?php echo $this->_var['shop']['logo']; ?><?php else: ?>images/nologo.gif<?php endif; ?>"  />
   	  <p><a href="index.php?m=shop&shopid=<?php echo $this->_var['shop']['shopid']; ?>"><?php echo $this->_var['shop']['shopname']; ?></a></p>
 	<p>主营：快餐</p>
-	<p>平均送餐时间：50分钟</p>
+	<br/>
     </dt>
-    <dd><h1><?php if ($this->_var['shop']['flag'] == 2): ?>休息中 <?php else: ?>营业中<?php endif; ?></h1><span><a href="index.php?m=fav&a=shopadd&shopid=<?php echo $this->_var['shop']['shopid']; ?>">收藏</a></span></dd>
+    <dd><h1><?php if ($this->_var['shop']['flag'] == 2): ?>休息中 <?php else: ?>营业中<?php endif; ?></h1>
+		<span>
+			<a style="padding-left:18px;padding-top:2px;padding-right:10px;background-size:50px 22px;"  href="index.php?m=fav&a=shopadd&shopid=<?php echo $this->_var['shop']['shopid']; ?>">收藏</a>
+		</span>
+	</dd>
     </a>
   </dl>
   <div class="can_xiang">
  <a href="index.php?m=shop&shopid=<?php echo $this->_var['shop']['shopid']; ?>" ><img width='46' height='46' src="<?php if ($this->_var['shop']['logo']): ?><?php echo $this->_var['shop']['logo']; ?><?php else: ?>images/nologo.gif<?php endif; ?>"  /></a>
   <h1><a href="index.php?m=shop&shopid=<?php echo $this->_var['shop']['shopid']; ?>"><?php echo $this->_var['shop']['shopname']; ?></a></h1>
   <p>主营：快餐</p>
-  <p>平均送餐时间：30分钟</p>
-  
   <p>配送价格:<?php echo $this->_var['shop']['sendplace']; ?></p>
   <p>地址:<?php echo $this->_var['shop']['address']; ?></p>
   <p>电话:<?php echo $this->_var['shop']['phone']; ?></p>
@@ -89,3 +91,7 @@
 <?php echo $this->fetch('lib/footer.html'); ?>
 </body>
 </html>
+<script>
+	
+
+</script>
