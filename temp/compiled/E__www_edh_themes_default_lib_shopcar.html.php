@@ -15,9 +15,11 @@
 			<div id="order_controls">
 				<a id="cart_clear"  class="btn  btn-danger " href="index.php?m=shopcar&a=clearCar" rel="nofollow"> 清空 </a>
 				<a id="cart_submit" class="btn btn-primary" href="index.php?m=shopcar&a=buy&shopid=<?php echo $_GET['shopid']; ?>" rel="nofollow"> 创建订单 </a>
-                <?php if ($this->_var['ssuser']): ?>
+               <!--
+			   <?php if ($this->_var['ssuser']): ?>
 				<a id="cart_view" class="btn btn-warning" href="index.php?m=order&a=history" rel="nofollow">查看订单</a>
                 <?php endif; ?>
+				-->
 			</div>
 		
 			</div>

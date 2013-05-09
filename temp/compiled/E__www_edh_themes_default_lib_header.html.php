@@ -79,7 +79,16 @@ a:hover {
      <div class="right gouw">
 </div>
 
-    <h1><input type="text" class="sou_kuang" /><input type="button" class="sou_menu fz f14" value="搜一下"  /></h1>
+    <h1><input type="text" class="sou_kuang" id="search" value="搜索美食" /><input type="button" class="sou_menu fz f14" value="搜一下"  /></h1>
     </dd>
 </dl>
 </div>
+<script>
+	$(document).ready(function(){
+		$("#search").focus(function(){ 
+			if($(this).val()=="搜索美食"){
+				$(this).val("");
+			}
+		});
+	})
+</script>

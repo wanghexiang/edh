@@ -109,7 +109,7 @@ $(document).ready(function()
           <h2><?php echo $this->_var['shopinfo']['content']; ?></h2>
           <p>配送价格: <?php echo $this->_var['shopinfo']['sendplace']; ?></p>
           <p>地址: <?php echo $this->_var['shopinfo']['address']; ?></p>
-		  <p>电话: <?php echo $this->_var['shopinfo']['mobiles']; ?></p>
+		 
 		  <p>商户类型: <?php if ($this->_var['shopinfo']['ordertype'] == 1): ?>手机商户<?php else: ?>互联网商户<?php endif; ?></p>
 		  <p>营业时间:<?php echo $this->_var['shopinfo']['starthour']; ?>:<?php echo $this->_var['shopinfo']['startminute']; ?>-<?php echo $this->_var['shopinfo']['endhour']; ?>:<?php echo $this->_var['shopinfo']['endminute']; ?></p>
 		  <p>简介:<?php echo $this->_var['shopinfo']['info']; ?></p>

@@ -168,7 +168,22 @@ switch($_GET['a'])
           
 		}
 		
+		//得到收藏店铺
+		$userid=$_SESSION['ssuser']['userid'];
+		
+		if($userid){
+			$fav=$db->getAll("SELECT * FROM ".table('fav_shop').",".table('shop')." WHERE  fav_shop.userid='$userid' AND fav_shop.shopid=shop.shopid  LIMIT 6 "); 
+			//$fav=$db->getAll("SELECT * FROM ".table('guest')." WHERE status=1 AND shopid='$shopid' AND siteid='$cksiteid' ORDER BY id DESC LIMIT 10 ");
+		}
+		
+		
+		//推荐店铺
+		$recommend=$db->getAll("SELECT * FROM ".table('shop')." WHERE isrecommend=1  LIMIT 6 "); 
+		//$fav=$db->getAll("SELECT * FROM ".table('guest')." WHERE status=1 AND shopid='$shopid' AND siteid='$cksiteid' ORDER BY id DESC LIMIT 10 ");
+	   
 		$smarty->assign("shoplist",$shoplist);
+		$smarty->assign("recommend",$recommend);
+		$smarty->assign("fav",$fav);
 		$smarty->assign("pagelist",multipage($shopnum,$pagesize,$page,"index.php?m=shoplist&provinceid=$provinceid&cityid=$cityid&townid=$townid&catid=$catid&smid=$smid&amid=$amid&orderby=".$_GET['orderby']));
 		
 		//seo项

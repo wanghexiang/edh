@@ -7,28 +7,15 @@
 
 <body>
 {include file='lib/header.html'}
-<div class="kuan clear col pb10">{$town}<a href="index.php" class="c">[切换地址]</a></div>
+<div class="kuan clear col pb10">当前地区:[{$town}]<a href="index.php" class="c" style="color:gray">切换地址</a></div>
 <div class="kuan mt5"><img src="image/banner.jpg" /></div>
 <dl class="cang kuan">
-	<dt>推荐店铺</dt>
-    <dd><a href=""  ><img src="/image/cang_j.jpg"/></a></dd>
-    <dd><a href="#">推荐</a></dd>
-    <dd><a href="#">推荐</a></dd>
-    <dd><a href="#">推荐</a></dd>
-    <dd><a href="#">推荐</a></dd>
-    <dd><a href="#">推荐</a></dd>
-  	<dt class="bd"><h1 class="fb"><a href="#">点击设置</a></h1></dt>
-</dl>
-<dl class="cang kuan">
 	<dt>收藏店铺</dt>
-	 
-    <dd><a href="#">收藏</a></dd> 
-    <dd><a href="#">收藏</a></dd>
-    <dd><a href="#">收藏</a></dd>
-    <dd><a href="#">收藏</a></dd>
-    <dd><a href="#">收藏</a></dd>
-    <dd><a href="#">收藏</a></dd>
-  	<dt class="bd"><h1 class="fb"><a href="#">点击设置</a></h1></dt>
+	 {foreach from=$fav item=f }
+		{if $f.logo}<dd><a href="index.php?m=shop&shopid={$f.shopid}"><img style="position:absolute;width:120px;height:70px;border:none;margin:10px;" src="{$f.logo}"/></a></dd> {/if}
+	 {/foreach}
+   
+  	<dt class="bd"><h1 class="fb"><a href="#"></a></h1></dt>
 </dl>
 <div class="can_ming">
   <dl class="cai_lan">
@@ -46,6 +33,14 @@
             <a {if $smarty.get.smid eq $s.smid} class="tabhover"{/if} href="index.php?m=shoplist&catid={$smarty.get.catid}&provinceid={$smarty.get.provinceid}&cityid={$smarty.get.cityid}&townid={$smarty.get.townid}&smid={$s.smid}&amid={$smarty.get.amid}&orderby={$smarty.get.orderby}">{$s.cname}元</a>
             {/foreach}</dd>
   </dl>
+  <dl class="cang kuan">
+	<dt>推荐店铺</dt>
+    {foreach from=$recommend item=r }
+		{if $r.logo}<dd><a href="index.php?m=shop&shopid={$r.shopid}"><img style="position:absolute;width:120px;height:70px;border:none;margin:10px;" src="{$r.logo}"/></a></dd> {/if}
+	 {/foreach}
+  	<dt class="bd"><h1 class="fb"><a href="#"></a></h1></dt>
+</dl>
+<br/>
    {foreach item=shop from=$shoplist}
   <div class="left dian_pu">
   <div class="pu_on">
@@ -69,7 +64,6 @@
   <p>主营：快餐</p>
   <p>配送价格:{$shop.sendplace}</p>
   <p>地址:{$shop.address}</p>
-  <p>电话:{$shop.phone}</p>
   <p>营业时间: {$shop.starthour}:{$shop.startminute}-{$shop.endhour}:{$shop.endminute}</p>
   </div>
   </div>

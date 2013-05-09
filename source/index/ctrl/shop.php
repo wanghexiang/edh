@@ -100,7 +100,7 @@ switch($_GET['a'])
 				"description"=>$shop['info']
 			);
 			$smarty->assign("seo",$seo);
-			 
+			
 			$smarty->display("shopindex.html");
 		}
 	break;
