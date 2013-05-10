@@ -1,6 +1,14 @@
 <div  style="width:320px; display:block;position:fixed;bottom:3px;right:0px; max-height:500px; overflow-x:hidden; overflow-y:scroll; " >
-	<div id="cart_min" class="cart_min"   onclick="$('#cart_outer').toggle(600);" ><a  >::我的外卖盒</a></div>
-    
+	<div id="cart_min" class="cart_min"   onclick="$('#cart_outer').toggle(600);" ><a  >我的外卖盒</a></div>
+    <style>
+		.cart_min:hover{
+			background:red;
+			text-algin:center;
+		}
+		.icon-remove:hover{
+			
+		}
+	</style>
     
 	<div id="cart_outer"   style=" width:300px;padding:6px; display:none; background-color:#E0F0FF;  z-index:10000; ">
 			 
