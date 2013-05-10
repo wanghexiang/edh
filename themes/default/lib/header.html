@@ -51,25 +51,20 @@ a:hover {
     <h2>{if !$ssuser}<a href="index.php?m=user&a=login">[登录]</a> <a href="index.php?m=user&a=reg" target="_blank">[免费注册]</a>{/if} </h2>
 
 	{if $ssuser}
-	<div class="nav-collapse"style="display:inline;width:100px;overflow:hidden ;">	
-
-	<ul class="nav" style="width:100px;liststyle:none;display:inline ">
-	<li  class="dropdown" style="width:100px;liststyle:none;display:inline ">
-<a style="width:100px;liststyle:none;display:inline " href="javascript:;"   class="dropdown-toggle" data-toggle="dropdown">{$ssuser.username}<b class="caret"></b></a>
-<ul class="dropdown-menu" >
-<li><a href="index.php?m=user&a=logout">退出</a></li>
-<li> <a href="index.php?m=user&a=chpwd">帐号密码</a> </li>
-<li> <a href="index.php?m=user&a=edi">手机号码</a> </li>
-<li> <a href="index.php?m=user&a=myaddress">常用地址</a> </li>
-
-<li> <a href="index.php?m=shopcar&a=history">订单历史</a> </li>
-
-
-
-</ul>
-</li>
-</ul>	
-</div>
+	<div class="nav-collapse">	
+		<ul class="nav">
+			<li  class="dropdown" style="liststyle:none;display:inline ">
+				<a style="liststyle:none;display:inline;color:red" href="javascript:;"   class="dropdown-toggle" data-toggle="dropdown">{$ssuser.username}<b class="caret"></b></a>
+				<ul class="dropdown-menu" >
+					<li> <a href="index.php?m=user&a=logout">退出</a></li>
+					<li> <a href="index.php?m=user&a=chpwd">帐号密码</a> </li>
+					<li> <a href="index.php?m=user&a=edi">手机号码</a> </li>
+					<li> <a href="index.php?m=user&a=myaddress">常用地址</a> </li>
+					<li> <a href="index.php?m=shopcar&a=history">订单历史</a> </li>
+				</ul>
+			</li>
+		</ul>	
+	</div>
 {/if}
     </dd>
 </dl>
@@ -79,7 +74,7 @@ a:hover {
      <div class="right gouw">
 </div>
 
-    <h1><input type="text" class="sou_kuang" id="search" value="搜索美食" /><input type="button" class="sou_menu fz f14" value="搜一下"  /></h1>
+    <h1><input type="text" class="sou_kuang" id="search" value="搜索美食" /><input type="button" class="sou_menu fz f14" value="搜一下" id="soumeishi" /></h1>
     </dd>
 </dl>
 </div>
@@ -90,5 +85,17 @@ a:hover {
 				$(this).val("");
 			}
 		});
+		$("#search").blur(function(){
+			if($(this).val()==""){
+				$(this).val("搜索美食");
+			}
+		});
+		$("#soumeishi").click(function(){
+			var keyword=$("#search").val();
+			
+			window.location="index.php?m=search&a=cai&keyword="+keyword;
+			
+			
+		})
 	})
 </script>

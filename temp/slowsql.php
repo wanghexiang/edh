@@ -16,3 +16,5 @@
 
 /index.php?m=region&a=town&cityid=1 时间:2013-05-10 09:29:34--SELECT * FROM town where cityid='1'---执行时间：0.11505484580994秒
 
+/admin.php?m=login&a=login 时间:2013-05-10 11:20:03--SELECT content FROM admin_zu WHERE id=1 ---执行时间：0.15052795410156秒
+

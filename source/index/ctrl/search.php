@@ -13,7 +13,7 @@ $shopcarinfo=shopcarinfo();
 $smarty->assign("shopcart",$shopcarinfo['shoplist']);
 $smarty->assign("totalmoney",$shopcarinfo['totalmoney']);
 
-$_GET['keyword']=$keyword=get_post('keyword',"h");
+$_GET['keyword']=$keyword=get_post('keyword',"h")?get_post('keyword',"h"):$_GET['keyword'];
 switch($a)
 {
 	case 'cai':

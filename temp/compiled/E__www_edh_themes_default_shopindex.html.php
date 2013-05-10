@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gbk" />
-<title>内页</title>
+<title><?php echo $this->_var['shopinfo']['shopname']; ?></title>
 <link rel="stylesheet" type="text/css" href="image/gong.css"/>
 <link rel="stylesheet" type="text/css" href="image/nei.css"/>
 <link rel="stylesheet" type="text/css" href="plugin/bootstrap/css/shopcar.css"/>
@@ -69,6 +69,8 @@ $(document).ready(function()
 			<?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
             </div>
             <div class="cai_tu fc"><?php if ($this->_var['current_cat']): ?><?php echo $this->_var['current_cat']['cname']; ?><?php else: ?>所有美食<?php endif; ?></div>
+			
+			<!-- 显示图片
 			<?php $_from = $this->_var['foods']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'f');if (count($_from)):
     foreach ($_from AS $this->_var['f']):
 ?>
@@ -76,44 +78,54 @@ $(document).ready(function()
             <dl class="left cai_chi">
             	<dt><img src="<?php echo $this->_var['f']['img']; ?>" /></dt>
             	<dd><p><h1><?php echo $this->_var['f']['price']; ?></h1><?php echo $this->_var['f']['title']; ?></p>
-                <p><span><?php if ($this->_var['shopconfig']['ordertype'] == 0): ?><a href="javascript:;" class="addCart" caiid="<?php echo $this->_var['f']['id']; ?>"  shopid='<?php echo $this->_var['f']['shopid']; ?>' name="<?php echo $this->_var['f']['title']; ?>" price="<?php echo $this->_var['f']['price']; ?>" cart_count='0' >来一份</a><?php else: ?><a href="javascript:;" title="电话预定" class="addCart" caiid="<?php echo $this->_var['f']['id']; ?>"  shopid='<?php echo $this->_var['f']['shopid']; ?>' name="<?php echo $this->_var['f']['title']; ?>" price="<?php echo $this->_var['f']['price']; ?>" cart_count='0'>+</a><?php endif; ?></span>月售97份</p>
+                <p><span><?php if ($this->_var['shopconfig']['ordertype'] == 0): ?><a href="javascript:;" class="addCart" caiid="<?php echo $this->_var['f']['id']; ?>"  shopid='<?php echo $this->_var['f']['shopid']; ?>' name="<?php echo $this->_var['f']['title']; ?>" price="<?php echo $this->_var['f']['price']; ?>" cart_count='0' >来一份</a><?php else: ?><a href="javascript:;" title="电话预定" class="addCart" caiid="<?php echo $this->_var['f']['id']; ?>"  shopid='<?php echo $this->_var['f']['shopid']; ?>' name="<?php echo $this->_var['f']['title']; ?>" price="<?php echo $this->_var['f']['price']; ?>" cart_count='0'>+</a><?php endif; ?></span></p>
                 </dd>
             </dl>
 			<?php elseif ($this->_var['f']['thum_img']): ?>
 			<dl class="left cai_chi">
             	<dt><img src="<?php echo $this->_var['f']['thum_img']; ?>" /></dt>
             	<dd><p><h1><?php echo $this->_var['f']['price']; ?></h1><?php echo $this->_var['f']['title']; ?></p>
-                <p><span><?php if ($this->_var['shopconfig']['ordertype'] == 0): ?><a href="javascript:;" class="addCart" caiid="<?php echo $this->_var['f']['id']; ?>"  shopid='<?php echo $this->_var['f']['shopid']; ?>' name="<?php echo $this->_var['f']['title']; ?>" price="<?php echo $this->_var['f']['price']; ?>" cart_count='0' >来一份</a><?php else: ?><a href="javascript:;" title="电话预定" class="addCart" caiid="<?php echo $this->_var['f']['id']; ?>"  shopid='<?php echo $this->_var['f']['shopid']; ?>' name="<?php echo $this->_var['f']['title']; ?>" price="<?php echo $this->_var['f']['price']; ?>" cart_count='0'>+</a><?php endif; ?></span>月售97份</p>
+                <p><span><?php if ($this->_var['shopconfig']['ordertype'] == 0): ?><a href="javascript:;" class="addCart" caiid="<?php echo $this->_var['f']['id']; ?>"  shopid='<?php echo $this->_var['f']['shopid']; ?>' name="<?php echo $this->_var['f']['title']; ?>" price="<?php echo $this->_var['f']['price']; ?>" cart_count='0' >来一份</a><?php else: ?><a href="javascript:;" title="电话预定" class="addCart" caiid="<?php echo $this->_var['f']['id']; ?>"  shopid='<?php echo $this->_var['f']['shopid']; ?>' name="<?php echo $this->_var['f']['title']; ?>" price="<?php echo $this->_var['f']['price']; ?>" cart_count='0'>+</a><?php endif; ?></span></p>
                 </dd>
             </dl>
 			<?php endif; ?>
+			
             <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
+			-->
             <div class="clear"></div>
 			<?php $_from = $this->_var['foods']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'f');if (count($_from)):
     foreach ($_from AS $this->_var['f']):
 ?>
-			<?php if (empty ( $this->_var['f']['img'] ) && empty ( $this->_var['f']['thum_img'] )): ?> 
-            <ul class="cai_wchi left" >
-            	<li ><h1 ><?php echo $this->_var['f']['price']; ?></h1><p ><?php echo $this->_var['f']['title']; ?></p>
-                 <p><span><?php if ($this->_var['shopconfig']['ordertype'] == 0): ?><a href="javascript:;" class="addCart" caiid="<?php echo $this->_var['f']['id']; ?>"  shopid='<?php echo $this->_var['f']['shopid']; ?>' name="<?php echo $this->_var['f']['title']; ?>" price="<?php echo $this->_var['f']['price']; ?>" cart_count='0' >来一份</a><?php else: ?><a href="javascript:;" title="电话预定" class="addCart" caiid="<?php echo $this->_var['f']['id']; ?>"  shopid='<?php echo $this->_var['f']['shopid']; ?>' name="<?php echo $this->_var['f']['title']; ?>" price="<?php echo $this->_var['f']['price']; ?>" cart_count='0'>+</a><?php endif; ?></span>月售97份</p>
-            </ul>
-			
-			<?php endif; ?>
+		
+            <ul class="cai_wchi left" style="width:680px;">
+            	<li style="padding-top:15px;width:600px;">
+					<span style="width:300px;float:left"><?php echo $this->_var['f']['title']; ?></span>
+					<span style="margin-left:100px; height:10px;foat:left"><?php echo $this->_var['f']['price']; ?>元</span>
+					
+					<span style=""><?php if ($this->_var['shopconfig']['ordertype'] == 0): ?><a href="javascript:;" style="margin-top:5px;" class="addCart" caiid="<?php echo $this->_var['f']['id']; ?>"  shopid='<?php echo $this->_var['f']['shopid']; ?>' name="<?php echo $this->_var['f']['title']; ?>" price="<?php echo $this->_var['f']['price']; ?>" cart_count='0' >来一份</a><?php else: ?><a href="javascript:;" title="电话预定" class="addCart" caiid="<?php echo $this->_var['f']['id']; ?>"  shopid='<?php echo $this->_var['f']['shopid']; ?>' name="<?php echo $this->_var['f']['title']; ?>" price="<?php echo $this->_var['f']['price']; ?>" cart_count='0'>+</a><?php endif; ?></span>
+				</li>
+		   </ul>
+			<style>
+				.cai_wchi:hover{
+					background:rgb(239,248,255);
+				}
+			</style>
+		
 			<?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
             
    		</div>
         <div class="left dian_abou ml20 mt15">
         	<img width='45' height='45' src="<?php if ($this->_var['shopinfo']['logo']): ?><?php echo $this->_var['shopinfo']['logo']; ?><?php else: ?>images/nologo.gif<?php endif; ?>"/><h1><?php echo $this->_var['shopinfo']['shopname']; ?></h1>
             <p><?php echo $this->_var['shopinfo']['cname']; ?></p>
-          
-          <h2><?php echo $this->_var['shopinfo']['content']; ?></h2>
+          <h2 style="margin-top:10px;padding:0px;"><?php echo $this->_var['shopinfo']['content']; ?></h2>
+		  
           <p>配送价格: <?php echo $this->_var['shopinfo']['sendplace']; ?></p>
           <p>地址: <?php echo $this->_var['shopinfo']['address']; ?></p>
 		 
 		  <p>商户类型: <?php if ($this->_var['shopinfo']['ordertype'] == 1): ?>手机商户<?php else: ?>互联网商户<?php endif; ?></p>
 		  <p>营业时间:<?php echo $this->_var['shopinfo']['starthour']; ?>:<?php echo $this->_var['shopinfo']['startminute']; ?>-<?php echo $this->_var['shopinfo']['endhour']; ?>:<?php echo $this->_var['shopinfo']['endminute']; ?></p>
 		  <p>简介:<?php echo $this->_var['shopinfo']['info']; ?></p>
-		  <a href="#">添加收藏</a>
+		  <a href="index.php?m=fav&a=shopadd&shopid=<?php echo $this->_var['shopinfo']['shopid']; ?>">添加收藏</a>
         </div>
         <div class="clear"></div>
     </div>

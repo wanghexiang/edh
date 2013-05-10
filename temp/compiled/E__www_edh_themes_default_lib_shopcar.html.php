@@ -4,9 +4,16 @@
 		.cart_min:hover{
 			background:red;
 			text-algin:center;
+			
+		}
+		.cart_min a:hover{
+			text-decoration:none;
+			color:rgb(224,240,255);
+			
 		}
 		.icon-remove:hover{
-			
+			background:url(plugin/bootstrap/img/glyphicons-halflings-white1.png) -313px 1px;
+			cursor:pointer;
 		}
 	</style>
     
@@ -21,8 +28,8 @@
 				(点击左侧的餐品，然后这里下单，再不用打电话啦，友情提示不同店铺将分别产生订单)
 			</p>
 			<div id="order_controls">
-				<a id="cart_clear"  class="btn  btn-danger " href="index.php?m=shopcar&a=clearCar" rel="nofollow"> 清空 </a>
-				<a id="cart_submit" class="btn btn-primary" href="index.php?m=shopcar&a=buy&shopid=<?php echo $_GET['shopid']; ?>" rel="nofollow"> 创建订单 </a>
+				<a id="cart_clear"  class="btn  btn-danger " href="index.php?m=shopcar&a=clearCar" rel="nofollow" style="color:white"> 清空 </a>
+				<a id="cart_submit" class="btn btn-primary" href="index.php?m=shopcar&a=buy&shopid=<?php echo $_GET['shopid']; ?>" rel="nofollow" style="color:white"> 创建订单 </a>
                <!--
 			   <?php if ($this->_var['ssuser']): ?>
 				<a id="cart_view" class="btn btn-warning" href="index.php?m=order&a=history" rel="nofollow">查看订单</a>
