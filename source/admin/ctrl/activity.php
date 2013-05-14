@@ -1,5 +1,5 @@
 <?php
-check_login();
+check_login();    
 $a=get_post('a');
 $a=$a?$a:"index";
 switch($a){
